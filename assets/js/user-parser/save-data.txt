@@ -1,0 +1,46 @@
+user{
+approved
+HADI
+1234
+<color=blue>[POLICE]</color>
+cash(25)weapon_m9(0)weapon_ar15(0)weapon_awsm(0)weapon_m1014(0)weapon_akm(0)vehicles(pride,elissan)weapon_uzi(0)
+-140, 1, 140
+0, 102, 0
+}
+user{
+approved
+MOHSEN
+1234
+<color=blue>[POLICE]</color>
+cash(25)weapon_m9(0)weapon_ar15(0)weapon_awsm(0)weapon_m1014(0)weapon_akm(0)vehicles(pride)weapon_uzi(0)
+-140, 1, 140
+0, 102, 0
+}
+user{
+approved
+AKBAR
+1234
+<color=red>[ADMIN]</color>
+cash(25)weapon_m9(0)weapon_ar15(0)weapon_awsm(0)weapon_m1014(0)weapon_akm(0)vehicles(pride, king)weapon_uzi(0)
+-140, 1, 140
+0, 102, 0
+}
+user{
+approved
+KEYHAN
+1234
+<color=blue>[POLICE]</color>
+cash(25)weapon_m9(0)weapon_ar15(0)weapon_awsm(0)weapon_m1014(0)weapon_akm(0)vehicles(pride,zupra,hummingbird)weapon_uzi(0)
+19.1, 0.2, 26.9
+0, 102, 0
+}
+user{
+approved
+NOOCH
+1234
+<color=yellow>[TAXI]</color>
+cash(25)weapon_m9(0)weapon_ar15(0)weapon_awsm(0)weapon_m1014(0)weapon_akm(0)vehicles(jtm)weapon_uzi(0)
+-140, 1, 140
+0, 102, 0
+}
+
