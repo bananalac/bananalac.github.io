@@ -41,7 +41,7 @@ window.addEventListener("DOMContentLoaded", function() {
     }
 })
 
-$("#newcode").on("click", function() {
+$("#newcode").on("click touchstart", function() {
     location.reload();
 })
 
@@ -53,7 +53,7 @@ const Toast = Swal.mixin({
     timerProgressBar: true
   });
 
-$("#findMistakesButton").on("click", function() {
+$("#findMistakesButton").on("click touchstart", function() {
 
     if($("#inputPlace").val().trim() === '') {
 
