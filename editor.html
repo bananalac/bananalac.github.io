@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="assets/style/testing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="shortcut icon" href="assets/img/logo.ico">
+    <meta property="og:title" content="SaveData Editor">
+    <meta property="og:type" content="Website">
+    <meta property="og:url" content="https://bananalac.github.io/editor">
+    <meta property="og:image" content="https://bananalac.github.io/assets/img/logo.png">
+    <meta property="og:description" content="Edit your save-data.txt and manage members!">
+    <meta name="theme-color" content="#FFFF00">
+    
+</head>
+<body>
+    <header>
+        <img src="assets/img/logo.png" alt="Logo">
+        <h1 style="color: white;">LAC SaveData Editor</h1>
+        <div id="hamburger" class="hamburger">&#9776;</div>
+    </header>
+
+    <div id="sidebar" class="sidebar">
+        <ul>
+            <a style="color: white;" href="/"><li>Home</li></a>
+            <a style="color: white;" href="/cleaner"><li>Triggerbox Cleaner</li></a>
+            <a style="color: white;" href="/linter"><li>Triggerbox Linter</li></a>
+        </ul>
+    </div>
+
+    <div class="user-table-container">
+
+        <h2 id="titleCheck" style="color: white;">Upload File</h2>
+        
+        <input autocomplete="off" type="file" id="fileUpload" accept=".txt" style="margin-bottom: 20px; display: none;">
+
+        <div class="button-container">
+            <label id="labelForUpload" for="fileUpload" class="file-label">Choose a file</label>
+            <button id="uploadButton"><i class="fas fa-upload"></i> Upload</button>
+            <button id="newOne" style="display: none;">New One</button>
+        </div>
+
+        <h2 id="userManagement" style="color: white;">User Management</h2>
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Role</th>
+                    <th>Inventory</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="usersList">
+                                       
+            </tbody>
+        </table>
+        <h2 style="color: white;">Bulk Actions</h2>
+        <div class="button-container">
+            <button id="approveAll" style="background-color: green;" disabled><i class="fas fa-check-circle"></i> Approve All</button>
+            <button id="denyAll" style="background-color: rgb(175, 2, 16);" disabled><i class="fas fa-times-circle"></i> Deny All</button>
+            <button id="deleteAll" style="background-color: rgb(56, 56, 56);" disabled><i class="fas fa-trash"></i> Delete All</button>
+        </div>
+        <div class="button-container">
+            <button id="downloadButton" disabled><i class="fas fa-check-circle"></i> Download file</button>
+        </div>
+
+    </div>
+    
+
+   
+    <footer>
+        <p>&copy; 2024 BananaLAC<br>Hosted by Github Pages<br><a style="text-decoration: underline;" href="https://github.com/bananalac/lac-savedata-parser">Source</a></p>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/sweetalert2.all.min.js"></script>
+    <script type="module" src="assets/js/main_savedata.js"></script>
+    <script>
+    
+
+        document.getElementById('hamburger').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

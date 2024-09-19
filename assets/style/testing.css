@@ -198,7 +198,7 @@ footer {
     background-color: #062f5b;
 }
 
-.edit-button, .delete-button, .approve-button {
+.edit-button, .delete-button, .approve-button, .deny-button, .inv-button {
     padding: 5px 10px;
     margin: 0 5px;
     border: none;
@@ -218,6 +218,26 @@ footer {
 
 .approve-button {
     background-color: #0abc3c;
+    color: white;
+}
+
+.deny-button {
+    background-color: #9f9a09;
+    color: white;
+}
+
+.deny-button:hover {
+    background-color: #5d5407;
+    color: white;
+}
+
+.inv-button {
+    background-color: #8f8fe6;
+    color: white;
+}
+
+.inv-button:hover {
+    background-color: #31296c;
     color: white;
 }
 
