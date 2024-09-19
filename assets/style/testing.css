@@ -104,10 +104,27 @@ textarea {
     width: 100%;
     margin-top: 10px;
 }
+
 .button-container button {
     flex: 1;
     margin: 0 5px;
     padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.hiddenTitles {
+    display: none;
+}
+.button-container label {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    text-align: center;
     background-color: #007bff;
     color: white;
     border: none;
@@ -155,6 +172,87 @@ footer {
 }
 .blink {
     animation: blink-animation 1s steps(5, start) infinite;
+}
+
+.user-table-container {
+    padding: 20px;
+    background-color: #39434d;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.user-table th, .user-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #062f5b;
+    color: white;
+}
+
+.user-table th {
+    background-color: #062f5b;
+}
+
+.edit-button, .delete-button, .approve-button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.approve-button {
+    background-color: #0abc3c;
+    color: white;
+}
+
+.approve-button:hover {
+    background-color: #0c8b25;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+[id^="spoiler-"] {
+    color: transparent;
+    background-color: black;
+    cursor: pointer;
+    user-select: none;
+}
+
+.blinking-text {
+    color: #ff2f00; /* A vibrant color for visibility */
+    animation: blink 1.5s infinite; /* Animation duration and repetition */
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1; /* Fully visible */
+    }
+    50% {
+        opacity: 0; /* Fully invisible */
+    }
 }
 
 @media (max-width: 768px) {

@@ -1,6 +1,6 @@
 import { AVAILABLE_OPTIONS as AO } from './syntax/syntax_sheet.js';
 import spliter from './funcs/spliter.js';
-import { subcommand, commandHasOption, noOption, commandFree, commandMultiOption, conditional } from './commands/_.js';
+import { subcommand, commandHasOption, noOption, commandFree, commandMultiOption, conditional } from './commands/minor.js';
 import { allKeys } from './funcs/tools.js';
 
 
