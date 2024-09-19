@@ -338,6 +338,7 @@ $("#uploadButton").on("touchstart click", function(e) {
 $("#downloadButton").on("touchstart click", function(e) {
 
     e.stopPropagation();
+    e.preventDefault();
     const blob = new Blob([write(cache)], { type: 'text/plain' });
 
     const link = document.createElement('a');
