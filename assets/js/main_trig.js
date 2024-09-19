@@ -5,7 +5,7 @@ window.addEventListener("DOMContentLoaded", function() {
     
 })
 
-$("#newmap").on("click", function() {
+$("#newmap").on("click touchstart", function() {
     location.reload();
 })
 
@@ -17,7 +17,7 @@ const Toast = Swal.mixin({
     timerProgressBar: true
   });
 
-$("#clearAllButton").on("click", function() {
+$("#clearAllButton").on("click touchstart", function() {
 
     if($("#inputPlace").val().trim() === '') {
 
