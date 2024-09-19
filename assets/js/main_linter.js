@@ -42,7 +42,8 @@ window.addEventListener("DOMContentLoaded", function() {
 })
 
 $("#newcode").on("touchstart click", function(e) {
-    e.stopPropagation();
+    e.preventDefault();
+    e.stopImmediatePropagation();
     location.reload();
 })
 
@@ -56,7 +57,8 @@ const Toast = Swal.mixin({
 
 $("#findMistakesButton").on("touchstart click", function(e) {
 
-    e.stopPropagation();
+    e.preventDefault();
+    e.stopImmediatePropagation();
     if($("#inputPlace").val().trim() === '') {
 
         Toast.fire({

@@ -153,14 +153,19 @@ function addList(arr, newTime = false) {
     $('[id^="spoiler-"]').each(function() {
         
         $(this).on("click touchstart", function(e) {
-            e.stopPropagation();
-            if($(this).css("color") === 'rgba(0, 0, 0, 0)') {
-                $(this).css("color", "white");
-                $(this).css("background-color", 'rgba(0, 0, 0, 0)')
-            } else {
-                $(this).css("color", "transparent");
-                $(this).css("background-color", 'black');
-            }
+            
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            setTimeout(() => {
+                if($(this).css("color") === 'rgba(0, 0, 0, 0)') {
+                    $(this).css("color", "white");
+                    $(this).css("background-color", 'rgba(0, 0, 0, 0)')
+                } else {
+                    $(this).css("color", "transparent");
+                    $(this).css("background-color", 'black');
+                }
+            }, 10);
+           
             
         });
     
@@ -168,102 +173,115 @@ function addList(arr, newTime = false) {
     //* Edit button handler
     $('button[id$="-edit"]').on('touchstart click', function(e) {
         
-        e.stopPropagation();
-        const username = $(this).attr("id").split("-")[0];
-        const password = $(this).attr("id").split("-")[1];
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const username = $(this).attr("id").split("-")[0];
+            const password = $(this).attr("id").split("-")[1];
+            
+            const user = cache.find(member => member.username === username && member.password === password);
+            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
+        if(user) {
         
-        const user = cache.find(member => member.username === username && member.password === password);
-        const userIndex = cache.findIndex(member => member.username === username && member.password === password);
-    if(user) {
-    
-        let usernameInput;
-        let passwordInput;
-        let roleInput;
-    
-        Swal.fire({
-            title: `Edit ${username}'s Information`,
-            html: `
-                <div style="display: flex; flex-direction: column;">
-                    <label style="text-align:left" for="name">Name</label>
-                    <input id="name" class="swal2-input" value="${user.username}" placeholder="Enter a new name">
-                    <label style="text-align:left" for="pass">Password:</label>
-                    <input id="pass" class="swal2-input" value="${user.password}" placeholder="Enter a new password">
-                    <label style="text-align:left" for="role">Role</label>
-                    <input id="role" class="swal2-input" value="${user.role}" placeholder="Enter a new role">
-                </div>
-            `,
-            focusConfirm: false,
-            didOpen: () => {
-                const popup = Swal.getPopup();
-                usernameInput = popup.querySelector('#name');
-                passwordInput = popup.querySelector('#pass');
-                roleInput = popup.querySelector('#role')
-            },
-            preConfirm: () => {
-                const name = usernameInput.value;
-                const pass = passwordInput.value;
-                const role = roleInput.value;
-    
-                if (!name || !pass || !role) {
-                    Swal.showValidationMessage(`Please enter all fields`);
+            let usernameInput;
+            let passwordInput;
+            let roleInput;
+        
+            Swal.fire({
+                title: `Edit ${username}'s Information`,
+                html: `
+                    <div style="display: flex; flex-direction: column;">
+                        <label style="text-align:left" for="name">Name</label>
+                        <input id="name" class="swal2-input" value="${user.username}" placeholder="Enter a new name">
+                        <label style="text-align:left" for="pass">Password:</label>
+                        <input id="pass" class="swal2-input" value="${user.password}" placeholder="Enter a new password">
+                        <label style="text-align:left" for="role">Role</label>
+                        <input id="role" class="swal2-input" value="${user.role}" placeholder="Enter a new role">
+                    </div>
+                `,
+                focusConfirm: false,
+                didOpen: () => {
+                    const popup = Swal.getPopup();
+                    usernameInput = popup.querySelector('#name');
+                    passwordInput = popup.querySelector('#pass');
+                    roleInput = popup.querySelector('#role')
+                },
+                preConfirm: () => {
+                    const name = usernameInput.value;
+                    const pass = passwordInput.value;
+                    const role = roleInput.value;
+        
+                    if (!name || !pass || !role) {
+                        Swal.showValidationMessage(`Please enter all fields`);
+                    }
+                    return { name: name, pass: pass, role: role };
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                cancelButtonText: 'Cancel',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                  //  console.log('User Data:', result.value);
+                    Swal.fire('Saved!', 'Your information has been saved.', 'success');
+        
+                    cache[userIndex].username = result.value.name;
+                    cache[userIndex].password = result.value.pass;
+                    cache[userIndex].role = result.value.role;
+        
+                    console.log(cache);
+                    addList(cache, true);
                 }
-                return { name: name, pass: pass, role: role };
-            },
-            showCancelButton: true,
-            confirmButtonText: 'Save',
-            cancelButtonText: 'Cancel',
-        }).then((result) => {
-            if (result.isConfirmed) {
-              //  console.log('User Data:', result.value);
-                Swal.fire('Saved!', 'Your information has been saved.', 'success');
-    
-                cache[userIndex].username = result.value.name;
-                cache[userIndex].password = result.value.pass;
-                cache[userIndex].role = result.value.role;
-    
-                console.log(cache);
-                addList(cache, true);
-            }
-        });
-    }
+            });
+        }
+        }, 10);
+       
         
     });
     //! Delete button handler
     $('button[id$="-del"]').on('touchstart click', function(e) {
         
-        e.stopPropagation();
-        const username = $(this).attr("id").split("-")[0];
-        const password = $(this).attr("id").split("-")[1];
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const username = $(this).attr("id").split("-")[0];
+            const password = $(this).attr("id").split("-")[1];
+            
+            const user = cache.find(member => member.username === username && member.password === password);
+            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
+       
+            if(user) {
+                cache.splice(userIndex, 1);
+                addList(cache, true);
+            }
+        }, 10);
         
-        const user = cache.find(member => member.username === username && member.password === password);
-        const userIndex = cache.findIndex(member => member.username === username && member.password === password);
-   
-        if(user) {
-            cache.splice(userIndex, 1);
-            addList(cache, true);
-        }
         
     });
     //! Deny button handler
     $('button[id$="-deny"]').on('touchstart click', function(e) {
         
-        e.stopPropagation();
-        const username = $(this).attr("id").split("-")[0];
-        const password = $(this).attr("id").split("-")[1];
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const username = $(this).attr("id").split("-")[0];
+            const password = $(this).attr("id").split("-")[1];
+            
+            const user = cache.find(member => member.username === username && member.password === password);
+            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
+       
+            if(user) {
+               cache[userIndex].status = 'pending';
+               addList(cache, true);
+            }
+        }, 10);
         
-        const user = cache.find(member => member.username === username && member.password === password);
-        const userIndex = cache.findIndex(member => member.username === username && member.password === password);
-   
-        if(user) {
-           cache[userIndex].status = 'pending';
-           addList(cache, true);
-        }
         
     });
     //* Approve button handler
     $('button[id$="-appr"]').on('touchstart click', function(e) {
         
-        e.stopPropagation();
+        e.preventDefault();
+        e.stopImmediatePropagation();
         const username = $(this).attr("id").split("-")[0];
         const password = $(this).attr("id").split("-")[1];
         
@@ -280,8 +298,12 @@ function addList(arr, newTime = false) {
 
 $("#uploadButton").on("touchstart click", function(e) {
     
-    e.stopPropagation();
-    const fileInput = document.getElementById("fileUpload");
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    setTimeout(() => {
+
+        const fileInput = document.getElementById("fileUpload");
 
     if(fileInput.files.length === 0) { 
         Toast.fire({
@@ -330,6 +352,10 @@ $("#uploadButton").on("touchstart click", function(e) {
     };
 
     reader.readAsText(file, 'utf-8');
+        
+    }, 10);
+
+    
 
     
 
@@ -337,47 +363,68 @@ $("#uploadButton").on("touchstart click", function(e) {
 
 $("#downloadButton").on("touchstart click", function(e) {
 
-    e.stopPropagation();
+    
     e.preventDefault();
-    const blob = new Blob([write(cache)], { type: 'text/plain' });
+    e.stopImmediatePropagation();
+    setTimeout(() => {
 
-    const link = document.createElement('a');
+        const blob = new Blob([write(cache)], { type: 'text/plain' });
 
-    link.href = URL.createObjectURL(blob);
-    link.download = 'save-data.txt';
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    document.body.removeChild(link);
+        const link = document.createElement('a');
+    
+        link.href = URL.createObjectURL(blob);
+        link.download = 'save-data.txt';
+    
+        document.body.appendChild(link);
+    
+        link.click();
+    
+        document.body.removeChild(link);
+        
+    }, 10);
+    
 
 });
 
 $("#approveAll").on("touchstart click", function(e) {
-    e.stopPropagation();
-    cache.forEach((mem, memIndex) => {
-        cache[memIndex].status = 'approved';
-    });
-    addList(cache, true);
+    
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    setTimeout(() => {
+        cache.forEach((mem, memIndex) => {
+            cache[memIndex].status = 'approved';
+        });
+        addList(cache, true);
+    }, 10);
+   
 });
 
 $("#denyAll").on("touchstart click", function(e) {
-    e.stopPropagation();
-    cache.forEach((mem, memIndex) => {
-        cache[memIndex].status = 'pending';
-    });
-    addList(cache, true);
+    
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    setTimeout(() => {
+        cache.forEach((mem, memIndex) => {
+            cache[memIndex].status = 'pending';
+        });
+        addList(cache, true);
+    }, 10);
 });
 
 $("#deleteAll").on("touchstart click", function(e) {
-    e.stopPropagation();
-    cache = [];
-    addList(cache, true);
+    
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    setTimeout(() => {
+        cache = [];
+        addList(cache, true);
+    }, 10);
 })
 
 $("#newOne").on("touchstart click", function(e) {
-    e.stopPropagation();
+    
+    e.preventDefault();
+    e.stopImmediatePropagation();
     location.reload();
 })
 
