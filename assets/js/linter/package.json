@@ -1,12 +1,12 @@
 {
-  "name": "triggerbox-linter",
+  "name": "lac-triggerbox-linter",
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
   "scripts": {
-   "split": "node spliter.js"
+   
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT"
+  "keywords": ["LAC", "triggerbox", "alizadev"],
+  "author": "BananaLAC",
+  "license": " MPL-2.0"
 }
