@@ -1,0 +1,12 @@
+{
+  "name": "triggerbox-linter",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+   "split": "node spliter.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}

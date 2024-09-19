@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAC Triggerbox Cleaner</title>
+    <link rel="stylesheet" href="assets/style/main_linter.css">
+</head>
+<body>
+    <header>
+        <img src="assets/img/logo.png" alt="Logo">
+        <h1 style="color: white;">LAC Triggerbox Cleaner</h1>
+        <div id="hamburger" class="hamburger">&#9776;</div>
+    </header>
+
+    <div id="sidebar" class="sidebar">
+        <ul>
+          
+        </ul>
+    </div>
+
+    <div class="code-container">
+        <textarea id="inputPlace" placeholder="Enter your map text here"></textarea>
+        
+        <div class="button-container">
+            <button id="clearAllButton">Clear All triggerboxes</button>
+            <button id="newmap" style="display: none;">New map</button>
+            <button id="copy" style="display: none;">Copy to clipboard</button>
+        </div>
+
+        <div id="mapShow" class="description2" style="display: none;"></div>
+
+        
+    </div>
+    <footer>
+        <p>&copy; 2024 Banana</p>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/sweetalert2.all.min.js"></script>
+    <script src="assets/js/main_trig.js"></script>
+    <script>
+        document.getElementById('hamburger').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

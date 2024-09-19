@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAC Triggerbox Linter</title>
+    <link rel="stylesheet" href="assets/style/main_linter.css">
+    <link rel="shortcut icon" href="assets/img/logo.ico">
+</head>
+<body>
+    <header>
+        <img src="assets/img/logo.png" alt="Logo">
+        <h1 style="color: white;">LAC Triggerbox linter</h1>
+        <div id="hamburger" class="hamburger">&#9776;</div>
+    </header>
+
+    <div id="sidebar" class="sidebar">
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Services</li>
+            <li>Contact</li>
+        </ul>
+    </div>
+
+    <div class="code-container">
+        <textarea id="inputPlace" placeholder="Enter your triggerbox code here..."></textarea>
+        
+        <div class="button-container">
+            <button id="findMistakesButton">Find Mistakes</button>
+            <button id="newcode" style="display: none;">New triggerbox</button>
+        </div>
+
+        <select id="descriptionSelector" disabled>
+            <option id="defE" value="descPlace" selected>Errors</option>
+            <option value="descPlace2">Warnings</option>
+        </select>
+
+        <div id="codeShow" class="description2" style="display: none;"></div>
+        <div id="descPlace" class="description" style="display: none;"></div>
+        <div id="descPlace2" class="description" style="display: none;">No warnings</div>
+  
+    </div>
+    <footer>
+        <p>&copy; 2024 Banana</p>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/sweetalert2.all.min.js"></script>
+    <script type="module" src="assets/js/main_linter.js"></script>
+    <script>
+        function blinkLine(lineNumber) {
+            const container = document.getElementById('codeShow');
+            const lines = container.innerHTML.split('<br>');
+            if (lineNumber < 1 || lineNumber > lines.length) return;
+
+            let cache = lines[lineNumber];
+
+            lines[lineNumber] = `<span class="blink">${lines[lineNumber]}</span>`;
+            container.innerHTML = lines.join('<br>');
+
+            setTimeout(() => {
+                lines[lineNumber] = `${cache}`;
+                container.innerHTML = lines.join('<br>');
+            }, 3000);
+        }
+
+        document.getElementById('descriptionSelector').addEventListener('change', function() {
+            const selectedValue = this.value;
+            const descriptions = document.querySelectorAll('.description');
+
+            descriptions.forEach(desc => {
+                desc.style.display = 'none'; // Hide all descriptions
+            });
+
+            document.getElementById(selectedValue).style.display = 'block'; // Show selected description          
+        });
+
+        document.getElementById('hamburger').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
