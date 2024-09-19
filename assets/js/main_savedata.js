@@ -1,4 +1,4 @@
-import { parse, write } from './lac-savedata-parser/index.js';
+import { parse, write } from './user-parser/index.js';
 
 let cache;
 
