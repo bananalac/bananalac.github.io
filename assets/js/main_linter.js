@@ -1,4 +1,4 @@
-import {convertToHtml, colorize, typeChecker} from './linter/index.js'
+import {convertToHtml, colorize, typeChecker} from './linter/index.js';
 
 
 window.addEventListener("DOMContentLoaded", function() {
@@ -41,7 +41,8 @@ window.addEventListener("DOMContentLoaded", function() {
     }
 })
 
-$("#newcode").on("click touchstart", function() {
+$("#newcode").on("touchstart click", function(e) {
+    e.stopPropagation();
     location.reload();
 })
 
@@ -53,8 +54,9 @@ const Toast = Swal.mixin({
     timerProgressBar: true
   });
 
-$("#findMistakesButton").on("click touchstart", function() {
+$("#findMistakesButton").on("touchstart click", function(e) {
 
+    e.stopPropagation();
     if($("#inputPlace").val().trim() === '') {
 
         Toast.fire({

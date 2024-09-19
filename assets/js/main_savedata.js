@@ -21,9 +21,9 @@ function extractBetweenTags(str) {
 
 
 
-// window.addEventListener("DOMContentLoaded", function() {
+window.addEventListener("DOMContentLoaded", function() {
 
-// })
+})
 
 
 
@@ -152,8 +152,8 @@ function addList(arr, newTime = false) {
     //? Password spoiler toggle
     $('[id^="spoiler-"]').each(function() {
         
-        $(this).on("click touchstart", function() {
-           
+        $(this).on("click touchstart", function(e) {
+            e.stopPropagation();
             if($(this).css("color") === 'rgba(0, 0, 0, 0)') {
                 $(this).css("color", "white");
                 $(this).css("background-color", 'rgba(0, 0, 0, 0)')
@@ -166,8 +166,9 @@ function addList(arr, newTime = false) {
     
     });
     //* Edit button handler
-    $('button[id$="-edit"]').on('click', function() {
+    $('button[id$="-edit"]').on('touchstart click', function(e) {
         
+        e.stopPropagation();
         const username = $(this).attr("id").split("-")[0];
         const password = $(this).attr("id").split("-")[1];
         
@@ -228,8 +229,9 @@ function addList(arr, newTime = false) {
         
     });
     //! Delete button handler
-    $('button[id$="-del"]').on('click', function() {
+    $('button[id$="-del"]').on('touchstart click', function(e) {
         
+        e.stopPropagation();
         const username = $(this).attr("id").split("-")[0];
         const password = $(this).attr("id").split("-")[1];
         
@@ -243,8 +245,9 @@ function addList(arr, newTime = false) {
         
     });
     //! Deny button handler
-    $('button[id$="-deny"]').on('click', function() {
+    $('button[id$="-deny"]').on('touchstart click', function(e) {
         
+        e.stopPropagation();
         const username = $(this).attr("id").split("-")[0];
         const password = $(this).attr("id").split("-")[1];
         
@@ -258,8 +261,9 @@ function addList(arr, newTime = false) {
         
     });
     //* Approve button handler
-    $('button[id$="-appr"]').on('click', function() {
+    $('button[id$="-appr"]').on('touchstart click', function(e) {
         
+        e.stopPropagation();
         const username = $(this).attr("id").split("-")[0];
         const password = $(this).attr("id").split("-")[1];
         
@@ -274,8 +278,9 @@ function addList(arr, newTime = false) {
     });
 }
 
-$("#uploadButton").on("click touchstart", function() {
+$("#uploadButton").on("touchstart click", function(e) {
     
+    e.stopPropagation();
     const fileInput = document.getElementById("fileUpload");
 
     if(fileInput.files.length === 0) { 
@@ -330,9 +335,9 @@ $("#uploadButton").on("click touchstart", function() {
 
 });
 
-$("#downloadButton").on("click touchstart", function() {
+$("#downloadButton").on("touchstart click", function(e) {
 
-
+    e.stopPropagation();
     const blob = new Blob([write(cache)], { type: 'text/plain' });
 
     const link = document.createElement('a');
@@ -348,26 +353,30 @@ $("#downloadButton").on("click touchstart", function() {
 
 });
 
-$("#approveAll").on("click touchstart", function() {
+$("#approveAll").on("touchstart click", function(e) {
+    e.stopPropagation();
     cache.forEach((mem, memIndex) => {
         cache[memIndex].status = 'approved';
     });
     addList(cache, true);
 });
 
-$("#denyAll").on("click touchstart", function() {
+$("#denyAll").on("touchstart click", function(e) {
+    e.stopPropagation();
     cache.forEach((mem, memIndex) => {
         cache[memIndex].status = 'pending';
     });
     addList(cache, true);
 });
 
-$("#deleteAll").on("click touchstart", function() {
+$("#deleteAll").on("touchstart click", function(e) {
+    e.stopPropagation();
     cache = [];
     addList(cache, true);
 })
 
-$("#newOne").on("click touchstart", function() {
+$("#newOne").on("touchstart click", function(e) {
+    e.stopPropagation();
     location.reload();
 })
 

@@ -5,7 +5,8 @@ window.addEventListener("DOMContentLoaded", function() {
     
 })
 
-$("#newmap").on("click touchstart", function() {
+$("#newmap").on("touchstart click", function(e) {
+    e.stopPropagation();
     location.reload();
 })
 
@@ -17,8 +18,9 @@ const Toast = Swal.mixin({
     timerProgressBar: true
   });
 
-$("#clearAllButton").on("click touchstart", function() {
+$("#clearAllButton").on("touchstart click", function(e) {
 
+    e.stopPropagation();
     if($("#inputPlace").val().trim() === '') {
 
         Toast.fire({
@@ -49,7 +51,8 @@ setTimeout(() => {
    
 });
 
-$("#copy").on("click", function() {
+$("#copy").on("touchstart click", function(e) {
+    e.stopPropagation();
     navigator.clipboard.writeText($("#mapShow").text()).then(() => {
         Toast.fire({
             icon: "success",
