@@ -42,7 +42,7 @@ export default function conditional(value, args) {
                     }
                     if(conditionInfo.type === 2) {
                         let checkArray = [];
-                        for (let i = conditionInfo.min; i < conditionInfo.max; i++) {
+                        for (let i = conditionInfo.min; i <= conditionInfo.max; i++) {
                             checkArray.push(i.toString());
                         };
                         if(conditionInfo.add) {
