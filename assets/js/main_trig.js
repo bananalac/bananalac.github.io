@@ -1,15 +1,15 @@
 
+let cache = { name: "", map: "" };
+
+
 
 window.addEventListener("DOMContentLoaded", function() {
-   
-    
+
+    $("#downloadButton").prop("disabled", true);
+
 })
 
-$("#newmap").on("touchstart click", function(e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    location.reload();
-})
+
 
 const Toast = Swal.mixin({
     toast: true,
@@ -19,55 +19,123 @@ const Toast = Swal.mixin({
     timerProgressBar: true
   });
 
-$("#clearAllButton").on("touchstart click", function(e) {
+document.getElementById("fileUpload").addEventListener("change", function(event) {
+    const file = event.target.files[0];
+    
+    if(!file) {
+        $("#labelForUpload").text("No file Selected!");
+    } else {
+        $("#labelForUpload").text(`${file.name} (${Math.round(file.size / 1024)} KB)`);
+    }
 
+})
+
+
+
+$("#uploadButton").on("touchstart click", function(e) {
+    
     e.preventDefault();
     e.stopImmediatePropagation();
-    if($("#inputPlace").val().trim() === '') {
 
+    setTimeout(() => {
+
+        const fileInput = document.getElementById("fileUpload");
+
+    if(fileInput.files.length === 0) { 
         Toast.fire({
             icon: "error",
-            title: "Provide a map text!"
-          });
+            title: "Upload a map"
+        });
         return;
     }
 
-setTimeout(() => {
+    const file = fileInput.files[0];
 
-    const pattern = /Trigger_Box_Editor(.*?)}/igm;
-    const map = $("#inputPlace").val().trim();
+    if(file.type !== 'text/plain') {
+        Toast.fire({
+            icon: "error",
+            title: "Wrong format!"
+        });
+        return;
+    }
+
+   
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+    
+        
+        const content = event.target.result;
+        
+        const lines = content.split("\n");
+        const triggerboxesLength = lines.filter(line => line.startsWith('Trigger_Box_Editor')).length;
+        const filteredItems = lines.filter(line => !line.startsWith('Trigger_Box_Editor'));
+        cache.map = filteredItems.join("\n");
+       
+
+       
+        
+        $("#downloadButton").prop("disabled", false);
+        
+        $("#uploadButton").css("display", "none");
+        $("#labelForUpload").css("display", "none");
+        $("#newOne").css("display", "block");
+        $("#fileUpload").css("display", "none");
+        $("#titleCheck").html(`Found ${triggerboxesLength} Triggerbox`);
+
+      
+    
+       
+        
+    };
+    cache.name = file.name.replace('.txt', "");
+    reader.readAsText(file, 'utf-8');
+        
+    }, 10);
 
     
-    $("#inputPlace").prop('disabled', true);
-    $("#clearAllButton").css('display', 'none');
-    $("#newmap").css('display', 'block');
-    $("#mapShow").css('display', 'block');
-    $("#copy").css('display', 'block');
 
-    $("#mapShow").text(map.replace(pattern, ""));
     
 
-   
-}, 10);
-   
-   
 });
 
-$("#copy").on("touchstart click", function(e) {
+$("#downloadButton").on("touchstart click", function(e) {
+
     
     e.preventDefault();
     e.stopImmediatePropagation();
-    navigator.clipboard.writeText($("#mapShow").text()).then(() => {
-        Toast.fire({
-            icon: "success",
-            title: "Copied to clipboard!"
-          });
-    }).catch(() => {
-        Toast.fire({
-            icon: "error",
-            title: "Failed to copy!"
-        });
-    })
-})
+    setTimeout(() => {
 
+        const blob = new Blob([cache.map], { type: 'text/plain' });
+    
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+       
+        link.href = `${url}`;
+        link.download = `clean-${cache.name}.txt`;
+
+    
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        
+    }, 10);
+    
+
+});
+
+
+
+
+
+$("#newOne").on("touchstart click", function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    setTimeout(() => {
+        
+        location.reload();
+    }, 10);
+   
+})
 

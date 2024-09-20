@@ -1,4 +1,4 @@
-import { parse, write } from './user-parser/index.js';
+import { parse, write, inventoryWrite, inventoryParse } from './user-parser/index.js';
 
 let cache;
 
@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", function() {
     $("#denyAll").prop("disabled", true);
     $("#deleteAll").prop("disabled", true);
     $("#downloadButton").prop("disabled", true);
-    
+
 })
 
 
@@ -126,7 +126,7 @@ function addList(arr, newTime = false) {
         const role = document.createElement('td');
         const findDef = roles.find(o => o.name === extractBetweenTags(member.role) );
         if(findDef) {
-            role.innerHTML = `<span style=\"color:${findDef.color}\">${findDef.icon} ${extractBetweenTags(member.role)}</span>`;
+            role.innerHTML = `<span class=\"no-select\" style=\"color:${findDef.color}\">${findDef.icon} ${extractBetweenTags(member.role)}</span>`;
         } else role.innerHTML = extractBetweenTags(member.role);
         tr.appendChild(role);
 
@@ -153,7 +153,16 @@ function addList(arr, newTime = false) {
 
     });
 
-   
+    //revealAllPass
+    $("#revealPasswords").on("click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            $('[id^="spoiler-"]').each(function(e) {
+                $(this).click();    
+            });
+        }, 10);
+    });
     //? Password spoiler toggle
     $('[id^="spoiler-"]').each(function() {
         
@@ -226,14 +235,70 @@ function addList(arr, newTime = false) {
                 cancelButtonText: 'Cancel',
             }).then((result) => {
                 if (result.isConfirmed) {
-                  //  console.log('User Data:', result.value);
-                    Swal.fire('Saved!', 'Your information has been saved.', 'success');
+                 
+                    Swal.fire('Saved!', 'Information has been saved.', 'success');
         
                     cache[userIndex].username = result.value.name;
                     cache[userIndex].password = result.value.pass;
                     cache[userIndex].role = result.value.role;
         
-                    console.log(cache);
+                    
+                    addList(cache, true);
+                }
+            });
+        }
+        }, 10);
+       
+        
+    });
+    //* Edit inv button handler
+    $('button[id$="-editinv"]').on('touchstart click', function(e) {
+        
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const username = $(this).attr("id").split("-")[0];
+            const password = $(this).attr("id").split("-")[1];
+            
+            const user = cache.find(member => member.username === username && member.password === password);
+            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
+        if(user) {
+        
+            let invInput;
+        
+            Swal.fire({
+                title: `Edit ${username}'s Inventory`,
+                html: `
+                    <div style="display: flex; flex-direction: column;">
+                        <label style="text-align:left" for="inv">Name</label>
+                        <input id="inv" class="swal2-input" value="${user.inventoryString}" placeholder="Enter new items">
+            
+                    </div>
+                `,
+                focusConfirm: false,
+                didOpen: () => {
+                    const popup = Swal.getPopup();
+                    invInput = popup.querySelector('#inv');
+                   
+                },
+                preConfirm: () => {
+                    const inv = invInput.value;
+        
+        
+                    if (!inv) {
+                        Swal.showValidationMessage(`Please enter inventory`);
+                    }
+                    return { inv: inv };
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                cancelButtonText: 'Cancel',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                 
+                    Swal.fire('Saved!', 'Inventory has been saved.', 'success');
+                    const parsedInfo = inventoryParse(result.value.inv);
+                    cache[userIndex].inventory = parsedInfo;
                     addList(cache, true);
                 }
             });

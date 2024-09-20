@@ -5,6 +5,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    min-height: 100vh;
     justify-content: flex-start;
 }
 header {
@@ -40,6 +41,12 @@ a {
    
 }
 
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
 .user-table {
   overflow-x: auto;
   white-space: nowrap;
@@ -51,6 +58,7 @@ a {
     color: white;
     position: fixed;
     top: 0;
+    z-index: 9999;
     left: -250px; /* Initially hidden */
     height: 100%;
     transition: left 0.3s ease;
@@ -265,6 +273,7 @@ textarea {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 footer {
+    margin-top: auto;
     text-align: center;
     padding: 10px;
     background-color: #062f5b;

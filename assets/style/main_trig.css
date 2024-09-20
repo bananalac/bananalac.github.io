@@ -5,6 +5,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    min-height: 100vh;
     justify-content: flex-start;
 }
 header {
@@ -40,12 +41,21 @@ a {
    
 }
 
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+
+
 .sidebar {
     width: 250px;
     background-color: #062f5b;
     color: white;
     position: fixed;
     top: 0;
+    z-index: 9999;
     left: -250px; /* Initially hidden */
     height: 100%;
     transition: left 0.3s ease;
@@ -85,37 +95,120 @@ a {
     margin-left: 250px;
 }
 
-/* .code-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1;
-    padding: 20px;
-} */
-textarea {
-    width: 100%;
-    height: 200px;
-    background-color: #39434d;
-    border: 2px solid #062f5b;
-    color: white;
-    border-radius: 5px;
-    padding: 10px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    resize: none;
-}
+
 .button-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin-top: 10px;
 }
-.button-container button {
+
+
+
+.button-container .success-btn {
+    flex: 1;
+    margin: 0 5px;
+    padding: 15px;
+    color: white;
+    background-color: #0abc3c;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-container .success-btn:hover {
+    background-color: #0c8b25;
+}
+
+.button-container .success-btn:disabled {
+    color: #a9a9a9;
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.button-container .danger-btn {
+    flex: 1;
+    margin: 0 5px;
+    padding: 15px;
+    color: white;
+    background-color: #ff2f00;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-container .danger-btn:hover {
+    background-color: #c82333;
+}
+
+.button-container .danger-btn:disabled {
+    color: #a9a9a9;
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.button-container .grey-btn {
+    flex: 1;
+    margin: 0 5px;
+    padding: 15px;
+    color: white;
+    background-color: #656565;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-container .grey-btn:hover {
+    background-color: #3e3e3e;
+}
+
+.button-container .grey-btn:disabled {
+    color: #a9a9a9;
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.button-container .primary-btn {
+    flex: 1;
+    margin: 0 5px;
+    padding: 15px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-container .primary-btn:hover {
+    background-color: #0056b3;
+}
+
+.button-container .primary-btn:disabled {
+    color: #a9a9a9;
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.hiddenTitles {
+    display: none;
+}
+.button-container label {
     flex: 1;
     margin: 0 5px;
     padding: 10px;
+    text-align: center;
     background-color: #007bff;
     color: white;
     border: none;
@@ -127,35 +220,10 @@ textarea {
 .button-container button:hover {
     background-color: #0056b3;
 }
-#descriptionSelector {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    border: 2px solid #062f5b;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.description {
-    background-color: #39434d;
-    border: 1px solid #062f5b;
-    border-radius: 5px;
-    color: white;
-    padding: 10px;
-    margin-top: 20px;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.description2 {
-    background-color: #39434d;
-    border: 1px solid #062f5b;
-    color: white;
-    border-radius: 5px;
-    padding: 10px;
-    margin-top: 20px;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+
+
 footer {
+    margin-top: auto;
     text-align: center;
     padding: 10px;
     background-color: #062f5b;
@@ -165,7 +233,95 @@ footer {
     animation: blink-animation 1s steps(5, start) infinite;
 }
 
+.user-table-container {
+    padding: 20px;
+    background-color: #39434d;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.edit-button, .delete-button, .approve-button, .deny-button, .inv-button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.approve-button {
+    background-color: #0abc3c;
+    color: white;
+}
+
+.deny-button {
+    background-color: #9f9a09;
+    color: white;
+}
+
+.deny-button:hover {
+    background-color: #5d5407;
+    color: white;
+}
+
+.inv-button {
+    background-color: #8f8fe6;
+    color: white;
+}
+
+.inv-button:hover {
+    background-color: #31296c;
+    color: white;
+}
+
+.approve-button:hover {
+    background-color: #0c8b25;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+[id^="spoiler-"] {
+    color: transparent;
+    background-color: black;
+    cursor: pointer;
+    user-select: none;
+}
+
+.blinking-text {
+    color: #ff2f00; /* A vibrant color for visibility */
+    animation: blink 1.5s infinite; /* Animation duration and repetition */
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1; /* Fully visible */
+    }
+    50% {
+        opacity: 0; /* Fully invisible */
+    }
+}
+
 @media (max-width: 768px) {
+
+
     .hamburger {
         display: block; /* Show hamburger on small screens */
     }

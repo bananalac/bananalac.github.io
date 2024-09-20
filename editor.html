@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link rel="stylesheet" href="assets/style/testing.css">
+    <link rel="stylesheet" href="assets/style/editor.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="assets/img/logo.ico">
     <meta property="og:title" content="SaveData Editor">
@@ -32,12 +32,12 @@
 
     <div class="user-table-container">
 
-        <h2 id="titleCheck" style="color: white;">Upload File</h2>
+        <h2 id="titleCheck" style="color: white;">Upload SaveData</h2>
         
         <input autocomplete="off" type="file" id="fileUpload" accept=".txt" style="margin-bottom: 20px; display: none;">
 
         <div class="button-container">
-            <label class="primary-btn" id="labelForUpload" for="fileUpload" class="file-label">Choose a file</label>
+            <label class="primary-btn" id="labelForUpload" for="fileUpload" class="file-label"><i class="fas fa-mouse-pointer"></i> Choose a save-data</label>
             <button class="primary-btn" id="uploadButton"><i class="fas fa-upload"></i> Upload</button>
             <button class="primary-btn" id="newOne" style="display: none;">New One</button>
         </div>
@@ -46,13 +46,13 @@
         <div class="table-responsive">
         <table class="user-table">
             <thead>
-                <tr>
-                    <th>Status</th>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>Role</th>
-                    <th>Inventory</th>
-                    <th>Actions</th>
+                <tr class="no-select">
+                    <th><i class="fas fa-chevron-right"></i> Status</th>
+                    <th><i class="fas fa-user"></i> Username</th>
+                    <th id="revealPasswords"><i class="fas fa-asterisk"></i> Password</th>
+                    <th><i class="fas fa-briefcase"></i> Role</th>
+                    <th><i class="fas fa-suitcase-rolling"></i> Inventory</th>
+                    <th><i class="fas fa-hammer"></i> Actions</th>
                 </tr>
             </thead>
             <tbody id="usersList">
@@ -75,7 +75,7 @@
 
    
     <footer>
-        <p>&copy; 2024 BananaLAC<br>Hosted by Github Pages<br><a style="text-decoration: underline;" href="https://github.com/bananalac/lac-savedata-parser">Source</a></p>
+        <p>&copy; 2024 BananaLAC<br>Hosted by <i class="fab fa-github"></i> Github Pages<br><a style="text-decoration: underline;" href="https://github.com/bananalac/lac-savedata-parser">Source</a></p>
     </footer>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/sweetalert2.all.min.js"></script>
