@@ -23,7 +23,8 @@ function parse(savedata) {
     const splitedUsers = splitTextCustom(savedata.trim(), "}");
 
     if(typeof splitedUsers === 'string') {
-        result.error = "This is not a savedata file."
+        result.error = "This is not a savedata file.";
+        return result;
     } else if(Array.isArray(splitedUsers)) {
 
         if(splitedUsers.length === 0) return result;

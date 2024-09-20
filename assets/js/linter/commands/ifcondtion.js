@@ -47,13 +47,13 @@ export default function conditional(value, args) {
                         };
                         if(conditionInfo.add) {
                             checkArray.push(...conditionInfo.add)
-                            if(!checkArray.includes(condValue)) errors.push({type: "danger", text: `ifcondition{} with '${condition}' condition, only accepts range of numbers from ${conditionInfo.min} to ${conditionInfo.max} and also these items: ${conditionInfo.add.join(" , ")}. (Line ${lineNum})`})
+                            if(!checkArray.includes(condValue)) errors.push(`ifcondition{} with '${condition}' condition, only accepts range of numbers from ${conditionInfo.min} to ${conditionInfo.max} and also these items: ${conditionInfo.add.join(" , ")}. (Line ${lineNum})`)
                         } else {
-                            if(!checkArray.includes(condValue)) errors.push({type: "danger", text: `ifcondition{} with '${condition}' condition, only accepts range of numbers from ${conditionInfo.min} to ${conditionInfo.max}. (Line ${lineNum})`})
+                            if(!checkArray.includes(condValue)) errors.push(`ifcondition{} with '${condition}' condition, only accepts range of numbers from ${conditionInfo.min} to ${conditionInfo.max}. (Line ${lineNum})`)
                         }
                     }
                     if(conditionInfo.type === 3) {
-                        if(typeof isBooleanString(condValue) === 'undefined')  errors.push({type: "danger", text: `ifcondition{} with '${condition}' condition, only accepts true or false. (Line ${lineNum})`})
+                        if(typeof isBooleanString(condValue) === 'undefined')  errors.push(`ifcondition{} with '${condition}' condition, only accepts true or false. (Line ${lineNum})`)
                     }
 
                 }
@@ -113,7 +113,7 @@ export default function conditional(value, args) {
                                 }
                             }
                             if(conditionInfo.type === 3) {
-                                if(typeof isBooleanString(condValue) === 'undefined')  errors.push({type: "danger", text: `ifcondition{} with '${condition}' condition, only accepts true or false (Line ${lineNum}, condition ${multiInd+1})`})
+                                if(typeof isBooleanString(condValue) === 'undefined')  errors.push(`ifcondition{} with '${condition}' condition, only accepts true or false (Line ${lineNum}, condition ${multiInd+1})`)
                             }
         
                         }

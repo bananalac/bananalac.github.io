@@ -37,12 +37,13 @@
         <input autocomplete="off" type="file" id="fileUpload" accept=".txt" style="margin-bottom: 20px; display: none;">
 
         <div class="button-container">
-            <label id="labelForUpload" for="fileUpload" class="file-label">Choose a file</label>
-            <button id="uploadButton"><i class="fas fa-upload"></i> Upload</button>
-            <button id="newOne" style="display: none;">New One</button>
+            <label class="primary-btn" id="labelForUpload" for="fileUpload" class="file-label">Choose a file</label>
+            <button class="primary-btn" id="uploadButton"><i class="fas fa-upload"></i> Upload</button>
+            <button class="primary-btn" id="newOne" style="display: none;">New One</button>
         </div>
 
         <h2 id="userManagement" style="color: white;">User Management</h2>
+        <div class="table-responsive">
         <table class="user-table">
             <thead>
                 <tr>
@@ -58,14 +59,15 @@
                                        
             </tbody>
         </table>
+        </div>
         <h2 style="color: white;">Bulk Actions</h2>
         <div class="button-container">
-            <button id="approveAll" style="background-color: green;" disabled><i class="fas fa-check-circle"></i> Approve All</button>
-            <button id="denyAll" style="background-color: rgb(175, 2, 16);" disabled><i class="fas fa-times-circle"></i> Deny All</button>
-            <button id="deleteAll" style="background-color: rgb(56, 56, 56);" disabled><i class="fas fa-trash"></i> Delete All</button>
+            <button class="success-btn" id="approveAll" disabled><i class="fas fa-check-circle"></i> Approve All</button>
+            <button class="danger-btn" id="denyAll" disabled><i class="fas fa-times-circle"></i> Deny All</button>
+            <button class="grey-btn" id="deleteAll" disabled><i class="fas fa-trash"></i> Delete All</button>
         </div>
         <div class="button-container">
-            <button id="downloadButton" disabled><i class="fas fa-check-circle"></i> Download file</button>
+            <button class="primary-btn" id="downloadButton" disabled><i class="fas fa-check-circle"></i> Download file</button>
         </div>
 
     </div>

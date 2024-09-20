@@ -66,7 +66,7 @@ export default function check7(func, sub = "", commandInfo, vlList, args) {
             //* NUM_CHANGABLE
             if(checkingItem.type === 3) {
                 if(!(vl.startsWith("+") || vl.startsWith("-"))) errors.push(`${func}{} with ${textEditor} ${example.replace(/OPT/gm, vlIndex+1)} should have numbers like this +100 or -200 (you need to provide + or -). (Line ${lineNum})`);
-                if(!isExactNumeric(vl.replace(/\+/gm, "").replace(/\-/gm, ""))) errors.push({type: "danger", text: `${func}{} with ${textEditor} ${example.replace(/OPT/gm, vlIndex+1)} should have numbers.you didn't provide a valid number. (Line ${lineNum})`})
+                if(!isExactNumeric(vl.replace(/\+/gm, "").replace(/\-/gm, ""))) errors.push(`${func}{} with ${textEditor} ${example.replace(/OPT/gm, vlIndex+1)} should have numbers.you didn't provide a valid number. (Line ${lineNum})`)
             }            
             //* LIST
             if(checkingItem.type === 4) {

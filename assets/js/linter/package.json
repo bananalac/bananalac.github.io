@@ -1,12 +1,13 @@
 {
   "name": "lac-triggerbox-linter",
-  "version": "1.0.0",
+  "description": "LAC triggerbox linter",
+  "version": "1.0.2",
   "type": "module",
   "main": "index.js",
   "scripts": {
    
   },
-  "keywords": ["LAC", "triggerbox", "alizadev"],
+  "keywords": ["LAC", "triggerbox", "alizadev", "kavascript"],
   "author": "BananaLAC",
-  "license": " MPL-2.0"
+  "license": "MPL-2.0"
 }

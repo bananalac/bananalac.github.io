@@ -23,6 +23,11 @@ function extractBetweenTags(str) {
 
 window.addEventListener("DOMContentLoaded", function() {
 
+    $("#approveAll").prop("disabled", true);
+    $("#denyAll").prop("disabled", true);
+    $("#deleteAll").prop("disabled", true);
+    $("#downloadButton").prop("disabled", true);
+    
 })
 
 
@@ -331,7 +336,21 @@ $("#uploadButton").on("touchstart click", function(e) {
         
         const content = event.target.result;
         const parsedContent = parse(content);
-        cache = parsedContent.members
+        if(parsedContent.error) {
+            Toast.fire({
+                icon: "error",
+                title: "This is not a save-data file!"
+            });
+            return;
+        }  
+        if(parsedContent.members.length === 0) {
+            Toast.fire({
+                icon: "error",
+                title: "Empty Save-data!"
+            });
+            return;
+        }  
+        cache = parsedContent.members;
 
        
         $("#approveAll").prop("disabled", false);
@@ -369,17 +388,20 @@ $("#downloadButton").on("touchstart click", function(e) {
     setTimeout(() => {
 
         const blob = new Blob([write(cache)], { type: 'text/plain' });
+    
+        const url = URL.createObjectURL(blob);
+        const timestamp = new Date().getTime();
 
         const link = document.createElement('a');
-    
-        link.href = URL.createObjectURL(blob);
+       
+        link.href = `${url}`;
         link.download = 'save-data.txt';
+
     
         document.body.appendChild(link);
-    
         link.click();
-    
         document.body.removeChild(link);
+        URL.revokeObjectURL(url);
         
     }, 10);
     
