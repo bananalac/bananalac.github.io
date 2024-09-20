@@ -32,9 +32,13 @@
 
     <div class="user-table-container">
 
+        <!-- <i class="fas fa-question-circle helper"></i> -->
+
         <h2 id="titleCheck" style="color: white;">Upload Map</h2>
         
         <input autocomplete="off" type="file" id="fileUpload" accept=".txt" style="margin-bottom: 20px; display: none;">
+
+        <input type="text" id="additionalRemove" autocomplete="off" placeholder="Coming Soon!" disabled>
 
         <div class="button-container">
             <label class="primary-btn" id="labelForUpload" for="fileUpload" class="file-label"><i class="fas fa-map"></i> Choose a map</label>
@@ -58,11 +62,11 @@
     <script type="module" src="assets/js/main_trig.js"></script>
     <script>
     
-
         document.getElementById('hamburger').addEventListener('click', function() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('active');
         });
+        
     </script>
 </body>
 </html>

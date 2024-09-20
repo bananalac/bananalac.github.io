@@ -27,10 +27,166 @@ window.addEventListener("DOMContentLoaded", function() {
     $("#denyAll").prop("disabled", true);
     $("#deleteAll").prop("disabled", true);
     $("#downloadButton").prop("disabled", true);
+    $('#searchBar').prop("disabled", true);
 
 })
 
+$(".helper").on("touchstart click", function(e) {
 
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    setTimeout(() => {
+        
+        Swal.fire({
+            title: "Search Help",
+            // icon: "info",
+            html: `
+             <p style="text-align:left">Use this keys at first of your search:<br>
+             <strong>status:</strong>approved/pending<br>
+             <strong>username:</strong> to find a username<br>
+             <strong>pass:</strong>to find a password<br>
+             <strong>role:</strong>to filter people with a role<br>
+             <strong>inv:item:value</strong> (to find who has this inventory item)<br>
+             Clear to show all.
+             </p>
+             <h5>Examples :</h5>
+             <p>username:alex_99<br>role:police<br>inv:vehicles:pride, king</p>
+            `,
+            showCloseButton: true,
+            showCancelButton: false,
+            focusConfirm: false,
+           
+          });
+
+    }, 10);
+
+});
+
+//search system
+$('#searchBar').on('keyup', function(e) {
+
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const filter = $(this).val();
+
+    if(filter.trim() === '') {
+        $('#usersList tr').each(function() {
+           $(this).show();
+        });
+        $("#searchMatch").html("").css("display", "none");
+    }
+    if(filter.toLowerCase().startsWith('status:')) {
+        let num = 0;
+        $('#usersList tr').each(function() {
+            const status = $(this).find('td:nth-child(1)').text().toLowerCase();
+            console.log(status)
+            if (status.includes(filter.replace('status:', ""))) {
+                $(this).show();
+                num++;
+            } else {
+                $(this).hide();
+            }
+
+        });
+        $("#searchMatch").html(`${num} matches found.`).css("display", "block");
+    }
+    if(filter.toLowerCase().startsWith('username:')) {
+        let num = 0;
+        $('#usersList tr').each(function() {
+            const username = $(this).find('td:nth-child(2)').text().toLowerCase();
+            console.log(username)
+            if (username.includes(filter.replace('username:', ""))) {
+                $(this).show();
+                num++;
+            } else {
+                $(this).hide();
+            }
+        });
+        $("#searchMatch").html(`${num} matches found.`).css("display", "block");
+    }
+    if(filter.startsWith('pass:')) {
+        let num = 0;
+        $('#usersList tr').each(function() {
+            const pass = $(this).find('td:nth-child(3)').text().toLowerCase();
+            console.log(pass)
+            if (pass.includes(filter.replace('pass:', ""))) {
+                $(this).show();
+                num++;
+            } else {
+                $(this).hide();
+            }
+        });
+        $("#searchMatch").html(`${num} matches found.`).css("display", "block");
+    }
+    if(filter.toLowerCase().startsWith('role:')) {
+        let num = 0;
+        $('#usersList tr').each(function() {
+            const role = $(this).find('td:nth-child(4)').text().toLowerCase();
+            console.log(role)
+            if (role.includes(filter.replace('role:', ""))) {
+                $(this).show();
+                num++;
+            } else {
+                $(this).hide();
+            }
+        });
+        $("#searchMatch").html(`${num} matches found.`).css("display", "block");
+    }
+    if(filter.startsWith('inv:')) {
+
+        const itemName = filter.split(":")[1];
+        const value = filter.split(":")[2];
+        
+        if(itemName && value) {
+            const filteredOnes = cache.filter(mem => mem.inventory[itemName] === value);
+            console.log(filteredOnes);
+            let justShowThem = [];
+            $('#usersList tr').each(function() {
+                const username = $(this).find('td:nth-child(2)').text();
+                const password = $(this).find('td:nth-child(3)').text();
+
+               filteredOnes.forEach(member => {
+                if(member.username === username && member.password === password) {
+                    justShowThem.push(this);
+                } 
+               }); 
+               
+               $("#searchMatch").html(`${justShowThem.length} matches found.`).css("display", "block");
+               if(justShowThem.includes(this)) $(this).show()
+               else {
+                  if($(this).attr("id") !== 'searchBar') $(this).hide();
+               }
+            });
+            
+        } else if(itemName && !value) {
+            const filteredOnes = cache.filter(mem => mem.inventory[itemName]);
+            console.log(filteredOnes);
+            let justShowThem = [];
+            $('#usersList tr').each(function() {
+                const username = $(this).find('td:nth-child(2)').text();
+                const password = $(this).find('td:nth-child(3)').text();
+
+               filteredOnes.forEach(member => {
+                if(member.username === username && member.password === password) {
+                    justShowThem.push(this);
+                } 
+               }); 
+               
+               $("#searchMatch").html(`${justShowThem.length} matches found.`).css("display", "block");
+               if(justShowThem.includes(this)) $(this).show()
+               else {
+                  if($(this).attr("id") !== 'searchBar') $(this).hide();
+               }
+            });
+          
+        }
+    }
+
+   
+
+    
+   
+});
 
 const Toast = Swal.mixin({
     toast: true,
@@ -96,7 +252,40 @@ function addList(arr, newTime = false) {
     document.getElementById("usersList").innerHTML = "";
 
     if(newTime === true) {
-        $("#userManagement").html(`User Management <span class="blinking-text">(Download edited file!)</span>`);
+        // if($('#searchBar').val() !== '') {
+        //     $('#searchBar').keyup();
+        // }
+        $("#userManagement").html(`User Management <i class="fas fa-question-circle helper"></i> <span class="blinking-text">(Unsaved)</span>`);
+        $(".helper").on("touchstart click", function(e) {
+
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            setTimeout(() => {
+                
+                Swal.fire({
+                    title: "Search Help",
+                    // icon: "info",
+                    html: `
+                     <p style="text-align:left">Use this keys at first of your search:<br>
+                     <strong>status:</strong>approved/pending<br>
+                     <strong>username:</strong> to find a username<br>
+                     <strong>pass:</strong>to find a password<br>
+                     <strong>role:</strong>to filter people with a role<br>
+                     <strong>inv:item:value</strong> (to find who has this inventory item)<br>
+                     Clear to show all.
+                     </p>
+                     <h5>Examples :</h5>
+                     <p>username:alex_99<br>role:police<br>inv:vehicles:pride, king</p>
+                    `,
+                    showCloseButton: true,
+                    showCancelButton: false,
+                    focusConfirm: false,
+                   
+                  });
+        
+            }, 10);
+        
+        })
         $("#titleCheck").html(`Edited save-data.txt with ${cache.length} saved users.`);   
     }
 
@@ -422,6 +611,7 @@ $("#uploadButton").on("touchstart click", function(e) {
         $("#denyAll").prop("disabled", false);
         $("#deleteAll").prop("disabled", false);
         $("#downloadButton").prop("disabled", false);
+        $('#searchBar').prop("disabled", false);
         
         $("#uploadButton").css("display", "none");
         $("#labelForUpload").css("display", "none");
@@ -503,8 +693,26 @@ $("#deleteAll").on("touchstart click", function(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     setTimeout(() => {
-        cache = [];
-        addList(cache, true);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete them!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              cache = [];
+              addList(cache, true);
+              Swal.fire({
+                title: "Deleted!",
+                text: "All of them has been deleted.",
+                icon: "success"
+              });
+            }
+          });
+        
     }, 10);
 })
 
@@ -512,6 +720,21 @@ $("#newOne").on("touchstart click", function(e) {
     
     e.preventDefault();
     e.stopImmediatePropagation();
-    location.reload();
+    setTimeout(() => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert edited players!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, exit!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                location.reload();
+            }
+          });
+    }, 10);
+   
 })
 

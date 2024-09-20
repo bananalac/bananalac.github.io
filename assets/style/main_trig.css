@@ -170,6 +170,22 @@ a {
     background-color: #3e3e3e;
 }
 
+.helper:hover {
+    color: #0abc3c;
+    cursor: pointer;
+}
+
+
+#additionalRemove {
+    margin-bottom: 10px;
+    width: 100%;
+   
+    padding: 10px; 
+    border-radius: 5px; 
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+ }
+
 .button-container .grey-btn:disabled {
     color: #a9a9a9;
     cursor: not-allowed;

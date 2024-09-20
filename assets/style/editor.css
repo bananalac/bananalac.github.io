@@ -49,6 +49,7 @@ a {
 
 .user-table {
   overflow-x: auto;
+  overflow-y: auto;
   white-space: nowrap;
 }
 
@@ -290,9 +291,25 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.helper:hover {
+    color: #0abc3c;
+    cursor: pointer;
+}
+
 .table-responsive {
     overflow-x: auto;
     margin-top: 20px;
+}
+
+
+#searchBar {
+   margin-bottom: 10px;
+   width: 100%;
+  
+   padding: 10px; 
+   border-radius: 5px; 
+   border: 1px solid #ccc;
+   box-sizing: border-box;
 }
 
 .user-table {
@@ -375,7 +392,7 @@ footer {
 }
 
 .blinking-text {
-    color: #ff2f00; /* A vibrant color for visibility */
+    color: #e0d60b; /* A vibrant color for visibility */
     animation: blink 1.5s infinite; /* Animation duration and repetition */
 }
 
