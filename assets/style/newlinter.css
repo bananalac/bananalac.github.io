@@ -215,6 +215,30 @@ textarea {
     pointer-events: none;
 }
 
+.button-container .white-btn {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-container .white-btn:hover {
+    background-color: #b7b7b7;
+}
+
+.button-container .primary-btn:disabled {
+    color: #a9a9a9;
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
 /* .button-container button {
     flex: 1;
     margin: 0 5px;
@@ -284,12 +308,32 @@ footer {
     animation: blink-animation 1s steps(5, start) infinite;
 }
 
+.suggestion-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    z-index: 1000;
+    display: none; /* Initially hidden */
+}
+
+.suggestion-box div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestion-box div:hover {
+    background-color: #f0f0f0;
+}
 
 .user-table-container {
     padding: 20px;
     background-color: #39434d;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .helper:hover {
