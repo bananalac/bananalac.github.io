@@ -84,7 +84,8 @@ $(".typers").each(function() {
     
         }, 10);
     })
-})
+});
+
 
 $("#newcode").on("touchstart click", function(e) {
     e.preventDefault();
