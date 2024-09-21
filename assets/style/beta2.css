@@ -1,3 +1,5 @@
+
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -12,13 +14,17 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #062f5b;
+    background-color: #797902;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 header img {
     height: 50px;
     margin-right: 20px;
+}
+
+.swal2-container {
+    z-index: 9999;
 }
 
 ul {
@@ -55,7 +61,7 @@ a {
 
 .sidebar {
     width: 250px;
-    background-color: #062f5b;
+    background-color: #797902;
     color: white;
     position: fixed;
     top: 0;
@@ -103,7 +109,7 @@ textarea {
     width: 100%;
     height: 200px;
     background-color: #39434d;
-    border: 2px solid #062f5b;
+    border: 2px solid #fffb00;
     color: white;
     border-radius: 5px;
     padding: 10px;
@@ -180,6 +186,34 @@ textarea {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.overlay {
+    position: fixed; /* Fixed positioning to cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* High z-index to overlay other elements */
+    opacity: 0; /* Start hidden */
+    transition: opacity 1s ease; /* Smooth transition for fade-in effect */
+}
+
+.ovrLogo {
+    max-width: 200px; /* Limit logo size */
+    margin-bottom: 20px; /* Space between logo and description */
+}
+
+.ovrdescription {
+    font-size: 1.5em; /* Increase font size for better readability */
+    text-align: center; /* Center the text */
+}
+
+
 .button-container .grey-btn:hover {
     background-color: #3e3e3e;
 }
@@ -196,7 +230,8 @@ textarea {
     margin: 0 5px;
     padding: 10px;
     color: white;
-    background-color: #007bff;
+    background-color: #d7d400;
+    color: black;
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -205,31 +240,7 @@ textarea {
 }
 
 .button-container .primary-btn:hover {
-    background-color: #0056b3;
-}
-
-.button-container .primary-btn:disabled {
-    color: #a9a9a9;
-    cursor: not-allowed;
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-.button-container .white-btn {
-    flex: 1;
-    margin: 0 5px;
-    padding: 10px;
-    color: rgb(0, 0, 0);
-    background-color: #ffffff;
-    border: none;
-    border-radius: 12px;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.button-container .white-btn:hover {
-    background-color: #b7b7b7;
+    background-color: #756f02;
 }
 
 .button-container .primary-btn:disabled {
@@ -301,39 +312,19 @@ footer {
     margin-top: auto;
     text-align: center;
     padding: 10px;
-    background-color: #062f5b;
+    background-color: #797902;
     color: white;
 }
 .blink {
     animation: blink-animation 1s steps(5, start) infinite;
 }
 
-.suggestion-box {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: white;
-    z-index: 1000;
-    display: none; /* Initially hidden */
-}
-
-.suggestion-box div {
-    padding: 10px;
-    cursor: pointer;
-}
-
-.suggestion-box div:hover {
-    background-color: #f0f0f0;
-}
 
 .user-table-container {
     padding: 20px;
     background-color: #39434d;
     border-radius: 5px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .helper:hover {
@@ -365,12 +356,12 @@ footer {
 .user-table th, .user-table td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid #062f5b;
+    border-bottom: 1px solid #797902;
     color: white;
 }
 
 .user-table th {
-    background-color: #062f5b;
+    background-color: #797902;
 }
 
 .edit-button, .delete-button, .approve-button, .deny-button, .inv-button {

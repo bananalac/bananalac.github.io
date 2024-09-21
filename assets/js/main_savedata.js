@@ -19,7 +19,9 @@ function extractBetweenTags(str) {
     }
 }
 
-
+$(document).ready(function() {
+    $(".overlay").slideUp();
+})
 
 window.addEventListener("DOMContentLoaded", function() {
 

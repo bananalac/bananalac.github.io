@@ -4,27 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link rel="stylesheet" href="assets/style/main_trig.css">
+    <link rel="stylesheet" href="assets/style/main_cleaner.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="assets/img/logo.ico">
     <meta property="og:title" content="Triggerbox Cleaner">
+    <meta property="og:site_name" content="BananaLAC">
     <meta property="og:type" content="Website">
     <meta property="og:url" content="https://bananalac.github.io/cleaner">
     <meta property="og:image" content="https://bananalac.github.io/assets/img/logo.png">
-    <meta property="og:description" content="Clean all of triggerboxes from a map!">
+    <meta property="og:description" content="Need a clean map from trigger boxes? This site can help you!">
+    <meta name="description" content="Need a clean map from trigger boxes? This site can help you!">
     <meta name="theme-color" content="#FFFF00">
     
 </head>
 <body>
+    <div style="opacity: 1;" class="overlay">
+        <img src="assets/img/logo.png" alt="ovrLogo" class="logo">
+        <p class="ovrdescription">Triggerbox Cleaner</p>
+    </div>
     <header>
         <img src="assets/img/logo.png" alt="Logo">
-        <h1 style="color: white;">LAC Triggerbox Cleaner</h1>
+        <h1 style="color: white;">Triggerbox Cleaner</h1>
         <div id="hamburger" class="hamburger">&#9776;</div>
     </header>
-
+   
     <div id="sidebar" class="sidebar">
         <ul>
-            <a style="color: white;" href="/"><li>Home</li></a>
+            <a style="color: white;" href="/"><li>Homepage</li></a>
             <a style="color: white;" href="/editor"><li>SaveData Editor</li></a>
             <a style="color: white;" href="/linter"><li>Triggerbox Linter</li></a>
         </ul>
@@ -32,13 +38,9 @@
 
     <div class="user-table-container">
 
-        <!-- <i class="fas fa-question-circle helper"></i> -->
-
         <h2 id="titleCheck" style="color: white;">Upload Map</h2>
         
         <input autocomplete="off" type="file" id="fileUpload" accept=".txt" style="margin-bottom: 20px; display: none;">
-
-        <input type="text" id="additionalRemove" autocomplete="off" placeholder="Coming Soon!" disabled>
 
         <div class="button-container">
             <label class="primary-btn" id="labelForUpload" for="fileUpload" class="file-label"><i class="fas fa-map"></i> Choose a map</label>

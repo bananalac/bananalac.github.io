@@ -2,15 +2,14 @@
 let cache = { name: "", map: "" };
 
 
+$(document).ready(function() {
+    $(".overlay").slideUp();
+})
 
 window.addEventListener("DOMContentLoaded", function() {
 
     $("#downloadButton").prop("disabled", true);
-    $("#additionalRemove").prop("disabled", true)
-
-})
-
-
+});
 
 const Toast = Swal.mixin({
     toast: true,
@@ -29,11 +28,7 @@ document.getElementById("fileUpload").addEventListener("change", function(event)
         $("#labelForUpload").text(`${file.name} (${Math.round(file.size / 1024)} KB)`);
     }
 
-})
-
-function splitText(text, spliter) {
-    return text.includes(spliter) ? text.split(spliter) : text;
-}
+});
 
 $("#uploadButton").on("touchstart click", function(e) {
     
@@ -47,7 +42,7 @@ $("#uploadButton").on("touchstart click", function(e) {
     if(fileInput.files.length === 0) { 
         Toast.fire({
             icon: "error",
-            title: "Upload a map"
+            title: "Upload a map!"
         });
         return;
     }
@@ -85,11 +80,7 @@ $("#uploadButton").on("touchstart click", function(e) {
         $("#fileUpload").css("display", "none");
         $("#titleCheck").html(`Found ${triggerboxesLength} Triggerbox`);
 
-
-
-      
-    
-       
+                 
         
     };
     cache.name = file.name.replace('.txt', "");
@@ -129,34 +120,11 @@ $("#downloadButton").on("touchstart click", function(e) {
 
 });
 
-$(".helper").on("touchstart click", function(e) {
-
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    setTimeout(() => {  
-        Swal.fire({
-            title: "Additional Removal",
-            // icon: "info",
-            html: `
-             <p style="text-align:left">Add other objects splited by , to remove them too.<br></p>
-             <h3>Example :</h3>
-             <p>Bridge_Chunk_Editor,Barrel_Editor</p>
-            `,
-            showCloseButton: true,
-            showCancelButton: false,
-            focusConfirm: false,  
-    });
-    }, 10);
-
-})
-
-
 
 $("#newOne").on("touchstart click", function(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     setTimeout(() => {
-        
         location.reload();
     }, 10);
    

@@ -1,5 +1,8 @@
 import {convertToHtml, colorize, typeChecker} from './linter/index.js';
 
+$(document).ready(function() {
+    $(".overlay").slideUp();
+});
 
 window.addEventListener("DOMContentLoaded", function() {
 

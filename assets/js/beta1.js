@@ -20,6 +20,18 @@ const Toast = Swal.mixin({
     timerProgressBar: true
   });
 
+$(document).ready(function() {
+    Swal.fire({
+        title: "This is a BETA",
+        text: "Some buttons or functions may not work.",
+        icon: "warning"
+    }).then((result) => {
+        if(result.isConfirmed) {
+            $(".overlay").slideUp();
+        }
+    });
+});
+
 window.addEventListener("DOMContentLoaded", function() {
 
     $("#descriptionSelector").prop('disabled', true);
@@ -196,12 +208,12 @@ setTimeout(() => {
 
 
 
-// Hide suggestion box when clicking outside
-document.addEventListener('click', function(event) {
-    if (!inputField.contains(event.target) && !suggestionBox.contains(event.target)) {
-        suggestionBox.style.display = 'none';
-    }
-});
+// // Hide suggestion box when clicking outside
+// document.addEventListener('click', function(event) {
+//     if (!inputField.contains(event.target) && !suggestionBox.contains(event.target)) {
+//         suggestionBox.style.display = 'none';
+//     }
+// });
 
 
 

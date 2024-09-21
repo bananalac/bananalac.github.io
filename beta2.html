@@ -4,18 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link rel="stylesheet" href="assets/style/editor.css">
+    <link rel="stylesheet" href="assets/style/beta2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="assets/img/logo.ico">
     <meta property="og:title" content="BETA02">
+    <meta property="og:site_name" content="BananaLAC">
     <meta property="og:type" content="Website">
-    <!-- <meta property="og:url" content="https://bananalac.github.io/editor"> -->
+    <meta property="og:url" content="https://bananalac.github.io/editor">
     <meta property="og:image" content="https://bananalac.github.io/assets/img/logo.png">
-    <meta property="og:description" content="OBJ MASSREMOVER">
+    <meta property="og:description" content="Beta02: New Object remover">
+    <meta name="description" content="Beta02: New Object remover">
     <meta name="theme-color" content="#FFFF00">
     
 </head>
 <body>
+    <div style="opacity: 1;" class="overlay">
+        <img src="assets/img/logo.png" alt="ovrLogo" class="logo">
+        <p class="ovrdescription">BETA02</p>
+    </div>
     <header>
         <img src="assets/img/logo.png" alt="Logo">
         <h1 style="color: white;">BETA02</h1>
@@ -24,51 +30,39 @@
 
     <div id="sidebar" class="sidebar">
         <ul>
-            <a style="color: white;" href="/"><li>Home</li></a>
-            <a style="color: white;" href="/cleaner"><li>Triggerbox Cleaner</li></a>
-            <a style="color: white;" href="/linter"><li>Triggerbox Linter</li></a>
+         
         </ul>
     </div>
 
     <div class="user-table-container">
 
-        <h2 id="titleCheck" style="color: white;">Upload SaveData</h2>
+        <h2 id="titleCheck" style="color: white;">Upload Map</h2>
         
         <input autocomplete="off" type="file" id="fileUpload" accept=".txt" style="margin-bottom: 20px; display: none;">
 
         <div class="button-container">
-            <label class="primary-btn" id="labelForUpload" for="fileUpload" class="file-label"><i class="fas fa-mouse-pointer"></i> Choose a save-data</label>
+            <label class="primary-btn" id="labelForUpload" for="fileUpload" class="file-label"><i class="fas fa-mouse-pointer"></i> Choose a map</label>
             <button class="primary-btn" id="uploadButton"><i class="fas fa-upload"></i> Upload</button>
             <button class="primary-btn" id="newOne" style="display: none;"><i class="fas fa-backspace"></i> EXIT</button>
         </div>
 
-        <div id="bulkDiv" class="button-container">
-            <button class="success-btn" id="approveAll" disabled><i class="fas fa-check-circle"></i> Approve All</button>
-            <button class="danger-btn" id="denyAll" disabled><i class="fas fa-times-circle"></i> Deny All</button>
-            <button class="grey-btn" id="deleteAll" disabled><i class="fas fa-trash"></i> Delete All</button>
-        </div>
+       
 
         <div class="button-container">
             <button class="primary-btn" id="downloadButton" disabled><i class="fas fa-check-circle"></i> Download file</button>
         </div>
 
        
-        <h2 id="userManagement" style="color: white;">User Management <i class="fas fa-question-circle helper"></i></h2>
-        <input type="text" id="searchBar" autocomplete="off" placeholder="Search... (use icon ? to help)" disabled>
+        <h2 id="userManagement" style="color: white;">Items</h2>
         <div class="table-responsive">
-           
-            
+             
         <table class="user-table">
-            <h4 id="searchMatch" style="color: white; display: none;"></h4>
+            
             <thead>
                 <tr class="no-select">
-                    <th><i class="fas fa-chevron-right"></i> Status</th>
-                    <th><i class="fas fa-user"></i> Username</th>
-                    <th id="revealPasswords"><i class="fas fa-asterisk"></i> Password</th>
-                    <th><i class="fas fa-briefcase"></i> Role</th>
-                    <th><i class="fas fa-suitcase-rolling"></i> Inventory</th>
-                    <th><i class="fas fa-hammer"></i> Actions</th>
-                </tr>
+                    <th><i class="fas fa-chevron-right"></i> Objects</th>
+                    <th><i class="fas fa-globe"></i> Amount</th>
+                    <th><i class="fas fa-briefcase"></i> Actions</th>                    
             </thead>
             <tbody id="usersList">
                                        
@@ -83,7 +77,7 @@
     </footer>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/sweetalert2.all.min.js"></script>
-    <script type="module" src="assets/js/main_savedata.js"></script>
+    <script type="module" src="assets/js/beta2.js"></script>
     <script>
     
 
