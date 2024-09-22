@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="assets/style/editor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="assets/img/logo.ico">
+    <meta property="og:title" content="BananaLAC: LAC Tools">
+    <meta property="og:site_name" content="BananaLAC">
+    <meta property="og:type" content="Website">
+    <meta property="og:url" content="https://bananalac.github.io/">
+    <meta property="og:image" content="https://bananalac.github.io/assets/img/logo.png">
+    <meta property="og:description" content="Ultimate collection of tools for LAC">
+    <meta name="description" content="Ultimate collection of tools for LAC">
+    <meta name="theme-color" content="#FFFF00">
+    
+</head>
+<body>
+    <header>
+        <img src="assets/img/logo.png" alt="Logo">
+        <h1 style="color: white;">404 Not Found!</h1>
+        <div id="hamburger" class="hamburger">&#9776;</div>
+    </header>
+
+    <div id="sidebar" class="sidebar">
+        <ul>
+            <a style="color: white;" href="/"><li>Homepage</li></a>
+            <a style="color: white;" href="/cleaner"><li>Triggerbox Cleaner</li></a>
+            <a style="color: white;" href="/linter"><li>Triggerbox Linter</li></a>
+        </ul>
+    </div>
+
+    <div class="user-table-container">
+
+        <h1 style="color: white; text-align: center;">Sorry, The page is moved or deleted.</h1>
+        
+        
+        <div class="button-container">
+            <button class="primary-btn" onclick="reload()">Homepage</button>
+        </div>
+     
+        </div>
+       
+   
+    <footer>
+        <p>&copy; 2024 BananaLAC<br>Hosted by <i class="fab fa-github"></i> Github Pages<br><a style="text-decoration: underline;" href="https://github.com/bananalac/lac-savedata-parser">Source</a></p>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/sweetalert2.all.min.js"></script>
+    <script>
+        function reload() {
+            location.replace("https://bananalac.github.io/");
+        }
+        document.getElementById('hamburger').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
