@@ -54,7 +54,7 @@ window.addEventListener("DOMContentLoaded", function() {
             $("#inputPlace").prop('disabled', true);
             $("#descriptionSelector").prop('disabled', false);
             $("#findMistakesButton").css('display', 'none');
-            $("#bulkDiv").hide();
+            $(".bulkDiv").hide();
             $("#inputPlace").hide();
             $(".resultsTitle").show();
             $("#newcode").css('display', 'block');
@@ -120,7 +120,7 @@ setTimeout(() => {
     $("#inputPlace").prop('disabled', true);
     $("#descriptionSelector").prop('disabled', false);
     $("#findMistakesButton").css('display', 'none');
-    $("#bulkDiv").hide();
+    $(".bulkDiv").hide();
     $("#inputPlace").hide();
     $(".resultsTitle").show();
     $("#newcode").css('display', 'block');
