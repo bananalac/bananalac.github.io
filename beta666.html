@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="assets/style/cutter.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="assets/img/logo.ico">
+   
+    
+</head>
+<body>
+    <div style="opacity: 1;" class="overlay">
+        <img src="assets/img/logo.png" alt="ovrLogo" class="logo">
+        <p class="ovrdescription">Map Cutter</p>
+    </div>
+    <header>
+        <img src="assets/img/logo.png" alt="Logo">
+        <h1 style="color: white;">Map Cutter</h1>
+        <div id="hamburger" class="hamburger">&#9776;</div>
+    </header>
+
+    <div id="sidebar" class="sidebar">
+        <ul>
+            <a style="color: white;" href="/"><li>Homepage</li></a>
+            <a style="color: white;" href="/cleaner"><li>Triggerbox Cleaner</li></a>
+            <a style="color: white;" href="/linter"><li>Triggerbox Linter</li></a>
+        </ul>
+    </div>
+
+    <div class="user-table-container">
+
+        <div class="rectangle">
+            <input type="text" class="corner-input" id="top-left" placeholder="Top Left">
+            <input type="text" class="corner-input" id="top-right" placeholder="Top Right">
+            <input type="text" class="corner-input" id="bottom-left" placeholder="Bottom Left">
+            <input type="text" class="corner-input" id="bottom-right" placeholder="Bottom Right">
+        </div>
+
+        
+        <div class="button-container">
+            <label class="primary-btn" id="labelForUpload" for="fileUpload" class="file-label"><i class="fas fa-mouse-pointer"></i> Choose a save-data</label>
+            <button class="primary-btn" id="uploadButton"><i class="fas fa-upload"></i> Upload</button>
+            <button class="primary-btn" id="newOne" style="display: none;"><i class="fas fa-backspace"></i> EXIT</button>
+        </div>
+
+       
+                                 
+            
+    </div>
+  
+   
+    <footer>
+        <p>&copy; 2024 BananaLAC<br>Hosted by <i class="fab fa-github"></i> Github Pages<br><a style="text-decoration: underline;" href="https://github.com/bananalac/lac-savedata-parser">Source</a></p>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/sweetalert2.all.min.js"></script>
+    <script type="module" src="assets/js/main_savedata.js"></script>
+    <script>
+        document.getElementById('hamburger').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
