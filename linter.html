@@ -1,12 +1,13 @@
+<!-- BETA01 - linter -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAC Triggerbox Linter</title>
+    <title></title>
     <link rel="stylesheet" href="assets/style/main_linter.css">
-    <link rel="shortcut icon" href="assets/img/logo.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="assets/img/logo.ico">
     <meta property="og:title" content="Triggerbox Linter">
     <meta property="og:site_name" content="BananaLAC">
     <meta property="og:type" content="Website">
@@ -24,36 +25,61 @@
     </div>
     <header>
         <img src="assets/img/logo.png" alt="Logo">
-        <h1 style="color: white;">Triggerbox linter</h1>
+        <h1 style="color: white;">Triggerbox Linter</h1>
         <div id="hamburger" class="hamburger">&#9776;</div>
     </header>
 
     <div id="sidebar" class="sidebar">
         <ul>
-            <a style="color: white;" href="/"><li>Homepage</li></a>
+            <a style="color: white;" href="/"><li>Home</li></a>
             <a style="color: white;" href="/cleaner"><li>Triggerbox Cleaner</li></a>
             <a style="color: white;" href="/editor"><li>SaveData Editor</li></a>
         </ul>
     </div>
 
-    <div class="code-container">
-        <textarea id="inputPlace" placeholder="Enter your triggerbox code here..."></textarea>
-        
+    <div class="user-table-container">
+
+        <div id="bulkDiv" class="button-container">
+            <button class="white-btn typers" id="bracketStart"><strong>&lbrace;</strong></button>
+            <button class="white-btn typers" id="bracketEnd"><strong>&rbrace;</strong></button>
+            <button class="white-btn typers" id="colon"><strong>&colon;</strong></button>
+            <button class="white-btn typers" id="asterix"><strong>&ast;</strong></button>
+            <button class="white-btn typers" id="comma"><strong>&comma;</strong></button>
+            <button class="white-btn typers" id="lt"><strong>&lt;</strong></button>
+            <button class="white-btn typers" id="gt"><strong>&gt;</strong></button>
+            <button class="white-btn typers" id="equals"><strong>&equals;</strong></button>
+            <button class="white-btn typers" id="notequals"><strong>&excl;&equals;</strong></button>
+            <button class="white-btn typers" id="and"><strong>&amp;&amp;</strong></button>
+        </div>
         <div class="button-container">
-            <button id="findMistakesButton">Find Mistakes</button>
-            <button id="newcode" style="display: none;">New triggerbox</button>
+            <button id="suggestor" class="white-btn" style="padding: 5px; display: none;"></button>
         </div>
 
-        <select id="descriptionSelector" disabled>
-            <option id="defE" value="descPlace" selected>Errors</option>
-            <option value="descPlace2">Warnings</option>
-        </select>
+        <div class="code-container">
+            <h2 id="resultsTitle" style="color: white; display: none;">Results:</h2>
+            <textarea id="inputPlace" placeholder="Enter your triggerbox code here..."></textarea>
+            <div id="suggestionBox" class="suggestion-box"></div>
+            <h2 class="resultsTitle" style="color: white; display: none;">Your code :</h2>
+            <div id="codeShow" translate="no" class="description" style="display: none;"></div>
+            <h2 class="resultsTitle" style="color: white; display: none;">Errors :</h2>
+            <div id="descPlace" translate="no" class="description" style="display: none;"></div>
+            <h2 class="resultsTitle" style="color: white; display: none;">Warnings :</h2>
+            <div id="descPlace2" class="description" style="display: none;"></div>
+        </div>
+        
+        
 
-        <div id="codeShow" class="description2" style="display: none;"></div>
-        <div id="descPlace" class="description" style="display: none;"></div>
-        <div id="descPlace2" class="description" style="display: none;">No warnings</div>
-  
-    </div>
+        <div class="button-container">
+            <button class="primary-btn" id="findMistakesButton"><i class="fas fa-search"></i> Find Errors</button>
+        </div>
+
+       
+
+       
+      
+        </div>
+       
+   
     <footer>
         <p>&copy; 2024 BananaLAC<br>Hosted by <i class="fab fa-github"></i> Github Pages<br><a style="text-decoration: underline;" href="https://github.com/bananalac/lac-triggerbox-linter">Source</a></p>
     </footer>
@@ -61,32 +87,7 @@
     <script src="assets/js/sweetalert2.all.min.js"></script>
     <script type="module" src="assets/js/main_linter.js"></script>
     <script>
-        function blinkLine(lineNumber) {
-            const container = document.getElementById('codeShow');
-            const lines = container.innerHTML.split('<br>');
-            if (lineNumber < 1 || lineNumber > lines.length) return;
-
-            let cache = lines[lineNumber];
-
-            lines[lineNumber] = `<span class="blink">${lines[lineNumber]}</span>`;
-            container.innerHTML = lines.join('<br>');
-
-            setTimeout(() => {
-                lines[lineNumber] = `${cache}`;
-                container.innerHTML = lines.join('<br>');
-            }, 3000);
-        }
-
-        document.getElementById('descriptionSelector').addEventListener('change', function() {
-            const selectedValue = this.value;
-            const descriptions = document.querySelectorAll('.description');
-
-            descriptions.forEach(desc => {
-                desc.style.display = 'none'; // Hide all descriptions
-            });
-
-            document.getElementById(selectedValue).style.display = 'block'; // Show selected description          
-        });
+    
 
         document.getElementById('hamburger').addEventListener('click', function() {
             const sidebar = document.getElementById('sidebar');

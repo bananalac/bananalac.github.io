@@ -26,7 +26,11 @@ export default function conditional(value, args) {
             const condition = seperate[0].trim().toLowerCase();
             const condValue = seperate[1].trim().toLowerCase();
 
-            if(!allKeys(C).includes(condition)) errors.push(`There is no condition named '${condition}' (Line ${lineNum})`)
+            if(condition.startsWith("inventory:")) {
+
+            
+
+            } else if(!allKeys(C).includes(condition)) errors.push(`There is no condition named '${condition}' (Line ${lineNum})`)
             else {
 
                 const conditionInfo = C[condition];
@@ -86,6 +90,11 @@ export default function conditional(value, args) {
                     const condition = seperate[0].trim().toLowerCase();
                     const condValue = seperate[1].trim().toLowerCase();
         
+                    if(condition.startsWith("inventory:")) {
+
+            
+
+                    } else
                     if(!allKeys(C).includes(condition)) errors.push(`There is no condition named '${condition}' (Line ${lineNum}, condition ${multiInd+1})`)
                     else {
         
