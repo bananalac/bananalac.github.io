@@ -7,7 +7,14 @@
     <link rel="stylesheet" href="assets/style/cutter.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="assets/img/logo.ico">
-   
+    <meta property="og:title" content="Map cutter">
+    <meta property="og:site_name" content="BananaLAC">
+    <meta property="og:type" content="Website">
+    <meta property="og:url" content="https://bananalac.github.io/cutter">
+    <meta property="og:image" content="https://bananalac.github.io/assets/img/logo.png">
+    <meta property="og:description" content="Need to cut a specific part of map? use this!">
+    <meta name="description" content="Need to cut a specific part of map? use this!">
+    <meta name="theme-color" content="#FFFF00">
     
 </head>
 <body>
@@ -26,24 +33,37 @@
             <a style="color: white;" href="/"><li>Homepage</li></a>
             <a style="color: white;" href="/cleaner"><li>Triggerbox Cleaner</li></a>
             <a style="color: white;" href="/linter"><li>Triggerbox Linter</li></a>
+            <a style="color: white;" href="/editor"><li>SaveData Editor</li></a>
         </ul>
     </div>
 
     <div class="user-table-container">
 
-        <div class="rectangle">
-            <input type="text" class="corner-input" id="top-left" placeholder="Top Left">
-            <input type="text" class="corner-input" id="top-right" placeholder="Top Right">
-            <input type="text" class="corner-input" id="bottom-left" placeholder="Bottom Left">
-            <input type="text" class="corner-input" id="bottom-right" placeholder="Bottom Right">
-        </div>
+        <input autocomplete="off" type="file" id="fileUpload" accept=".txt" style="margin-bottom: 20px; display: none;">
 
         
         <div class="button-container">
-            <label class="primary-btn" id="labelForUpload" for="fileUpload" class="file-label"><i class="fas fa-mouse-pointer"></i> Choose a save-data</label>
+            <label class="primary-btn" id="labelForUpload" for="fileUpload" class="file-label"><i class="fas fa-map"></i> Choose a map</label>
             <button class="primary-btn" id="uploadButton"><i class="fas fa-upload"></i> Upload</button>
             <button class="primary-btn" id="newOne" style="display: none;"><i class="fas fa-backspace"></i> EXIT</button>
         </div>
+
+        <h2 id="titleCheck" style="color: white; display: none;">Select the part of map :</h2>
+        <div class="rectangle" style="display: none;">
+            <input type="text" class="corner-input" id="top-left" placeholder="x , z">
+            <input type="text" class="corner-input" id="bottom-right" placeholder="x , z">
+        </div>
+
+        <div class="button-container">
+            <button class="success-btn" id="proceed" style="display: none;">Proceed!</button>
+        </div>
+
+        <div class="button-container">
+            <button class="primary-btn" id="downloadButton" style="display: none;"><i class="fas fa-download"></i> Download cut part</button>
+            <button class="primary-btn" id="copyToClipboard" style="display: none;"><i class="fas fa-copy"></i> Copy cut part</button>
+        </div>
+
+       
 
        
                                  
@@ -52,11 +72,12 @@
   
    
     <footer>
-        <p>&copy; 2024 BananaLAC<br>Hosted by <i class="fab fa-github"></i> Github Pages<br><a style="text-decoration: underline;" href="https://github.com/bananalac/lac-savedata-parser">Source</a></p>
+        <p>&copy; 2024 BananaLAC<br>Hosted by <i class="fab fa-github"></i> Github Pages<br></p>
     </footer>
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/sweetalert2.all.min.js"></script>
-    <script type="module" src="assets/js/main_savedata.js"></script>
+    <script type="module" src="assets/js/main_cutter.js"></script>
     <script>
         document.getElementById('hamburger').addEventListener('click', function() {
             const sidebar = document.getElementById('sidebar');

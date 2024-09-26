@@ -316,7 +316,6 @@ footer {
     padding: 20px;
     background-color: #39434d;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .helper:hover {
@@ -465,7 +464,10 @@ footer {
     border: 2px solid #000000; /* Border color */
     margin: 20px auto; /* Center the rectangle */
     border-width: 4px; 
-    background-image: url('../img/tex.jpg'); 
+    background-image: url('../img/tex2.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .corner-input {
@@ -479,21 +481,25 @@ footer {
 
 #top-left {
     top: 0;
+    border-bottom-right-radius: 10px;
     left: 0;
 }
 
 #top-right {
     top: 0;
+    border-bottom-left-radius: 10px;
     right: 0;
 }
 
 #bottom-left {
     bottom: 0;
+    border-top-right-radius: 10px;
     left: 0;
 }
 
 #bottom-right {
     bottom: 0;
+    border-top-left-radius: 10px;
     right: 0;
 }
 
