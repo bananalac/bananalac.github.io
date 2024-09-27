@@ -115,6 +115,7 @@ $("#uploadButton").on("touchstart click", function(e) {
 $("#proceed").on("touchstart click", function(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
+    let thisMustBeCleaned = [];
     setTimeout(() => {
         
         if($("#top-left").val().trim() === '' || $("#bottom-right").val().trim() === '') {
@@ -140,17 +141,20 @@ $("#proceed").on("touchstart click", function(e) {
 
 
         cache.map.forEach((line, lineIndex) => {
-              if(lineIndex > 14 && line.trim() !== '') {
+              if(lineIndex > 14 && line.trim() !== '' && !line.trim().startsWith('Spawn_Point_Editor')) {
                 
                 const itemX = Number(line.split(":")[1].split(",")[0]);
                 const itemY = Number(line.split(":")[1].split(",")[2]);
 
                 if(isPointInRectangle(x1, y1, x2, y2, itemX, itemY) === false) {
-                    cache.map.splice(lineIndex, 1);
+                    thisMustBeCleaned.push(lineIndex);
                 }
 
               }
         });
+
+        const cleanedOne = cache.map.filter((_, lineIndex) => !thisMustBeCleaned.includes(lineIndex));
+        cache.map = cleanedOne;
 
         $("#proceed").hide();
         $("#downloadButton").show();
