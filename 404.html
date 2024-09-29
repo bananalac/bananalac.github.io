@@ -1,64 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="assets/style/editor.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="assets/img/logo.ico">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <title>BananaLAC</title>
+    <meta name="description" content="LAC game tools">
+    <meta name="keywords" content="lac, los angeles crimes, alizadev, mohammadalizade" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="manifest" href="__manifest.json">
+    <!-- OG -->
     <meta property="og:title" content="BananaLAC: LAC Tools">
     <meta property="og:site_name" content="BananaLAC">
     <meta property="og:type" content="Website">
     <meta property="og:url" content="https://bananalac.github.io/">
     <meta property="og:image" content="https://bananalac.github.io/assets/img/logo.png">
-    <meta property="og:description" content="Ultimate collection of tools for LAC">
-    <meta name="description" content="Ultimate collection of tools for LAC">
-    <meta name="theme-color" content="#FFFF00">
-    
+    <meta property="og:description" content="LAC Game Tools">
 </head>
-<body>
-    <header>
-        <img src="assets/img/logo.png" alt="Logo">
-        <h1 style="color: white;">404 Not Found!</h1>
-        <div id="hamburger" class="hamburger">&#9776;</div>
-    </header>
 
-    <div id="sidebar" class="sidebar">
-        <ul>
-            <a style="color: white;" href="/"><li>Homepage</li></a>
-            <a style="color: white;" href="/cleaner"><li>Triggerbox Cleaner</li></a>
-            <a style="color: white;" href="/linter"><li>Triggerbox Linter</li></a>
-            <a style="color: white;" href="/editor"><li>SaveData Editor</li></a>
-            <a style="color: white;" href="/cutter"><li>Map Cutter</li></a>
-        </ul>
+<body class="bg-white">
+
+    <!-- loader -->
+    <div id="loader">
+        <div class="spinner-border text-primary" role="status"></div>
     </div>
+    <!-- * loader -->
 
-    <div class="user-table-container">
+    <!-- App Header -->
+    <div class="appHeader no-border transparent position-absolute">
+        <div class="left">
+            <a href="/" class="headerButton goBack">
+                <ion-icon name="chevron-back-outline"></ion-icon>
+            </a>
+        </div>
+        <div class="pageTitle">404 Not Found</div>
+        <div class="right">
+        </div>
+    </div>
+    <!-- * App Header -->
 
-        <h1 style="color: white; text-align: center;">Sorry, The page is moved or deleted.</h1>
-        
-        
-        <div class="button-container">
-            <button class="primary-btn" onclick="reload()">Homepage</button>
+    <!-- App Capsule -->
+    <div id="appCapsule">
+
+        <div class="error-page">
+            <div class="mb-2">
+                <img src="assets/img/sample/photo/vector3.png" alt="alt" class="imaged square w200">
+            </div>
+            <h1 class="title">404 Not Found!</h1>
+            <div class="text mb-3">
+                The content you are looking for has been deleted or no longer exists.
+            </div>
+           
+
+            <div class="fixed-footer">
+                <div class="row">
+                    <div class="col-12">
+                        <a href="/" class="btn btn-primary btn-lg btn-block">Go Back</a>
+                    </div>
+                </div>
+            </div>
         </div>
-     
-        </div>
-       
-   
-    <footer>
-        <p>&copy; 2024 BananaLAC<br>Hosted by <i class="fab fa-github"></i> Github Pages<br></p>
-    </footer>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/sweetalert2.all.min.js"></script>
-    <script>
-        function reload() {
-            location.replace("https://bananalac.github.io/");
-        }
-        document.getElementById('hamburger').addEventListener('click', function() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        });
-    </script>
+
+    </div>
+    <!-- * App Capsule -->
+
+
+    <!-- ============== Js Files ==============  -->
+    <!-- Bootstrap -->
+    <script src="assets/js/lib/bootstrap.min.js"></script>
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- Splide -->
+    <script src="assets/js/plugins/splide/splide.min.js"></script>
+    <!-- ProgressBar js -->
+    <script src="assets/js/plugins/progressbar-js/progressbar.min.js"></script>
+    <!-- Base Js File -->
+    <script src="assets/js/base.js"></script>
+    
+
 </body>
+
 </html>

@@ -1,88 +1,262 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="assets/style/cutter.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="assets/img/logo.ico">
-    <meta property="og:title" content="Map cutter">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#FFFF00">
+    <title>Map Crop</title>
+    <meta name="description" content="Cut any map using the rectangle diameter!">
+    <meta name="keywords" content="lac, los angeles crimes, alizadev, mohammadalizade" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="manifest" href="__manifest.json">
+    <!-- OG -->
+    <meta property="og:title" content="BananaLAC: Map Crop">
     <meta property="og:site_name" content="BananaLAC">
     <meta property="og:type" content="Website">
     <meta property="og:url" content="https://bananalac.github.io/cutter">
     <meta property="og:image" content="https://bananalac.github.io/assets/img/logo.png">
-    <meta property="og:description" content="Need to cut a specific part of map? use this!">
-    <meta name="description" content="Need to cut a specific part of map? use this!">
-    <meta name="theme-color" content="#FFFF00">
-    
+    <meta property="og:description" content="Cut any map using the rectangle diameter!">
 </head>
+
 <body>
-    <div style="opacity: 1;" class="overlay">
-        <img src="assets/img/logo.png" alt="ovrLogo" class="logo">
-        <p class="ovrdescription">Map Cutter</p>
+
+    <!-- loader -->
+    <div id="loader">
+        <div class="spinner-border text-primary" role="status"></div>
     </div>
-    <header>
-        <img src="assets/img/logo.png" alt="Logo">
-        <h1 style="color: white;">Map Cutter</h1>
-        <div id="hamburger" class="hamburger">&#9776;</div>
-    </header>
+    <!-- * loader -->
 
-    <div id="sidebar" class="sidebar">
-        <ul>
-            <a style="color: white;" href="/"><li>Homepage</li></a>
-            <a style="color: white;" href="/cleaner"><li>Triggerbox Cleaner</li></a>
-            <a style="color: white;" href="/linter"><li>Triggerbox Linter</li></a>
-            <a style="color: white;" href="/editor"><li>SaveData Editor</li></a>
-        </ul>
-    </div>
-
-    <div class="user-table-container">
-
-        <input autocomplete="off" type="file" id="fileUpload" accept=".txt" style="margin-bottom: 20px; display: none;">
-
-        
-        <div class="button-container">
-            <label class="primary-btn" id="labelForUpload" for="fileUpload" class="file-label"><i class="fas fa-map"></i> Choose a map</label>
-            <button class="primary-btn" id="uploadButton"><i class="fas fa-upload"></i> Upload</button>
-            <button class="primary-btn" id="newOne" style="display: none;"><i class="fas fa-backspace"></i> EXIT</button>
+    <!-- App Header -->
+    <div class="appHeader bg-primary">
+        <div class="left">
+            <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
+                <ion-icon name="menu-outline"></ion-icon>
+            </a>
         </div>
-
-        <h2 id="titleCheck" style="color: white; display: none;">Select the part of map :</h2>
-        <div class="rectangle" style="display: none;">
-            <input type="text" class="corner-input" id="top-left" placeholder="x , z">
-            <input type="text" class="corner-input" id="bottom-right" placeholder="x , z">
+        <div class="pageTitle">
+            BananaLAC
         </div>
-
-        <div class="button-container">
-            <button class="success-btn" id="proceed" style="display: none;">Proceed!</button>
-        </div>
-
-        <div class="button-container">
-            <button class="primary-btn" id="downloadButton" style="display: none;"><i class="fas fa-download"></i> Download cut part</button>
-            <button class="primary-btn" id="copyToClipboard" style="display: none;"><i class="fas fa-copy"></i> Copy cut part</button>
-        </div>
-
        
-
-       
-                                 
-            
     </div>
-  
-   
-    <footer>
-        <p>&copy; 2024 BananaLAC<br>Hosted by <i class="fab fa-github"></i> Github Pages<br></p>
-    </footer>
+    <!-- * App Header -->
 
+    <!-- App Capsule -->
+    <div id="appCapsule" class="full-height">
+
+
+        <div id="cropperSection" class="section full mt-2">
+            <div class="section-title large">Map Crop</div>
+            <div class="wide-block pt-2 pb-2">
+                <div class="custom-file-upload" id="fileUpload1">
+                    <input type="file" autocomplete="off" id="fileuploadInput" accept=".txt">
+                    <label for="fileuploadInput">
+                        <span>
+                            <strong>
+                                <ion-icon name="cloud-upload-outline"></ion-icon>
+                                <i>Upload Your map</i>
+                            </strong>
+                        </span>
+                    </label>
+                </div>
+                <button id="uploadButton" type="button" class="btn btn-primary btn-block"><ion-icon name="calculator"></ion-icon> Set Diognal</button>
+                
+            </div>
+
+
+        </div>
+
+        <div id="coordinatesSection" style="display: none;" class="section full mt-2">
+            <div class="section-title large">Set Coordinates</div>
+            <div class="wide-block pt-2 pb-2">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#diagonalhelpModal" class="btn btn-secondary btn-block"><ion-icon name="help-circle"></ion-icon> Diagonal help</button>
+            </div>
+            <div class="wide-block pt-2 pb-2">
+                <div class="form-group boxed">
+                    <div class="input-wrapper">
+                        <label class="form-label" for="topleftXZ">Top-left Coordinates (Only x,z)</label>
+                        <input type="text" class="form-control" id="topleftXZ" placeholder="x,z"
+                            autocomplete="off" spellcheck="false">
+                    
+                    </div>
+                </div>
+                <div class="form-group boxed">
+                    <div class="input-wrapper">
+                        <label class="form-label" for="bottomrightXZ">Bottom-Right Coordinates (Only x,z)</label>
+                        <input type="text" class="form-control" id="bottomrightXZ" placeholder="x,z"
+                            autocomplete="off" spellcheck="false">
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="wide-block pt-2 pb-2">
+                <button id="proceed" type="button" class="btn btn-success btn-block"><ion-icon name="crop"></ion-icon> Crop</button>
+            </div>
+
+        </div>
+
+        <div id="resultsSection" style="display: none;" class="section full mt-2">
+            <div class="section-title large">Your Map Is Ready!</div>
+            <div class="wide-block pt-2 pb-2">
+                <button id="downloadButton" type="button" data-bs-toggle="modal" data-bs-target="#diagonalhelpModal" class="btn btn-secondary btn-block"><ion-icon name="download-outline"></ion-icon> Download Map</button>
+            </div>
+            <div class="wide-block pt-2 pb-2">
+                <button id="copyToClipboard" type="button" class="btn btn-success btn-block"><ion-icon name="copy-outline"></ion-icon> Copy</button>
+            </div>
+
+        </div>
+
+        <div id="toast-nomap" class="toast-box toast-top bg-danger">
+            <div class="in">
+                <div class="text">
+                    Upload a map!
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-wtype" class="toast-box toast-top bg-danger">
+            <div class="in">
+                <div class="text">
+                    Wrong Format!
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-copied" class="toast-box toast-top bg-success">
+            <div class="in">
+                <div class="text">
+                   Copied to clipboard!
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-xz" class="toast-box toast-top bg-danger">
+            <div class="in">
+                <div class="text">
+                    Provide x,z!
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade dialogbox" id="diagonalhelpModal" data-bs-backdrop="static" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <img src="assets/img/diagonal_help.jpg" alt="image" class="img-fluid">
+                    <div class="modal-footer">
+                        <div class="btn-inline">
+                            <a href="javascript:void(0)" class="btn btn-text-secondary" data-bs-dismiss="modal">CLOSE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- * App Capsule -->
+
+    <!-- App Bottom Menu -->
+    <div class="appBottomMenu">
+        <a href="/list" class="item">
+            <div class="col">
+                <ion-icon name="layers-outline"></ion-icon>
+            </div>
+        </a>
+        <a href="/" class="item active">
+            <div class="col">
+                <ion-icon name="home-outline"></ion-icon>
+            </div>
+        </a>
+        <a href="#sidebarPanel" class="item" data-bs-toggle="offcanvas">
+            <div class="col">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+        </a>
+    </div>
+    <!-- * App Bottom Menu -->
+
+    <!-- App Sidebar -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarPanel">
+        <div class="offcanvas-body">
+            <!-- profile box -->
+            <div class="profileBox">
+                <div class="image-wrapper">
+                    <img src="https://avatars.githubusercontent.com/u/81914120" alt="image" class="imaged rounded">
+                </div>
+                <div class="in">
+                    <strong>Made by kavascript</strong>
+                    <div class="text-muted">
+                        With <ion-icon name="heart"></ion-icon>
+                    </div>
+                </div>
+                <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
+                    <ion-icon name="close"></ion-icon>
+                </a>
+            </div>
+            <!-- * profile box -->
+
+            <ul class="listview flush transparent no-line image-listview mt-2">
+                <li>
+                    <a href="index.html" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            Homepage
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/list" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="layers-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>Tools List</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <div class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="moon-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>Dark Mode</div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodesidebar">
+                                <label class="form-check-label" for="darkmodesidebar"></label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- * App Sidebar -->
+
+    <!-- ============== Js Files ==============  -->
+    <!-- Bootstrap -->
+    <script src="assets/js/lib/bootstrap.min.js"></script>
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- Splide -->
+    <script src="assets/js/plugins/splide/splide.min.js"></script>
+    <!-- ProgressBar js -->
+    <script src="assets/js/plugins/progressbar-js/progressbar.min.js"></script>
+    <!-- Base Js File -->
+    <script src="assets/js/base.js"></script>
+    <!--JQuery -->
     <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/sweetalert2.all.min.js"></script>
-    <script type="module" src="assets/js/main_cutter.js"></script>
-    <script>
-        document.getElementById('hamburger').addEventListener('click', function() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        });
-    </script>
+    <!-- Cutter Code -->
+    <script src="assets/js/cutter_newface.js"></script>
+
 </body>
+
 </html>

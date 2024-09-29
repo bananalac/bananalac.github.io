@@ -1,101 +1,363 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="assets/style/editor.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="assets/img/logo.ico">
-    <meta property="og:title" content="SaveData Editor">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#FFFF00">
+    <title>SaveData Editor</title>
+    <meta name="description" content="Manage save-data.txt">
+    <meta name="keywords" content="lac, los angeles crimes, alizadev, mohammadalizade" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="manifest" href="__manifest.json">
+    <!-- OG -->
+    <meta property="og:title" content="BananaLAC: Savedata Editor">
     <meta property="og:site_name" content="BananaLAC">
     <meta property="og:type" content="Website">
     <meta property="og:url" content="https://bananalac.github.io/editor">
     <meta property="og:image" content="https://bananalac.github.io/assets/img/logo.png">
-    <meta property="og:description" content="Edit your save-data.txt and manage your members!">
-    <meta name="description" content="Edit your save-data.txt and manage your members!">
-    <meta name="theme-color" content="#FFFF00">
-    
+    <meta property="og:description" content="Manage save-data.txt">
 </head>
+
 <body>
-    <div style="opacity: 1;" class="overlay">
-        <img src="assets/img/logo.png" alt="ovrLogo" class="logo">
-        <p class="ovrdescription">SaveData Editor</p>
+
+    <!-- loader -->
+    <div id="loader">
+        <div class="spinner-border text-primary" role="status"></div>
     </div>
-    <header>
-        <img src="assets/img/logo.png" alt="Logo">
-        <h1 style="color: white;">SaveData Editor</h1>
-        <div id="hamburger" class="hamburger">&#9776;</div>
-    </header>
+    <!-- * loader -->
 
-    <div id="sidebar" class="sidebar">
-        <ul>
-            <a style="color: white;" href="/"><li>Homepage</li></a>
-            <a style="color: white;" href="/cleaner"><li>Triggerbox Cleaner</li></a>
-            <a style="color: white;" href="/linter"><li>Triggerbox Linter</li></a>
-            <a style="color: white;" href="/cutter"><li>Map Cutter</li></a>
-        </ul>
-    </div>
-
-    <div class="user-table-container">
-
-        <h2 id="titleCheck" style="color: white;">Upload SaveData</h2>
-        
-        <input autocomplete="off" type="file" id="fileUpload" accept=".txt" style="margin-bottom: 20px; display: none;">
-
-        <div class="button-container">
-            <label class="primary-btn" id="labelForUpload" for="fileUpload" class="file-label"><i class="fas fa-mouse-pointer"></i> Choose a save-data</label>
-            <button class="primary-btn" id="uploadButton"><i class="fas fa-upload"></i> Upload</button>
-            <button class="primary-btn" id="newOne" style="display: none;"><i class="fas fa-backspace"></i> EXIT</button>
+    <!-- App Header -->
+    <div class="appHeader bg-primary">
+        <div class="left">
+            <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
+                <ion-icon name="menu-outline"></ion-icon>
+            </a>
         </div>
-
-        <div id="bulkDiv" class="button-container">
-            <button class="success-btn" id="approveAll" disabled><i class="fas fa-check-circle"></i> Approve All</button>
-            <button class="danger-btn" id="denyAll" disabled><i class="fas fa-times-circle"></i> Deny All</button>
-            <button class="grey-btn" id="deleteAll" disabled><i class="fas fa-trash"></i> Delete All</button>
+        <div class="pageTitle">
+            BananaLAC
         </div>
-
-        <div class="button-container">
-            <button class="primary-btn" id="downloadButton" disabled><i class="fas fa-check-circle"></i> Download file</button>
-        </div>
-
        
-        <h2 id="userManagement" style="color: white;">User Management <i class="fas fa-question-circle helper"></i></h2>
-        <input type="text" id="searchBar" autocomplete="off" placeholder="Search... (use icon ? to help)" disabled>
-        <div class="table-responsive">
-           
+    </div>
+    <!-- * App Header -->
+
+    <!-- App Capsule -->
+    <div id="appCapsule" class="full-height">
+
+
+        <div id="uploadSection" class="section full mt-2">
+            <div class="section-title large">SaveData Editor</div>
+            <div class="wide-block pt-2 pb-2">
+                <div class="custom-file-upload" id="fileUpload1">
+                    <input type="file" autocomplete="off" id="fileuploadInput" accept=".txt">
+                    <label for="fileuploadInput">
+                        <span>
+                            <strong>
+                                <ion-icon name="cloud-upload-outline"></ion-icon>
+                                <i>Upload Your save-data.txt</i>
+                            </strong>
+                        </span>
+                    </label>
+                </div>
+                <button id="uploadButton" type="button" class="btn btn-primary btn-block"><ion-icon name="create-outline"></ion-icon> Edit</button>
+
+            </div>
             
-        <table class="user-table">
-            <h4 id="searchMatch" style="color: white; display: none;"></h4>
-            <thead>
-                <tr class="no-select">
-                    <th><i class="fas fa-chevron-right"></i> Status</th>
-                    <th><i class="fas fa-user"></i> Username</th>
-                    <th id="revealPasswords"><i class="fas fa-asterisk"></i> Password</th>
-                    <th><i class="fas fa-briefcase"></i> Role</th>
-                    <th><i class="fas fa-suitcase-rolling"></i> Inventory</th>
-                    <th><i class="fas fa-hammer"></i> Actions</th>
-                </tr>
-            </thead>
-            <tbody id="usersList">
-                                       
-            </tbody>
-        </table>
-    </div>
+            <div id="newOne" style="display: none;" class="wide-block pt-2 pb-2">
+                <button type="button" class="btn btn-success btn-block"><ion-icon name="add-outline"></ion-icon> New One</button>
+            </div>
+
         </div>
-       
-   
-    <footer>
-        <p>&copy; 2024 BananaLAC<br>Hosted by <i class="fab fa-github"></i> Github Pages<br><a style="text-decoration: underline;" href="https://github.com/bananalac/lac-savedata-parser">Source</a></p>
-    </footer>
+
+        <div id="editingSection" style="display: none;" class="section full mt-2">
+            <div id="editingTableTitle" class="section-title large">Editing Table</div>
+            <div class="wide-block pt-2 pb-2">
+                <button id="approveAll" type="button" class="btn btn-success"><ion-icon name="checkmark-done-circle-sharp"></ion-icon> Approve All</button>
+                <button id="denyAll" type="button" class="btn btn-danger"><ion-icon name="trash-sharp"></ion-icon> Deny All</button>
+                <button id="deleteAll" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteAllPrompt"><ion-icon name="trash-sharp"></ion-icon> Delete All</button>
+            </div>
+            <div class="wide-block pt-2 pb-2">
+                <button id="downloadButton" type="button" class="btn btn-success"><ion-icon name="download"></ion-icon></ion-icon> Download</button>
+            </div>
+            <div class="wide-block pt-2 pb-2">
+
+                <div class="accordion" id="accordion3">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#accordion001">
+                                <ion-icon name="help-circle-outline"></ion-icon>
+                                Search Help
+                            </button>
+                        </h2>
+                        <div id="accordion001" class="accordion-collapse collapse" data-bs-parent="#accordion3">
+                            <div class="accordion-body">
+                                <p style="text-align:left">Use this keys at first of your search:<br>
+                                <strong>status:</strong>approved/pending<br>
+                                <strong>username:</strong> to find a username<br>
+                                <strong>pass:</strong>to find a password<br>
+                                <strong>role:</strong>to filter people with a role<br>
+                                <strong>inv:item:value</strong> (to find who has this inventory item)<br>
+                                Clear to show all.
+                                </p>
+                                <h5>Examples :</h5>
+                                <p>username:alex_99<br>role:police<br>inv:vehicles:pride, king</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group searchbox">
+                    <input id="searchBar" autocomplete="off" spellcheck="off" type="text" class="form-control" placeholder="Enter pharse">
+                    <i class="input-icon">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </i>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Status</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Password</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Inventory</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersList">
+                            
+                           
+                        </tbody>
+                    </table>
+                </div>
+               
+               
+            </div>
+            
+           
+
+        </div>
+
+        <div id="toast-nosavedata" class="toast-box toast-top bg-danger">
+            <div class="in">
+                <div class="text">
+                    Upload save-data.txt!
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-approved" class="toast-box toast-top bg-success">
+            <div class="in">
+                <div class="text">
+                    All members approved.
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-denied" class="toast-box toast-top bg-warning">
+            <div class="in">
+                <div class="text">
+                    All members denied.
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-notsavedata" class="toast-box toast-top bg-danger">
+            <div class="in">
+                <div class="text">
+                    This is not a save-data.txt!
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-emptysavedata" class="toast-box toast-top bg-warning">
+            <div class="in">
+                <div class="text">
+                    Empty Savedata!
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-wtype" class="toast-box toast-top bg-danger">
+            <div class="in">
+                <div class="text">
+                    Wrong Format!
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-coming" class="toast-box toast-top bg-info">
+            <div class="in">
+                <div class="text">
+                    Edit & Inventory Edit will be ready soon!
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade dialogbox" id="deleteAllPrompt" data-bs-backdrop="static" tabindex="-1"
+            role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Are you sure?</h5>
+                    </div>
+                    <div class="modal-body">
+                        This process cannot be undone!
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-inline">
+                            <a id="deleteAllAcceptor" href="javascipt:void(0)" class="btn btn-text-danger" data-bs-dismiss="modal">
+                                <ion-icon name="trash-outline"></ion-icon>
+                                Delete All
+                            </a>
+                            <a href="javascipt:void(0)" class="btn btn-text-primary" data-bs-dismiss="modal">
+                                <ion-icon name="return-up-back"></ion-icon>
+                                Go Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade dialogbox" id="editInventory" data-bs-backdrop="static" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="invEditorUsername" class="modal-title"></h5>
+                    </div>
+                    <form>
+                        <div class="modal-body text-start mb-2">
+                            <div class="form-group basic">
+                                <div class="input-wrapper">
+                                    <label class="form-label" for="inv1">Inventory</label>
+                                    <input type="text" class="form-control" id="inv1" placeholder="Enter an inventory">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="btn-inline">
+                                <button type="button" class="btn btn-text-secondary"
+                                    data-bs-dismiss="modal">CLOSE</button>
+                                <button type="button" class="btn btn-text-primary" data-bs-dismiss="modal">EDIT</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        
+
+
+
+    </div>
+    <!-- * App Capsule -->
+
+    <!-- App Bottom Menu -->
+    <div class="appBottomMenu">
+        <a href="/list" class="item">
+            <div class="col">
+                <ion-icon name="layers-outline"></ion-icon>
+            </div>
+        </a>
+        <a href="/" class="item active">
+            <div class="col">
+                <ion-icon name="home-outline"></ion-icon>
+            </div>
+        </a>
+        <a href="#sidebarPanel" class="item" data-bs-toggle="offcanvas">
+            <div class="col">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+        </a>
+    </div>
+    <!-- * App Bottom Menu -->
+
+    <!-- App Sidebar -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarPanel">
+        <div class="offcanvas-body">
+            <!-- profile box -->
+            <div class="profileBox">
+                <div class="image-wrapper">
+                    <img src="https://avatars.githubusercontent.com/u/81914120" alt="image" class="imaged rounded">
+                </div>
+                <div class="in">
+                    <strong>Made by kavascript</strong>
+                    <div class="text-muted">
+                        With <ion-icon name="heart"></ion-icon>
+                    </div>
+                </div>
+                <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
+                    <ion-icon name="close"></ion-icon>
+                </a>
+            </div>
+            <!-- * profile box -->
+
+            <ul class="listview flush transparent no-line image-listview mt-2">
+                <li>
+                    <a href="index.html" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            Homepage
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/list" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="layers-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>Tools List</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <div class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="moon-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>Dark Mode</div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodesidebar">
+                                <label class="form-check-label" for="darkmodesidebar"></label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- * App Sidebar -->
+
+    <!-- ============== Js Files ==============  -->
+    <!-- Bootstrap -->
+    <script src="assets/js/lib/bootstrap.min.js"></script>
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- Splide -->
+    <script src="assets/js/plugins/splide/splide.min.js"></script>
+    <!-- ProgressBar js -->
+    <script src="assets/js/plugins/progressbar-js/progressbar.min.js"></script>
+    <!-- Base Js File -->
+    <script src="assets/js/base.js"></script>
+    <!--JQuery -->
     <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/sweetalert2.all.min.js"></script>
-    <script type="module" src="assets/js/main_savedata.js"></script>
-    <script>
-        document.getElementById('hamburger').addEventListener('click', function() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        });
-    </script>
+    <!-- Editor Code -->
+    <script type="module" src="assets/js/editor_newface.js"></script>
+
 </body>
+
 </html>

@@ -8,23 +8,23 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#FFFF00">
-    <title>Triggerbox Cleaner</title>
-    <meta name="description" content="Clear triggerboxes from any map!">
+    <title>BananaLAC</title>
+    <meta name="description" content="LAC Game Tools">
     <meta name="keywords" content="lac, los angeles crimes, alizadev, mohammadalizade" />
     <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="manifest" href="__manifest.json">
     <!-- OG -->
-    <meta property="og:title" content="BananaLAC: Triggerbox Cleaner">
+    <meta property="og:title" content="BananaLAC: LAC Tools">
     <meta property="og:site_name" content="BananaLAC">
     <meta property="og:type" content="Website">
-    <meta property="og:url" content="https://bananalac.github.io/cleaner">
+    <meta property="og:url" content="https://bananalac.github.io/">
     <meta property="og:image" content="https://bananalac.github.io/assets/img/logo.png">
-    <meta property="og:description" content="Clear triggerboxes from any map!">
+    <meta property="og:description" content="LAC Game Tools">
 </head>
 
-<body>
+<body class="bg-white">
 
     <!-- loader -->
     <div id="loader">
@@ -33,7 +33,7 @@
     <!-- * loader -->
 
     <!-- App Header -->
-    <div class="appHeader bg-primary">
+    <div class="appHeader bg-primary scrolled">
         <div class="left">
             <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
                 <ion-icon name="menu-outline"></ion-icon>
@@ -46,63 +46,97 @@
     </div>
     <!-- * App Header -->
 
+    <!-- Search Component -->
+    <div id="search" class="appHeader">
+        <form class="search-form">
+            <div class="form-group searchbox">
+                <input type="text" class="form-control" placeholder="Search...">
+                <i class="input-icon">
+                    <ion-icon name="search-outline"></ion-icon>
+                </i>
+                <a href="#" class="ms-1 close toggle-searchbox">
+                    <ion-icon name="close-circle"></ion-icon>
+                </a>
+            </div>
+        </form>
+    </div>
+    <!-- * Search Component -->
+
     <!-- App Capsule -->
-    <div id="appCapsule" class="full-height">
+    <div id="appCapsule">
 
+        <div class="header-large-title">
+            <h1 class="title">Tools List</h1>
+        </div>
 
-        <div class="section full mt-2">
-            <div class="section-title large">Triggerbox Cleaner</div>
-            <div class="wide-block pt-2 pb-2">
-                <div class="custom-file-upload" id="fileUpload1">
-                    <input type="file" autocomplete="off" id="fileuploadInput" accept=".txt">
-                    <label for="fileuploadInput">
-                        <span>
-                            <strong>
-                                <ion-icon name="cloud-upload-outline"></ion-icon>
-                                <i>Upload Your map</i>
-                            </strong>
-                        </span>
-                    </label>
-                </div>
-                <button id="uploadButton" type="button" class="btn btn-primary btn-block"><ion-icon name="trash-outline"></ion-icon> Clear Triggerboxes</button>
-                <button id="downloadButton" type="button" class="btn btn-success btn-block" style="display: none;"><ion-icon name="download-outline"></ion-icon> Download Map</button>
-                
-            </div>
+        <ul class="listview image-listview flush transparent mt-3 mb-2">
+            <li>
+                <a href="/cutter" class="item">
+                    <div class="icon-box bg-primary">
+                        <ion-icon name="cut-outline"></ion-icon>
+                    </div>
+                    <div class="in">
+                        Map Crop
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/linter" class="item">
+                    <div class="icon-box bg-primary">
+                        <ion-icon name="code-slash-outline"></ion-icon>
+                    </div>
+                    <div class="in">
+                        Triggerbox Linter
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/cleaner" class="item">
+                    <div class="icon-box bg-primary">
+                        <ion-icon name="trash-outline"></ion-icon>
+                    </div>
+                    <div class="in">
+                        Triggerbox Cleaner
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/editor" class="item">
+                    <div class="icon-box bg-primary">
+                        <ion-icon name="newspaper-outline"></ion-icon>
+                    </div>
+                    <div class="in">
+                        SaveData Editor
+                    </div>
+                </a>
+            </li>
             
-            <div id="newOne" style="display: none;" class="wide-block pt-2 pb-2">
-                <button type="button" class="btn btn-success btn-block"><ion-icon name="add-outline"></ion-icon> New One</button>
+           
+        </ul>
+
+
+        <!-- app footer -->
+        <div class="appFooter">
+            <img src="assets/img/logo.png" alt="icon" class="footer-logo mb-2">
+            <div class="footer-title">
+                Copyright © BananaLAC <span class="yearNow"></span>. All Rights Reserved.<br>
+                Hosted By <ion-icon name="logo-github"></ion-icon> Github Pages
+            </div>
+            <div>LAC game tools</div>
+           
+
+            <div class="mt-2">
+                <a href="javascript:void(0)" class="btn btn-icon btn-sm btn-discord">
+                    <ion-icon name="logo-discord"></ion-icon>
+                </a>
             </div>
 
         </div>
-
-        <div id="toast-nomap" class="toast-box toast-top bg-danger">
-            <div class="in">
-                <div class="text">
-                    Upload a map!
-                </div>
-            </div>
-        </div>
-
-        <div id="toast-found" class="toast-box toast-top bg-info">
-            <div class="in">
-                <div id="foundX" class="text">
-                    
-                </div>
-            </div>
-        </div>
-
-        <div id="toast-wtype" class="toast-box toast-top bg-danger">
-            <div class="in">
-                <div class="text">
-                    Wrong Format!
-                </div>
-            </div>
-        </div>
-
-
+        <!-- * app footer -->
 
     </div>
     <!-- * App Capsule -->
+
 
     <!-- App Bottom Menu -->
     <div class="appBottomMenu">
@@ -184,6 +218,7 @@
     </div>
     <!-- * App Sidebar -->
 
+
     <!-- ============== Js Files ==============  -->
     <!-- Bootstrap -->
     <script src="assets/js/lib/bootstrap.min.js"></script>
@@ -195,10 +230,6 @@
     <script src="assets/js/plugins/progressbar-js/progressbar.min.js"></script>
     <!-- Base Js File -->
     <script src="assets/js/base.js"></script>
-    <!--JQuery -->
-    <script src="assets/js/jquery.min.js"></script>
-    <!-- Cleaner Code -->
-    <script type="module" src="assets/js/cleaner_newface.js"></script>
 
 </body>
 

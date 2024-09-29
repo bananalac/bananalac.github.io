@@ -1,34 +1,256 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#FFFF00">
     <title>BananaLAC</title>
-    <link rel="stylesheet" href="assets/style/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="assets/img/logo.ico">
+    <meta name="description" content="LAC game tools">
+    <meta name="keywords" content="lac, los angeles crimes, alizadev, mohammadalizade" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="manifest" href="__manifest.json">
+    <!-- OG -->
     <meta property="og:title" content="BananaLAC: LAC Tools">
     <meta property="og:site_name" content="BananaLAC">
     <meta property="og:type" content="Website">
     <meta property="og:url" content="https://bananalac.github.io/">
     <meta property="og:image" content="https://bananalac.github.io/assets/img/logo.png">
-    <meta property="og:description" content="Ultimate collection of tools for LAC">
-    <meta name="description" content="Ultimate collection of tools for LAC">
-    <meta name="theme-color" content="#FFFF00">
+    <meta property="og:description" content="LAC Game Tools">
 </head>
+
 <body>
-    <header>
-        <div class="logo">
-            <img src="assets/img/logo.png" alt="Logo">
+
+    <!-- loader -->
+    <div id="loader">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <!-- * loader -->
+
+    <!-- App Header -->
+    <div class="appHeader bg-primary scrolled">
+        <div class="left">
+            <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
+                <ion-icon name="menu-outline"></ion-icon>
+            </a>
         </div>
-    </header>
-    <main>
-        <h1>Useful Tools</h1>
-        <p>Made by BananaLAC 🍌</p>
-        <h2 style="text-align: center;"><a href="/linter">Triggerbox Linter</a><br><a href="/cleaner">Triggerbox Cleaner</a><br><a href="/editor">SaveData Editor</a><br><a href="/cutter">Map Cutter (NEW)</a></h2>
-    </main>
-    <footer>
-        <p>&copy; 2024 BananaLAC. All rights reserved.<br>Hosted by <i class="fab fa-github"></i> Github Pages</p>
-    </footer>
+        <div class="pageTitle">
+            BananaLAC
+        </div>
+       
+    </div>
+    <!-- * App Header -->
+
+    <!-- Search Component -->
+    <div id="search" class="appHeader">
+        <form class="search-form">
+            <div class="form-group searchbox">
+                <input type="text" class="form-control" placeholder="Search...">
+                <i class="input-icon">
+                    <ion-icon name="search-outline"></ion-icon>
+                </i>
+                <a href="#" class="ms-1 close toggle-searchbox">
+                    <ion-icon name="close-circle"></ion-icon>
+                </a>
+            </div>
+        </form>
+    </div>
+    <!-- * Search Component -->
+
+    <!-- App Capsule -->
+    <div id="appCapsule">
+
+        <div class="header-large-title">
+            <h1 class="title">BananaLAC 🍌</h1>
+            <h4 class="subtitle">Los Angeles Crimes Online Tools!</h4>
+        </div>
+
+        <div class="section full mt-3 mb-3">
+
+            <!-- carousel multiple -->
+            <div class="carousel-multiple splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <div class="card">
+                                <img src="assets/img/sample/photo/linter-slide.jpg" class="card-img-top" alt="linter-image">
+                                <div class="card-body pt-2">
+                                    <h4 class="mb-0">Trigger Box Linter</h4>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="card">
+                                <img src="assets/img/sample/photo/cleaner-slide.jpg" class="card-img-top" alt="cleaner-image">
+                                <div class="card-body pt-2">
+                                    <h4 class="mb-0">Trigger Box Cleaner</h4>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="card">
+                                <img src="assets/img/sample/photo/cut-slide.jpg" class="card-img-top" alt="cutter-image">
+                                <div class="card-body pt-2">
+                                    <h4 class="mb-0">Map Cutter</h4>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="card">
+                                <img src="assets/img/sample/photo/editor-slide.jpg" class="card-img-top" alt="editor-image">
+                                <div class="card-body pt-2">
+                                    <h4 class="mb-0">SaveData Editor</h4>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- * carousel multiple -->
+
+        </div>
+
+
+        <div class="section mt-3 mb-3">
+            <div class="card">
+                <img src="assets/img/sample/photo/mainpagebanner.jpg" class="card-img-top" alt="image">
+                <div class="card-body">
+                    <h6 class="card-subtitle">Discover Our Tools</h6>
+                    <h5 class="card-title">Click to see list!</h5>
+                    <p class="card-text">
+                        Suitable for map and save-data editing!
+                    </p>
+                    <a href="app-pages.html" class="btn btn-primary">
+                        <ion-icon name="layers-outline"></ion-icon>
+                        List
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- app footer -->
+        <div class="appFooter">
+            <img src="assets/img/logo.png" alt="icon" class="footer-logo mb-2">
+            <div class="footer-title">
+                Copyright © BananaLAC <span class="yearNow"></span>. All Rights Reserved.<br>
+                Hosted By <ion-icon name="logo-github"></ion-icon> Github Pages
+            </div>
+            <div>LAC game tools</div>
+           
+
+            <div class="mt-2">
+                <a href="javascript:void(0)" class="btn btn-icon btn-sm btn-discord">
+                    <ion-icon name="logo-discord"></ion-icon>
+                </a>
+            </div>
+
+        </div>
+        <!-- * app footer -->
+
+    </div>
+    <!-- * App Capsule -->
+
+
+    <!-- App Bottom Menu -->
+    <div class="appBottomMenu">
+        <a href="/list" class="item">
+            <div class="col">
+                <ion-icon name="layers-outline"></ion-icon>
+            </div>
+        </a>
+        <a href="/" class="item active">
+            <div class="col">
+                <ion-icon name="home-outline"></ion-icon>
+            </div>
+        </a>
+        <a href="#sidebarPanel" class="item" data-bs-toggle="offcanvas">
+            <div class="col">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+        </a>
+    </div>
+    <!-- * App Bottom Menu -->
+
+    <!-- App Sidebar -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarPanel">
+        <div class="offcanvas-body">
+            <!-- profile box -->
+            <div class="profileBox">
+                <div class="image-wrapper">
+                    <img src="https://avatars.githubusercontent.com/u/81914120" alt="image" class="imaged rounded">
+                </div>
+                <div class="in">
+                    <strong>Made by kavascript</strong>
+                    <div class="text-muted">
+                        With <ion-icon name="heart"></ion-icon>
+                    </div>
+                </div>
+                <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
+                    <ion-icon name="close"></ion-icon>
+                </a>
+            </div>
+            <!-- * profile box -->
+
+            <ul class="listview flush transparent no-line image-listview mt-2">
+                <li>
+                    <a href="index.html" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            Homepage
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/list" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="layers-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>Tools List</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <div class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="moon-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>Dark Mode</div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodesidebar">
+                                <label class="form-check-label" for="darkmodesidebar"></label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- * App Sidebar -->
+
+
+    <!-- ============== Js Files ==============  -->
+    <!-- Bootstrap -->
+    <script src="assets/js/lib/bootstrap.min.js"></script>
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- Splide -->
+    <script src="assets/js/plugins/splide/splide.min.js"></script>
+    <!-- ProgressBar js -->
+    <script src="assets/js/plugins/progressbar-js/progressbar.min.js"></script>
+    <!-- Base Js File -->
+    <script src="assets/js/base.js"></script>
+
+
 </body>
+
 </html>
