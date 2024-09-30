@@ -17,14 +17,6 @@ const converterKeys = {
     false: "false"
 };
 
-// const Toast = Swal.mixin({
-//     toast: true,
-//     position: "top-end",
-//     showConfirmButton: false,
-//     timer: 3000,
-//     timerProgressBar: true
-//   });
-
 $(document).ready(function() {
 
     const currentLink = window.location.href;
@@ -84,7 +76,8 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
-         $("#codebox").val("");
+         //$("#codebox").val("");
+         $("#codebox").prop('disabled', false);
          $("#resultsSection").html("Errors will appear here!")
          $("#warningsSection").html("Warnings will appear here!")
          $("#newOne").hide();

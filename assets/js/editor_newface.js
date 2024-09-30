@@ -1,5 +1,7 @@
 import { parse, write, inventoryWrite, inventoryParse } from './user-parser/index.js';
 
+let rowPerPage = 100;
+let currentPage = 1;
 let cache;
 
 function extractBetweenTags(str) {
@@ -65,130 +67,12 @@ $(document).ready(function() {
     // $("#downloadButton").prop("disabled", true);
     $('#searchBar').prop("disabled", true);
 
-    $('#searchBar').on('keyup', function(e) {
+    // $('#searchBar').on('keyup', function(e) {
 
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        const filter = $(this).val();
-    
-        if(filter.trim() === '') {
-            $('#usersList tr').each(function() {
-               $(this).show();
-            });
-            $("#searchMatch").html("").css("display", "none");
-        }
-        if(filter.toLowerCase().startsWith('status:')) {
-            let num = 0;
-            $('#usersList tr').each(function() {
-                const status = $(this).find('td:nth-child(1)').text().toLowerCase();
-                console.log(status)
-                if (status.includes(filter.replace('status:', ""))) {
-                    $(this).show();
-                    num++;
-                } else {
-                    $(this).hide();
-                }
-    
-            });
-            $("#searchMatch").html(`${num} matches found.`).css("display", "block");
-        }
-        if(filter.toLowerCase().startsWith('username:')) {
-            let num = 0;
-            $('#usersList tr').each(function() {
-                const username = $(this).find('td:nth-child(2)').text().toLowerCase();
-                console.log(username)
-                if (username.includes(filter.replace('username:', ""))) {
-                    $(this).show();
-                    num++;
-                } else {
-                    $(this).hide();
-                }
-            });
-            $("#searchMatch").html(`${num} matches found.`).css("display", "block");
-        }
-        if(filter.startsWith('pass:')) {
-            let num = 0;
-            $('#usersList tr').each(function() {
-                const pass = $(this).find('td:nth-child(3)').text().toLowerCase();
-                console.log(pass)
-                if (pass.includes(filter.replace('pass:', ""))) {
-                    $(this).show();
-                    num++;
-                } else {
-                    $(this).hide();
-                }
-            });
-            $("#searchMatch").html(`${num} matches found.`).css("display", "block");
-        }
-        if(filter.toLowerCase().startsWith('role:')) {
-            let num = 0;
-            $('#usersList tr').each(function() {
-                const role = $(this).find('td:nth-child(4)').text().toLowerCase();
-                console.log(role)
-                if (role.includes(filter.replace('role:', ""))) {
-                    $(this).show();
-                    num++;
-                } else {
-                    $(this).hide();
-                }
-            });
-            $("#searchMatch").html(`${num} matches found.`).css("display", "block");
-        }
-        if(filter.startsWith('inv:')) {
-    
-            const itemName = filter.split(":")[1];
-            const value = filter.split(":")[2];
-            
-            if(itemName && value) {
-                const filteredOnes = cache.filter(mem => mem.inventory[itemName] === value);
-                console.log(filteredOnes);
-                let justShowThem = [];
-                $('#usersList tr').each(function() {
-                    const username = $(this).find('td:nth-child(2)').text();
-                    const password = $(this).find('td:nth-child(3)').text();
-    
-                   filteredOnes.forEach(member => {
-                    if(member.username === username && member.password === password) {
-                        justShowThem.push(this);
-                    } 
-                   }); 
-                   
-                   $("#searchMatch").html(`${justShowThem.length} matches found.`).css("display", "block");
-                   if(justShowThem.includes(this)) $(this).show()
-                   else {
-                      if($(this).attr("id") !== 'searchBar') $(this).hide();
-                   }
-                });
-                
-            } else if(itemName && !value) {
-                const filteredOnes = cache.filter(mem => mem.inventory[itemName]);
-                console.log(filteredOnes);
-                let justShowThem = [];
-                $('#usersList tr').each(function() {
-                    const username = $(this).find('td:nth-child(2)').text();
-                    const password = $(this).find('td:nth-child(3)').text();
-    
-                   filteredOnes.forEach(member => {
-                    if(member.username === username && member.password === password) {
-                        justShowThem.push(this);
-                    } 
-                   }); 
-                   
-                   $("#searchMatch").html(`${justShowThem.length} matches found.`).css("display", "block");
-                   if(justShowThem.includes(this)) $(this).show()
-                   else {
-                      if($(this).attr("id") !== 'searchBar') $(this).hide();
-                   }
-                });
-              
-            }
-        }
-    
+    //     e.preventDefault();
+    //     e.stopImmediatePropagation();    
        
-    
-        
-       
-    });
+    // });
 
     $("#uploadButton").on("touchstart click", function(e) {
     
@@ -196,7 +80,7 @@ $(document).ready(function() {
         e.stopImmediatePropagation();
     
         setTimeout(() => {
-    
+        
         const fileInput = document.getElementById("fileuploadInput");
     
         if(fileInput.files.length === 0) { 
@@ -216,28 +100,31 @@ $(document).ready(function() {
     
         reader.onload = function(event) {
         
-            
+            try {
+            $(this).prop("disabled", true);
             const content = event.target.result;
             const parsedContent = parse(content);
             if(parsedContent.error) {
-                toastbox("toast-notsavedata", 3000);
-                return;
+              
             }  
             if(parsedContent.members.length === 0) {
                 toastbox("toast-emptysavedata", 3000);
                 return;
             }  
             cache = parsedContent.members;
-    
+           
            
             $("#uploadSection").slideToggle();
             $("#editingSection").slideToggle();
-            $("#searchBar").prop("disabled", false);
+            //$("#searchBar").prop("disabled", false);
             $("#editingTableTitle").html(`Editing Table (With ${cache.length} users.)`)
     
-          
-            addList(parsedContent.members)
-           
+            displayPage(currentPage);
+                
+            } catch (e) {
+                toastbox("toast-notsavedata", 3000);
+                return;
+            }
             
         };
     
@@ -259,7 +146,7 @@ $(document).ready(function() {
                 cache[memIndex].status = 'approved';
             });
             toastbox("toast-approved", 3000);
-            addList(cache, true);
+            displayPage(currentPage);
         }, 10);   
     });
     
@@ -271,7 +158,7 @@ $(document).ready(function() {
                 cache[memIndex].status = 'pending';
             });
             toastbox("toast-denied", 3000);
-            addList(cache, true);
+            displayPage(currentPage);
         }, 10);
     });
     
@@ -281,7 +168,7 @@ $(document).ready(function() {
         e.stopImmediatePropagation();
         setTimeout(() => {
             cache = [];
-            addList(cache, true);
+            displayPage(currentPage);
         }, 10);
     });
 
@@ -316,21 +203,20 @@ $(document).ready(function() {
 
     
 })
+/**
+ * 
+ * @param {Number} page 
+ */
+function displayPage(page) {
 
+    const table = document.getElementById("usersList");
+    const startIndex = (page - 1) * rowPerPage;
+    const endIndex = startIndex + rowPerPage;
+    const slicedData = cache.slice(startIndex, endIndex);
+    $("#editingTableTitle").html(`Editing Table (With ${cache.length} users.)`);
 
-
-function addList(arr, newTime = false) {
-
-    document.getElementById("usersList").innerHTML = "";
-
-    if(newTime === true) {
-        // if($('#searchBar').val() !== '') {
-        //     $('#searchBar').keyup();
-        // } 
-        $("#editingTableTitle").html(`Editing Table (With ${cache.length} users.) (Unsaved)`);   
-    }
-
-    arr.forEach((member) => {
+    table.innerHTML = "";
+    slicedData.forEach((member) => {
 
         const tr = document.createElement('tr');
         tr.id = `${member.user}-${member.password}`;
@@ -379,8 +265,7 @@ function addList(arr, newTime = false) {
         `;
         tr.appendChild(actions);
 
-        document.getElementById("usersList").appendChild(tr);
-
+        table.appendChild(tr);
     });
 
     $('button[id$="-edit"],button[id$="-editinv"]').on('touchstart click', function(e) {
@@ -487,9 +372,6 @@ function addList(arr, newTime = false) {
        
         
     // });
-
-
-
     //! Delete button handler (OK)
     $('button[id$="-del"]').on('touchstart click', function(e) {
         
@@ -504,7 +386,7 @@ function addList(arr, newTime = false) {
        
             if(user) {
                 cache.splice(userIndex, 1);
-                addList(cache, true);
+                displayPage(page);
             }
         }, 10);
         
@@ -524,7 +406,7 @@ function addList(arr, newTime = false) {
        
             if(user) {
                cache[userIndex].status = 'pending';
-               addList(cache, true);
+               displayPage(page);
             }
         }, 10);
         
@@ -543,11 +425,99 @@ function addList(arr, newTime = false) {
    
         if(user) {
            cache[userIndex].status = 'approved';
-           addList(cache, true);
+           displayPage(page);
         }
         
     });
+
+    updatePagination(page);
+
 }
+
+function updatePagination(currentPage) {
+    const pageCount = Math.ceil(cache.length / rowPerPage);
+    const paginationContainer = document.getElementsByClassName("pagination")[0];
+    paginationContainer.innerHTML = "";
+
+    for (let i = 1; i <= pageCount; i++) {
+        const innerLi = document.createElement('li');
+        const innerAnchor = document.createElement('a');
+        
+        innerAnchor.className = "page-link";
+        innerAnchor.innerText = i;
+        innerAnchor.href = "javascript:void(0)";
+
+        if(i === currentPage) {
+            innerAnchor.className += ' bg-success';
+        };
+
+        innerLi.appendChild(innerAnchor);
+        innerLi.className = "page-item";
+
+        innerLi.onclick = () => {
+            displayPage(i);
+        };
+
+       
+
+        paginationContainer.appendChild(innerLi);
+    }
+}
+
+function generateSingleTableRow(member) {
+    const tr = document.createElement('tr');
+    tr.id = `${member.user}-${member.password}`;
+
+    const status = document.createElement('td');
+    const converterItem = { 
+        approved: `<ion-icon name=\"checkmark-done-outline\"></ion-icon> Approved`, 
+        pending: `<ion-icon name=\"time-outline\"></ion-icon> Pending` 
+    };
+    
+    status.innerHTML = converterItem[member.status];
+    tr.appendChild(status);
+
+    const username = document.createElement('td');
+    username.innerHTML = member.username;
+    tr.appendChild(username);
+
+    const password = document.createElement('td');
+    password.innerHTML = member.password;
+    tr.appendChild(password);
+
+
+    const role = document.createElement('td');
+    const findDef = roles.find(o => o.name === extractBetweenTags(member.role) );
+    if(findDef) {
+        role.innerHTML = `<span style=\"color:${findDef.color}\">${findDef.icon} ${extractBetweenTags(member.role)}</span>`;
+    } else role.innerHTML = extractBetweenTags(member.role);
+    tr.appendChild(role);
+
+    const inventoryEditor = document.createElement('td');
+    inventoryEditor.innerHTML = `<button id=\"${member.username}-${member.password}-editinv\" class=\"btn btn-success btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>`;
+
+    tr.appendChild(inventoryEditor);
+
+    const actions = document.createElement('td');
+    //data-bs-toggle=\"modal\" data-bs-target=\"#editInventory\"
+    if(member.status === 'approved') actions.innerHTML = `
+    <button id=\"${member.username}-${member.password}-edit\" class=\"btn btn-light btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>
+    <button id=\"${member.username}-${member.password}-deny\" class=\"btn btn-danger btn-sm\"><ion-icon name="close-sharp"></ion-icon> Deny</button>
+    <button id=\"${member.username}-${member.password}-del\"  class=\"btn btn-secondary btn-sm\"><ion-icon name="trash"></ion-icon> Delete</button>
+    `
+    else  actions.innerHTML = `
+    <button id=\"${member.username}-${member.password}-edit\" class=\"btn btn-light btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>
+    <button id=\"${member.username}-${member.password}-appr\" class=\"btn btn-success btn-sm\"><ion-icon name="checkmark-circle"></ion-icon> Approve</button>
+    <button id=\"${member.username}-${member.password}-del\" class=\"btn btn-secondary btn-sm\"><ion-icon name="trash"></ion-icon> Delete</button>
+    `;
+    tr.appendChild(actions);
+
+    document.getElementById("usersList").appendChild(tr);
+
+
+}
+
+
 
 
 
