@@ -13,7 +13,7 @@
     <meta name="keywords" content="lac, los angeles crimes, alizadev, mohammadalizade" />
     <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="manifest" href="__manifest.json">
     <!-- OG -->
     <meta property="og:title" content="BananaLAC: Savedata Editor">
@@ -80,6 +80,7 @@
                 <button id="approveAll" type="button" class="btn btn-success"><ion-icon name="checkmark-done-circle-sharp"></ion-icon> Approve All</button>
                 <button id="denyAll" type="button" class="btn btn-danger"><ion-icon name="trash-sharp"></ion-icon> Deny All</button>
                 <button id="deleteAll" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteAllPrompt"><ion-icon name="trash-sharp"></ion-icon> Delete All</button>
+                <button id="scanUsers" type="button" class="btn btn-info"><ion-icon name="scan"></ion-icon> Scan (NEW)</button>
             </div>
             <div class="wide-block pt-2 pb-2">
                 <button id="downloadButton" type="button" class="btn btn-success"><ion-icon name="download"></ion-icon></ion-icon> Download</button>
@@ -98,34 +99,29 @@
                         <div id="accordion001" class="accordion-collapse collapse" data-bs-parent="#accordion3">
                             <div class="accordion-body">
                                 <p style="text-align:left">Use this keys at first of your search:<br>
-                                <strong>status:</strong>approved/pending<br>
-                                <strong>username:</strong> to find a username<br>
-                                <strong>pass:</strong>to find a password<br>
-                                <strong>role:</strong>to filter people with a role<br>
-                                <strong>inv:item:value</strong> (to find who has this inventory item)<br>
+                                <mark>status:</mark>approved/pending<br>
+                                <mark>user:</mark> to find a username<br>
+                                <mark>pass:</mark>to find a password<br>
+                                <mark>role:</mark>to filter people with a role<br>
+                                <!-- <mark>inv:item:value</mark> (to find who has this inventory item)<br> -->
                                 Clear to show all.
                                 </p>
-                                <h5>Examples :</h5>
-                                <p>username:alex_99<br>role:police<br>inv:vehicles:pride, king</p>
+                                <h5>Example :</h5>
+                                <p>user:alex_99<br>role:police<!-- <br>inv:vehicles:pride, king --></p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group searchbox">
-                    <input id="searchBar" autocomplete="off" spellcheck="false" type="text" class="form-control" placeholder="Search Disabled">
+                    <input id="searchBar" autocomplete="off" spellcheck="false" type="text" class="form-control" placeholder="Search...">
                     <i class="input-icon">
                         <ion-icon name="search-outline"></ion-icon>
                     </i>
                 </div>
                 <div class="divider bg-primary mt-2 mb-3"></div>
                 <nav>
-                    <ul class="pagination flex-wrap">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    <ul class="pagination flex-wrap">                      
                     </ul>
                 </nav>
                 <div class="divider bg-primary mt-2 mb-3"></div>
@@ -203,10 +199,10 @@
             </div>
         </div>
 
-        <div id="toast-coming" class="toast-box toast-top bg-info">
+        <div id="toast-invedit" class="toast-box toast-top bg-success">
             <div class="in">
                 <div class="text">
-                    Edit & Inventory Edit will be ready soon!
+                    Successfully Edited!
                 </div>
             </div>
         </div>
@@ -247,16 +243,17 @@
                         <div class="modal-body text-start mb-2">
                             <div class="form-group basic">
                                 <div class="input-wrapper">
+                                    <a class="inventoryFinder" style="display: none;"></a>
                                     <label class="form-label" for="inv1">Inventory</label>
-                                    <input type="text" class="form-control" id="inv1" placeholder="Enter an inventory">
+                                    <input autocomplete="off" type="text" class="form-control" id="inv1" placeholder="Enter an inventory">
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <div class="btn-inline">
                                 <button type="button" class="btn btn-text-secondary"
-                                    data-bs-dismiss="modal">CLOSE</button>
-                                <button type="button" class="btn btn-text-primary" data-bs-dismiss="modal">EDIT</button>
+                                    data-bs-dismiss="modal"><ion-icon name="return-up-back"></ion-icon> GO BACK</button>
+                                <button id="acceptEdits" type="button" class="btn btn-text-primary" data-bs-dismiss="modal"><ion-icon name="save"></ion-icon> SAVE</button>
                             </div>
                         </div>
                     </form>
@@ -264,10 +261,62 @@
             </div>
         </div>
 
+        <div class="modal fade dialogbox" id="editInfo" data-bs-backdrop="static" tabindex="-1" role="dialog">
+            <a class="userEditFinder" style="display: none;"></a>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="editUsername" class="modal-title"></h5>
+                    </div>
+                    <form>
+                        <div class="modal-body text-start mb-2">
+                            <!-- USERNAME -->
+                            <div class="form-group basic">
+                                <div class="input-wrapper">                                    
+                                    <label class="form-label" for="usr1">Username</label>
+                                    <input autocomplete="off" type="text" class="form-control" id="usr1" placeholder="Enter a new username">
+                                </div>
+                            </div>
+                            <!-- PASSWORD -->
+                            <div class="form-group basic">
+                                <div class="input-wrapper">                                    
+                                    <label class="form-label" for="pass1">Password</label>
+                                    <input autocomplete="off" type="text" class="form-control" id="pass1" placeholder="Enter a new password">
+                                </div>
+                            </div>
+                            <!-- ROLE -->
+                             <div class="form-group basic">
+                                <div class="input-wrapper">                                    
+                                    <label class="form-label" for="role1">Role</label>
+                                    <input autocomplete="off" type="text" class="form-control" id="role1" placeholder="Enter a role">
+                                </div>
+                            </div>                            
+                        </div>
+                        <div class="modal-footer">
+                            <div class="btn-inline">
+                                <button type="button" class="btn btn-text-secondary"
+                                    data-bs-dismiss="modal"><ion-icon name="return-up-back"></ion-icon> GO BACK</button>
+                                <button id="acceptEdits2" type="button" class="btn btn-text-primary" data-bs-dismiss="modal"><ion-icon name="save"></ion-icon> SAVE</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade modalbox" id="scanModal" data-bs-backdrop="static" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Scan Results</h5>
+                        <a href="#" data-bs-dismiss="modal">Close</a>
+                    </div>
+                    <div id="scanBody" class="modal-body"></div>
+                </div>
+            </div>
+        </div>
 
         
-
-
 
     </div>
     <!-- * App Capsule -->

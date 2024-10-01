@@ -34,7 +34,7 @@ $(document).ready(function() {
         setTimeout(() => {
     
             $("#codebox").prop('disabled', true);
-            $(".typers").prop("disabled", false);
+            $(".typers").prop("disabled", true);
             $("#findMistakesButton").hide();
             $("#newOne").show();
         

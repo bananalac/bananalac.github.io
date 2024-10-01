@@ -25,54 +25,79 @@ const roles = [
     {
         name: "[TAXI]",
         color: "yellow",
-        icon: `<i style=\"color: yellow\" class=\"fas fa-taxi\"></i>`
+        icon: `<ion-icon name=\"car\"></ion-icon>`
     },
     {
         name: "[POLICE]",
         color: "blue",
-        icon: `<i style=\"color: lightblue\" class=\"fas fa-fighter-jet\"></i>`
+        icon: `<ion-icon name=\"shield-half\"></ion-icon>`
     },
     {
         name: "[DOCTOR]",
         color: "green",
-        icon: `<i style=\"color: green\" class=\"fas fa-user-md\"></i>`
+        icon: `<ion-icon name=\"medkit\"></ion-icon>`
     },
     {
         name: "[MECHANIC]",
         color: "orange",
-        icon: `<i style=\"color: orange\" class=\"fas fa-wrench\"></i>`
+        icon: `<ion-icon name=\"build\"></ion-icon>`
     },
     {
         name: "[ADMIN]",
         color: "red",
-        icon: `<i style=\"color: red\" class=\"fas fa-user-shield\"></i>`
+        icon: `<ion-icon name=\"lock-closed\"></ion-icon>`
     },
     {
         name: "[WORKER]",
         color: "#c7c",
-        icon: `<i style=\"color: #c7c\" class=\"fas fa-hard-hat\"></i>`
+        icon: `<ion-icon name=\"body\"></ion-icon>`
     },
     {
         name: "[BUILDER]",
         color: "white",
-        icon: `<i style=\"color: white\" class=\"fas fa-bible\"></i>`
+        icon: `<ion-icon name=\"business\"></ion-icon>`
+    },
+    {
+        name: "none",
+        color: "white",
+        icon: `<ion-icon name=\"man\"></ion-icon>`
     }
 ];
 
 $(document).ready(function() {
 
-    // $("#approveAll").prop("disabled", true);
-    // $("#denyAll").prop("disabled", true);
-    // $("#deleteAll").prop("disabled", true);
-    // $("#downloadButton").prop("disabled", true);
-    $('#searchBar').prop("disabled", true);
+    //$("#scanModal").modal('toggle');
+    
+   // $('#searchBar').prop("disabled", true);
 
-    // $('#searchBar').on('keyup', function(e) {
+    $('#searchBar').on('keyup', function(e) {
 
-    //     e.preventDefault();
-    //     e.stopImmediatePropagation();    
+        e.preventDefault();
+        e.stopImmediatePropagation();  
+        const filter = $(this).val().trim();
+        
+        if(filter === '') {            
+            displayPage(currentPage);
+        } else {
+            if(filter.startsWith('status:') && filter.split(":")[1].trim() !== '') {
+                const statusFilter = cache.filter(mems => mems.status.toLowerCase().includes(filter.toLowerCase().replace('status:', '')));
+                displayPageSearch(1, statusFilter);
+            }
+            if(filter.startsWith('user:') && filter.split(":")[1].trim() !== '') {
+                const userFilter = cache.filter(mems => mems.username.toLowerCase().includes(filter.toLowerCase().replace('user:', '')));
+                displayPageSearch(1, userFilter);
+            }
+            if(filter.startsWith('pass:') && filter.split(":")[1].trim() !== '') {
+                const passFilter = cache.filter(mems => mems.password.toLowerCase().includes(filter.toLowerCase().replace('pass:', '')));
+                displayPageSearch(1, passFilter);
+            }
+            if(filter.startsWith('role:') && filter.split(":")[1].trim() !== '') {
+                const roleFilter = cache.filter(mems => mems.role.toLowerCase().includes(filter.toLowerCase().replace('role:', '')));
+                displayPageSearch(1, roleFilter);
+            }
+        }
        
-    // });
+    });
 
     $("#uploadButton").on("touchstart click", function(e) {
     
@@ -200,6 +225,72 @@ $(document).ready(function() {
     
     });
 
+    $("#scanUsers").on("touchstart click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const scanBody = document.getElementById('scanBody');
+            const builderUsers = cache.filter(member => member.role.toLowerCase().includes('builder'));
+            const adminUsers = cache.filter(member => member.role.toLowerCase().includes('admin'));
+
+            if(builderUsers.length > 0) {
+                const p = document.createElement('p');
+                p.innerHTML = `<span class=\"badge badge-warning\">[BUILDER]</span> Detected!<br>This role gives users access to map editing and is a very sensitive role, so it is recommended to remove this role from the ${builderUsers.length} users who have it.`;
+                scanBody.appendChild(p);
+                scanBody.innerHTML += `<button id=\"removeAllBuilders\" type=\"button\" class=\"btn btn-danger btn-block\"><ion-icon name="close"></ion-icon> Remove</button>`;
+            }
+
+            if(adminUsers.length > 0) {
+                const p = document.createElement('p');
+                p.innerHTML = `<span class=\"badge badge-danger\">[ADMIN]</span> Detected!<br>Those who have this role have the ability to fire and ban people and generally have admin access, so it is recommended to remove this role from the ${adminUsers.length} people who have it.`;
+                scanBody.appendChild(p);
+                scanBody.innerHTML += `<button id=\"removeAllAdmins\" type=\"button\" class=\"btn btn-danger btn-block\"><ion-icon name="close"></ion-icon> Remove</button>`;
+            }
+
+            if(scanBody.innerHTML === '') {
+                const p = document.createElement('p');
+                p.innerHTML = `Excellent!<br>No sensitive items were found`;
+                scanBody.appendChild(p);
+            }
+
+            $("#removeAllBuilders").on("touchstart click", function(e) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                setTimeout(() => {
+                    cache = cache.filter(member => !member.role.toLowerCase().includes('builder'));
+                    $(this).text("All removed!");
+                    $(this).prop("disabled", true);
+                    $(this).removeClass("btn-danger");
+                    $(this).addClass("btn-success");
+                    displayPage(currentPage);
+                }, 10);
+            });
+
+            $("#removeAllAdmins").on("touchstart click", function(e) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                setTimeout(() => {
+                    cache = cache.filter(member => !member.role.toLowerCase().includes('admin'));
+                    $(this).text("All removed!");
+                    $(this).prop("disabled", true);
+                    $(this).removeClass("btn-danger");
+                    $(this).addClass("btn-success");
+                    displayPage(currentPage);
+                }, 10);
+            });
+
+            $("#scanModal").modal("show");
+
+        }, 10);
+    });
+
+    $("#scanModal").on("hidden.bs.modal", function(e) {
+        $("#scanBody").html("");
+    })
+
+   
+
+    
 
     
 })
@@ -247,19 +338,19 @@ function displayPage(page) {
         tr.appendChild(role);
 
         const inventoryEditor = document.createElement('td');
-        inventoryEditor.innerHTML = `<button id=\"${member.username}-${member.password}-editinv\" class=\"btn btn-success btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>`;
+        //data-bs-toggle=\"modal\" data-bs-target=\"#editInventory\"
+        inventoryEditor.innerHTML = `<button id=\"${member.username}-${member.password}-editinv\" data-bs-toggle=\"modal\" data-bs-target=\"#editInventory\" class=\"btn btn-success btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>`;
 
         tr.appendChild(inventoryEditor);
 
-        const actions = document.createElement('td');
-        //data-bs-toggle=\"modal\" data-bs-target=\"#editInventory\"
+        const actions = document.createElement('td');      
         if(member.status === 'approved') actions.innerHTML = `
-        <button id=\"${member.username}-${member.password}-edit\" class=\"btn btn-light btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>
+        <button id=\"${member.username}-${member.password}-edit\" data-bs-toggle=\"modal\" data-bs-target=\"#editInfo\" class=\"btn btn-light btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>
         <button id=\"${member.username}-${member.password}-deny\" class=\"btn btn-danger btn-sm\"><ion-icon name="close-sharp"></ion-icon> Deny</button>
         <button id=\"${member.username}-${member.password}-del\"  class=\"btn btn-secondary btn-sm\"><ion-icon name="trash"></ion-icon> Delete</button>
         `
         else  actions.innerHTML = `
-        <button id=\"${member.username}-${member.password}-edit\" class=\"btn btn-light btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>
+        <button id=\"${member.username}-${member.password}-edit\" data-bs-toggle=\"modal\" data-bs-target=\"#editInfo\" class=\"btn btn-light btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>
         <button id=\"${member.username}-${member.password}-appr\" class=\"btn btn-success btn-sm\"><ion-icon name="checkmark-circle"></ion-icon> Approve</button>
         <button id=\"${member.username}-${member.password}-del\" class=\"btn btn-secondary btn-sm\"><ion-icon name="trash"></ion-icon> Delete</button>
         `;
@@ -267,111 +358,98 @@ function displayPage(page) {
 
         table.appendChild(tr);
     });
-
-    $('button[id$="-edit"],button[id$="-editinv"]').on('touchstart click', function(e) {
+     
+    //* Edit button handler
+    $('button[id$="-edit"]').on('touchstart click', function(e) {
+        
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
-            toastbox("toast-coming", 3000);
+            const username = $(this).attr("id").split("-")[0];
+            const password = $(this).attr("id").split("-")[1];
+            
+            const user = cache.find(member => member.username === username && member.password === password);
+            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
+        if(user) {        
+            $("#editUsername").html(`Editing ${username}'s Info`);
+            $("#usr1").val(user.username);
+            $("#pass1").val(user.password);           
+            $("#role1").val(user.role);
+            $(".userEditFinder").attr("id", `${userIndex}`);                                                        
+        }
         }, 10);
-    })
-
-    // //* Edit button handler
-    // $('button[id$="-edit"]').on('touchstart click', function(e) {
-        
-    //     e.preventDefault();
-    //     e.stopImmediatePropagation();
-    //     setTimeout(() => {
-    //         const username = $(this).attr("id").split("-")[0];
-    //         const password = $(this).attr("id").split("-")[1];
-            
-    //         const user = cache.find(member => member.username === username && member.password === password);
-    //         const userIndex = cache.findIndex(member => member.username === username && member.password === password);
-    //     if(user) {
-        
-
-           
-        
-    //         Swal.fire({
-    //             title: `Edit ${username}'s Information`,
-    //             html: `
-    //                 <div style="display: flex; flex-direction: column;">
-    //                     <label style="text-align:left" for="name">Name</label>
-    //                     <input id="name" class="swal2-input" value="${user.username}" placeholder="Enter a new name">
-    //                     <label style="text-align:left" for="pass">Password:</label>
-    //                     <input id="pass" class="swal2-input" value="${user.password}" placeholder="Enter a new password">
-    //                     <label style="text-align:left" for="role">Role</label>
-    //                     <input id="role" class="swal2-input" value="${user.role}" placeholder="Enter a new role">
-    //                 </div>
-    //             `,
-    //             focusConfirm: false,
-    //             didOpen: () => {
-    //                 const popup = Swal.getPopup();
-    //                 usernameInput = popup.querySelector('#name');
-    //                 passwordInput = popup.querySelector('#pass');
-    //                 roleInput = popup.querySelector('#role')
-    //             },
-    //             preConfirm: () => {
-    //                 const name = usernameInput.value;
-    //                 const pass = passwordInput.value;
-    //                 const role = roleInput.value;
-        
-    //                 if (!name || !pass || !role) {
-    //                     Swal.showValidationMessage(`Please enter all fields`);
-    //                 }
-    //                 return { name: name, pass: pass, role: role };
-    //             },
-    //             showCancelButton: true,
-    //             confirmButtonText: 'Save',
-    //             cancelButtonText: 'Cancel',
-    //         }).then((result) => {
-    //             if (result.isConfirmed) {
-                 
-    //                 Swal.fire('Saved!', 'Information has been saved.', 'success');
-        
-    //                 cache[userIndex].username = result.value.name;
-    //                 cache[userIndex].password = result.value.pass;
-    //                 cache[userIndex].role = result.value.role;
-        
-                    
-    //                 addList(cache, true);
-    //             }
-    //         });
-    //     }
-    //     }, 10);
        
         
-    // });
-    // //* Edit inv button handler (needs more time)
-    // $('button[id$="-editinv"]').on('touchstart click', function(e) {
+    });
+    $("#acceptEdits2").on('touchstart click', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const selectedIndex = Number($(".userEditFinder").attr("id"));
+            const username = $("#usr1").val().trim();
+            const password = $("#pass1").val().trim();
+            const role = $("#role1").val().trim();
+            if(username === '' || password === '' || role === '') {
+                alert('Don\'t leave any input empty!');
+                return;
+            }
+            cache[selectedIndex].username = username;
+            cache[selectedIndex].password = password;
+            cache[selectedIndex].role = role;
+            toastbox("toast-invedit", 3000);
+            displayPage(currentPage);     
+        }, 10);
+    });
+    $('#editInfo').on('hidden.bs.modal', function () {
+        $('#usr1').val("");
+        $('#role1').val("");
+        $('#pass1').val("");
+        $("#editUsername").html("");
+        $('.inventoryFinder').removeAttr('id');
+    });
+    //* Edit inv button handler
+    $('button[id$="-editinv"]').on('touchstart click', function(e) {
         
-    //     e.preventDefault();
-    //     e.stopImmediatePropagation();
-    //     setTimeout(() => {
-    //         const username = $(this).attr("id").split("-")[0];
-    //         const password = $(this).attr("id").split("-")[1];
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const username = $(this).attr("id").split("-")[0];
+            const password = $(this).attr("id").split("-")[1];
             
-    //         const user = cache.find(member => member.username === username && member.password === password);
-    //         const userIndex = cache.findIndex(member => member.username === username && member.password === password);
-    //     if(user) {
-        
-    //         $("#invEditorUsername").html(`Editing ${username} inventory.`);
-           
-        
-    //         a.then((result) => {
-    //             if (result.isConfirmed) {
-                 
-    //                 Swal.fire('Saved!', 'Inventory has been saved.', 'success');
-    //                 const parsedInfo = inventoryParse(result.value.inv);
-    //                 cache[userIndex].inventory = parsedInfo;
-    //                 addList(cache, true);
-    //             }
-    //         });
-    //     }
-    //     }, 10);
+            const user = cache.find(member => member.username === username && member.password === password);
+            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
+        if(user) {        
+            $("#invEditorUsername").html(`Editing ${username}'s Inventory`);
+            $("#inv1").val(user.inventoryString);
+            $(".inventoryFinder").attr("id", `${userIndex}`);
+        }
        
-        
-    // });
+        }, 10);
+    });
+    $("#acceptEdits").on('touchstart click', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            if($("#inv1").val().trim() === '') {
+                alert('Provide An Inventory!');
+                return;
+            }
+            const selectedIndex = Number($(".inventoryFinder").attr("id"));
+            const parsedInfo = inventoryParse($("#inv1").val().trim());
+            cache[selectedIndex].inventory = parsedInfo;
+            cache[selectedIndex].inventoryString = $("#inv1").val().trim();
+            toastbox('toast-invedit', 3000);
+            $('#inv1').val("");
+            $("#invEditorUsername").html("");
+            $('.inventoryFinder').removeAttr('id');
+            displayPage(currentPage);      
+        }, 10);
+    });
+    $('#editInventory').on('hidden.bs.modal', function () {
+        $('#inv1').val("");
+        $("#invEditorUsername").html("");
+        $('.inventoryFinder').removeAttr('id');
+    });
     //! Delete button handler (OK)
     $('button[id$="-del"]').on('touchstart click', function(e) {
         
@@ -430,7 +508,223 @@ function displayPage(page) {
         
     });
 
+    currentPage = page;
     updatePagination(page);
+
+}
+
+function displayPageSearch(page, arr) {
+
+    const table = document.getElementById("usersList");
+    const startIndex = (page - 1) * rowPerPage;
+    const endIndex = startIndex + rowPerPage;
+    const slicedData = arr.slice(startIndex, endIndex);
+    $("#editingTableTitle").html(`Editing Table (With ${cache.length} users.)`);
+
+    table.innerHTML = "";
+    slicedData.forEach((member) => {
+
+        const tr = document.createElement('tr');
+        tr.id = `${member.user}-${member.password}`;
+
+        const status = document.createElement('td');
+        const converterItem = { 
+            approved: `<ion-icon name=\"checkmark-done-outline\"></ion-icon> Approved`, 
+            pending: `<ion-icon name=\"time-outline\"></ion-icon> Pending` 
+        };
+        
+        status.innerHTML = converterItem[member.status];
+        tr.appendChild(status);
+
+        const username = document.createElement('td');
+        username.innerHTML = member.username;
+        tr.appendChild(username);
+
+        const password = document.createElement('td');
+        password.innerHTML = member.password;
+        tr.appendChild(password);
+
+
+        const role = document.createElement('td');
+        const findDef = roles.find(o => o.name === extractBetweenTags(member.role) );
+        if(findDef) {
+            role.innerHTML = `<span style=\"color:${findDef.color}\">${findDef.icon} ${extractBetweenTags(member.role)}</span>`;
+        } else role.innerHTML = extractBetweenTags(member.role);
+        tr.appendChild(role);
+
+        const inventoryEditor = document.createElement('td');
+        //data-bs-toggle=\"modal\" data-bs-target=\"#editInventory\"
+        inventoryEditor.innerHTML = `<button id=\"${member.username}-${member.password}-editinv\" data-bs-toggle=\"modal\" data-bs-target=\"#editInventory\" class=\"btn btn-success btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>`;
+
+        tr.appendChild(inventoryEditor);
+
+        const actions = document.createElement('td');      
+        if(member.status === 'approved') actions.innerHTML = `
+        <button id=\"${member.username}-${member.password}-edit\" data-bs-toggle=\"modal\" data-bs-target=\"#editInfo\" class=\"btn btn-light btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>
+        <button id=\"${member.username}-${member.password}-deny\" class=\"btn btn-danger btn-sm\"><ion-icon name="close-sharp"></ion-icon> Deny</button>
+        <button id=\"${member.username}-${member.password}-del\"  class=\"btn btn-secondary btn-sm\"><ion-icon name="trash"></ion-icon> Delete</button>
+        `
+        else  actions.innerHTML = `
+        <button id=\"${member.username}-${member.password}-edit\" data-bs-toggle=\"modal\" data-bs-target=\"#editInfo\" class=\"btn btn-light btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>
+        <button id=\"${member.username}-${member.password}-appr\" class=\"btn btn-success btn-sm\"><ion-icon name="checkmark-circle"></ion-icon> Approve</button>
+        <button id=\"${member.username}-${member.password}-del\" class=\"btn btn-secondary btn-sm\"><ion-icon name="trash"></ion-icon> Delete</button>
+        `;
+        tr.appendChild(actions);
+
+        table.appendChild(tr);
+    });
+     
+    //* Edit button handler
+    $('button[id$="-edit"]').on('touchstart click', function(e) {
+        
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const username = $(this).attr("id").split("-")[0];
+            const password = $(this).attr("id").split("-")[1];
+            
+            const user = cache.find(member => member.username === username && member.password === password);
+            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
+        if(user) {        
+            $("#editUsername").html(`Editing ${username}'s Info`);
+            $("#usr1").val(user.username);
+            $("#pass1").val(user.password);           
+            $("#role1").val(user.role);
+            $(".userEditFinder").attr("id", `${userIndex}`);                                                        
+        }
+        }, 10);
+       
+        
+    });
+    $("#acceptEdits2").on('touchstart click', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const selectedIndex = Number($(".userEditFinder").attr("id"));
+            const username = $("#usr1").val().trim();
+            const password = $("#pass1").val().trim();
+            const role = $("#role1").val().trim();
+            if(username === '' || password === '' || role === '') {
+                alert('Don\'t leave any input empty!');
+                return;
+            }
+            cache[selectedIndex].username = username;
+            cache[selectedIndex].password = password;
+            cache[selectedIndex].role = role;
+            toastbox("toast-invedit", 3000);
+            displayPageSearch(currentPage, arr);     
+        }, 10);
+    });
+    $('#editInfo').on('hidden.bs.modal', function () {
+        $('#usr1').val("");
+        $('#role1').val("");
+        $('#pass1').val("");
+        $("#editUsername").html("");
+        $('.inventoryFinder').removeAttr('id');
+    });
+    //* Edit inv button handler
+    $('button[id$="-editinv"]').on('touchstart click', function(e) {
+        
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const username = $(this).attr("id").split("-")[0];
+            const password = $(this).attr("id").split("-")[1];
+            
+            const user = cache.find(member => member.username === username && member.password === password);
+            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
+        if(user) {        
+            $("#invEditorUsername").html(`Editing ${username}'s Inventory`);
+            $("#inv1").val(user.inventoryString);
+            $(".inventoryFinder").attr("id", `${userIndex}`);
+        }
+       
+        }, 10);
+    });
+    $("#acceptEdits").on('touchstart click', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            if($("#inv1").val().trim() === '') {
+                alert('Provide An Inventory!');
+                return;
+            }
+            const selectedIndex = Number($(".inventoryFinder").attr("id"));
+            const parsedInfo = inventoryParse($("#inv1").val().trim());
+            cache[selectedIndex].inventory = parsedInfo;
+            cache[selectedIndex].inventoryString = $("#inv1").val().trim();
+            toastbox('toast-invedit', 3000);
+            $('#inv1').val("");
+            $("#invEditorUsername").html("");
+            $('.inventoryFinder').removeAttr('id');
+            displayPageSearch(currentPage, arr);
+        }, 10);
+    });
+    $('#editInventory').on('hidden.bs.modal', function () {
+        $('#inv1').val("");
+        $("#invEditorUsername").html("");
+        $('.inventoryFinder').removeAttr('id');
+    });
+    //! Delete button handler (OK)
+    $('button[id$="-del"]').on('touchstart click', function(e) {
+        
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const username = $(this).attr("id").split("-")[0];
+            const password = $(this).attr("id").split("-")[1];
+            
+            const user = cache.find(member => member.username === username && member.password === password);
+            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
+       
+            if(user) {
+                cache.splice(userIndex, 1);
+                displayPageSearch(currentPage, arr);
+            }
+        }, 10);
+        
+        
+    });
+    //! Deny button handler (OK)
+    $('button[id$="-deny"]').on('touchstart click', function(e) {
+        
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const username = $(this).attr("id").split("-")[0];
+            const password = $(this).attr("id").split("-")[1];
+            
+            const user = cache.find(member => member.username === username && member.password === password);
+            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
+       
+            if(user) {
+               cache[userIndex].status = 'pending';
+               displayPageSearch(currentPage, arr);
+            }
+        }, 10);
+        
+        
+    });
+    //* Approve button handler (OK)
+    $('button[id$="-appr"]').on('touchstart click', function(e) {
+        
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const username = $(this).attr("id").split("-")[0];
+        const password = $(this).attr("id").split("-")[1];
+        
+        const user = cache.find(member => member.username === username && member.password === password);
+        const userIndex = cache.findIndex(member => member.username === username && member.password === password);
+   
+        if(user) {
+           cache[userIndex].status = 'approved';
+           displayPageSearch(currentPage, arr);
+        }
+        
+    });
+
+    currentPage = page;
+    updatePaginationSearch(page, arr);
 
 }
 
@@ -464,58 +758,37 @@ function updatePagination(currentPage) {
     }
 }
 
-function generateSingleTableRow(member) {
-    const tr = document.createElement('tr');
-    tr.id = `${member.user}-${member.password}`;
+function updatePaginationSearch(currentPage, arr) {
+    const pageCount = Math.ceil(arr.length / rowPerPage);
+    const paginationContainer = document.getElementsByClassName("pagination")[0];
+    paginationContainer.innerHTML = "";
 
-    const status = document.createElement('td');
-    const converterItem = { 
-        approved: `<ion-icon name=\"checkmark-done-outline\"></ion-icon> Approved`, 
-        pending: `<ion-icon name=\"time-outline\"></ion-icon> Pending` 
-    };
-    
-    status.innerHTML = converterItem[member.status];
-    tr.appendChild(status);
+    for (let i = 1; i <= pageCount; i++) {
+        const innerLi = document.createElement('li');
+        const innerAnchor = document.createElement('a');
+        
+        innerAnchor.className = "page-link";
+        innerAnchor.innerText = i;
+        innerAnchor.href = "javascript:void(0)";
 
-    const username = document.createElement('td');
-    username.innerHTML = member.username;
-    tr.appendChild(username);
+        if(i === currentPage) {
+            innerAnchor.className += ' bg-success';
+        };
 
-    const password = document.createElement('td');
-    password.innerHTML = member.password;
-    tr.appendChild(password);
+        innerLi.appendChild(innerAnchor);
+        innerLi.className = "page-item";
 
+        innerLi.onclick = () => {
+            displayPageSearch(i, arr);
+        };
 
-    const role = document.createElement('td');
-    const findDef = roles.find(o => o.name === extractBetweenTags(member.role) );
-    if(findDef) {
-        role.innerHTML = `<span style=\"color:${findDef.color}\">${findDef.icon} ${extractBetweenTags(member.role)}</span>`;
-    } else role.innerHTML = extractBetweenTags(member.role);
-    tr.appendChild(role);
+       
 
-    const inventoryEditor = document.createElement('td');
-    inventoryEditor.innerHTML = `<button id=\"${member.username}-${member.password}-editinv\" class=\"btn btn-success btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>`;
-
-    tr.appendChild(inventoryEditor);
-
-    const actions = document.createElement('td');
-    //data-bs-toggle=\"modal\" data-bs-target=\"#editInventory\"
-    if(member.status === 'approved') actions.innerHTML = `
-    <button id=\"${member.username}-${member.password}-edit\" class=\"btn btn-light btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>
-    <button id=\"${member.username}-${member.password}-deny\" class=\"btn btn-danger btn-sm\"><ion-icon name="close-sharp"></ion-icon> Deny</button>
-    <button id=\"${member.username}-${member.password}-del\"  class=\"btn btn-secondary btn-sm\"><ion-icon name="trash"></ion-icon> Delete</button>
-    `
-    else  actions.innerHTML = `
-    <button id=\"${member.username}-${member.password}-edit\" class=\"btn btn-light btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>
-    <button id=\"${member.username}-${member.password}-appr\" class=\"btn btn-success btn-sm\"><ion-icon name="checkmark-circle"></ion-icon> Approve</button>
-    <button id=\"${member.username}-${member.password}-del\" class=\"btn btn-secondary btn-sm\"><ion-icon name="trash"></ion-icon> Delete</button>
-    `;
-    tr.appendChild(actions);
-
-    document.getElementById("usersList").appendChild(tr);
-
-
+        paginationContainer.appendChild(innerLi);
+    }
 }
+
+
 
 
 
