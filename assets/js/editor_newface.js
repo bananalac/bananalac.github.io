@@ -447,100 +447,104 @@ function displayPage(page) {
         } else role.innerHTML = extractBetweenTags(member.role);
         tr.appendChild(role);
 
-        const action = document.createElement('td');      
-        action.innerHTML = `<button id=\"${member.username}-${member.password}-opts\" data-bs-toggle=\"offcanvas\" data-bs-target=\"#actionSheetEditor\" class=\"btn btn-info btn-sm\"><ion-icon name=\"apps-sharp\"></ion-icon>Options</button>`;
-        tr.appendChild(action);
+        // const action = document.createElement('td');      
+        // action.innerHTML = `<button id=\"${member.username}-${member.password}-opts\" data-bs-toggle=\"offcanvas\" data-bs-target=\"#actionSheetEditor\" class=\"btn btn-info\"><ion-icon name=\"apps-sharp\"></ion-icon>Options</button>`;
+        // tr.appendChild(action);
 
 
         table.appendChild(tr);
     });
 
-    $('button[id$="-opts"]').on('touchstart click', function(e) {
+    // $('button[id$="-opts"]').on('touchstart click', function(e) {
+    //     e.preventDefault();
+    //     e.stopImmediatePropagation();
+    //     setTimeout(() => {
+    //         const username = $(this).attr("id").split("-")[0];
+    //         const password = $(this).attr("id").split("-")[1];
+            
+    //         const user = cache.find(member => member.username === username && member.password === password);
+    //         const userIndex = cache.findIndex(member => member.username === username && member.password === password);
+    //         if(user) {
+
+    //             $("#actionSheetTitle").html(`Available options for : ${user.username}`);
+    //             $(".actionSheetIndexSelector").attr("id", `${userIndex}`);
+    //             if(user.status === 'pending') {
+    //                 $("#approveOrDeny").removeClass('text-warning').addClass('text-success');
+    //                 $("#approveOrDeny").html(`<span><ion-icon name="checkmark-done"></ion-icon>Approve</span>`);
+    //             } else {
+    //                 $("#approveOrDeny").removeClass('text-success').addClass('text-warning');
+    //                 $("#approveOrDeny").html(`<span><ion-icon name="close-circle-sharp"></ion-icon>Deny</span>`);
+    //             }
+
+               
+
+    //         }
+            
+    //     }, 10);
+
+    // });
+
+    $("#editButton").on("touchstart click", function(ev) {
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        setTimeout(() => {
+            const userIndex = $(".actionSheetIndexSelector").attr("id");
+            $("#actionSheetIconed").removeClass('show');
+            setTimeout(() => {
+                $("#editInfo").modal('show');
+            }, 2);
+            $("#editUsername").html(`Editing ${cache[userIndex].username}'s Info`);
+            $("#usr1").val(cache[userIndex].username);
+            $("#pass1").val(cache[userIndex].password);           
+            $("#role1").val(cache[userIndex].role);
+            $(".userEditFinder").attr("id", `${userIndex}`);        
+        }, 10);
+        
+    });
+
+    $('#editInv').on('touchstart click', function(ev) {
+
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        setTimeout(() => {
+            $("#actionSheetIconed").css('visibility', 'hidden');
+            setTimeout(() => {
+                $("#editInventory").modal('show');
+            }, 2);
+            $("#invEditorUsername").html(`Editing ${username}'s Inventory`);
+            $("#inv1").val(user.inventoryString);
+            $(".inventoryFinder").attr("id", `${userIndex}`);                                       
+        }, 10);
+    });
+
+    $('#deleteUser').on('touchstart click', function(ev) {
+
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        setTimeout(() => {
+            $("#actionSheetIconed").removeClass('show');                        
+            cache.splice(userIndex, 1);
+            displayPage(page);
+            autosave();
+        }, 10);
+        
+        
+    });
+
+    $('#approveOrDeny').on('touchstart click', function(e) {
+
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
-            const username = $(this).attr("id").split("-")[0];
-            const password = $(this).attr("id").split("-")[1];
-            
-            const user = cache.find(member => member.username === username && member.password === password);
-            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
-            if(user) {
-
-                $("#actionSheetTitle").html(`Available options for : ${user.username}`);
-                if(user.status === 'pending') {
-                    $("#approveOrDeny").removeClass('text-warning').addClass('text-success');
-                    $("#approveOrDeny").html(`<span><ion-icon name="checkmark-done"></ion-icon>Approve</span>`);
-                } else {
-                    $("#approveOrDeny").removeClass('text-success').addClass('text-warning');
-                    $("#approveOrDeny").html(`<span><ion-icon name="close-circle-sharp"></ion-icon>Deny</span>`);
-                }
-
-                $("#editButton").on("touchstart click", function(ev) {
-                    ev.preventDefault();
-                    ev.stopImmediatePropagation();
-                    setTimeout(() => {
-                        $("#actionSheetIconed").removeClass('show');
-                        setTimeout(() => {
-                            $("#editInfo").modal('show');
-                        }, 2);
-                        $("#editUsername").html(`Editing ${username}'s Info`);
-                        $("#usr1").val(user.username);
-                        $("#pass1").val(user.password);           
-                        $("#role1").val(user.role);
-                        $(".userEditFinder").attr("id", `${userIndex}`);        
-                    }, 10);
-                    
-                });
-
-                $('#editInv').on('touchstart click', function(ev) {
-        
-                    ev.preventDefault();
-                    ev.stopImmediatePropagation();
-                    setTimeout(() => {
-                        $("#actionSheetIconed").removeClass('show');
-                        setTimeout(() => {
-                            $("#editInventory").modal('show');
-                        }, 2);
-                        $("#invEditorUsername").html(`Editing ${username}'s Inventory`);
-                        $("#inv1").val(user.inventoryString);
-                        $(".inventoryFinder").attr("id", `${userIndex}`);                                       
-                    }, 10);
-                });
-
-                $('#deleteUser').on('touchstart click', function(ev) {
-        
-                    ev.preventDefault();
-                    ev.stopImmediatePropagation();
-                    setTimeout(() => {
-                        $("#actionSheetIconed").removeClass('show');                        
-                        cache.splice(userIndex, 1);
-                        displayPage(page);
-                        autosave();
-                    }, 10);
-                    
-                    
-                });
-
-                $('#approveOrDeny').on('touchstart click', function(e) {
-        
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                    setTimeout(() => {
-                        $("#actionSheetIconed").removeClass('show');                        
-                        if(user.status === 'approved') cache[userIndex].status = 'pending'
-                        else cache[userIndex].status = 'approved'; 
-                        displayPage(page);
-                        autosave();
-                    }, 10);
-                   
-                    
-                    
-                });
-
-            }
-            
+            $("#actionSheetIconed").removeClass('show');                        
+            if(user.status === 'approved') cache[userIndex].status = 'pending'
+            else cache[userIndex].status = 'approved'; 
+            displayPage(page);
+            autosave();
         }, 10);
-
+       
+        
+        
     });
     
     $('#editInfo').on('hidden.bs.modal', function () {
