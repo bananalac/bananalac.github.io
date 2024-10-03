@@ -135,7 +135,7 @@ $(document).ready(function() {
         setTimeout(() => {
             navigator.share({
                 title: 'Lint Results',
-                text: `Code: ${code}\n${errs.fnl}\n${errs.warns}`
+                text: `Code: ${code}\n${errs.fnl}\n${errs.warns}\nLinted by BananaLAC\nhttps://bananalac.github.io/linter?code=${code}`
             })
         }, 10);
     })

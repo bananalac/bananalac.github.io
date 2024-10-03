@@ -85,8 +85,7 @@ $(document).ready(function() {
                     new File([blob], `${cache.name}.txt`, { type: "text/plain" })
                 ]
             }).catch(() => {
-                toastbox('toast-noshare', 3000);
-                return;
+               
             })
         } else {
             toastbox('toast-noshare', 3000);
