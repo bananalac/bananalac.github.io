@@ -51,6 +51,13 @@
 
 
         <div id="uploadSection" class="section full mt-2">
+            <div id="alertBoxer" class="wide-block pt-2 pb-2">
+                <div class="alert alert-success mb-2 alert-dismissible fade show" role="alert">
+                    <h4 class="alert-title"><ion-icon name="shield-checkmark"></ion-icon> Your files are safe!</h4>
+                    The files are processed in your system and not sent anywhere. <a href="/blog?=name-safety">[Learn More]</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
             <div class="section-title large">SaveData Editor</div>
             <div class="wide-block pt-2 pb-2">
                 <div class="custom-file-upload" id="fileUpload1">
@@ -65,14 +72,30 @@
                     </label>
                 </div>
                 <button id="uploadButton" type="button" class="btn btn-primary btn-block"><ion-icon name="create-outline"></ion-icon> Edit</button>
-
             </div>
             
-            <div id="newOne" style="display: none;" class="wide-block pt-2 pb-2">
-                <button type="button" class="btn btn-success btn-block"><ion-icon name="add-outline"></ion-icon> New One</button>
+            <div class="wide-block pt-2 pb-2">
+                <button id="recentsListButton" type="button" data-bs-toggle="modal" data-bs-target="#recentsModal" class="btn btn-secondary btn-block"><ion-icon name="bookmark-outline"></ion-icon> Save List</button>
             </div>
+           
 
         </div>
+
+        <!-- <div id="fabNewUser" style="display: none;" class="fab-button animate bottom-left dropdown">
+            <a href="#" class="fab" data-bs-toggle="dropdown">
+                <ion-icon name="add-outline"></ion-icon>
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">
+                    <ion-icon name="person-add"></ion-icon>
+                    <p id="newUserButton">New User</p>
+                </a>
+            </div>
+        </div> -->
+
+        <a href="#" class="button goTop">
+            <ion-icon name="arrow-up-outline"></ion-icon>
+        </a>
 
         <div id="editingSection" style="display: none;" class="section full mt-2">
             <div id="editingTableTitle" class="section-title large">Editing Table</div>
@@ -83,7 +106,8 @@
                 <button id="scanUsers" type="button" class="btn btn-info"><ion-icon name="scan"></ion-icon> Scan (NEW)</button>
             </div>
             <div class="wide-block pt-2 pb-2">
-                <button id="downloadButton" type="button" class="btn btn-success"><ion-icon name="download"></ion-icon></ion-icon> Download</button>
+                <button id="downloadButton" type="button" class="btn btn-success"><ion-icon name="download"></ion-icon> Download Map</button>
+                <button id="shareButton" type="button" class="btn btn-info"><ion-icon name="share-social"></ion-icon> Share Map</button>
             </div>
             <div class="wide-block pt-2 pb-2">
 
@@ -133,8 +157,7 @@
                                 <th scope="col">Username</th>
                                 <th scope="col">Password</th>
                                 <th scope="col">Role</th>
-                                <th scope="col">Inventory</th>
-                                <th scope="col">Actions</th>
+                                <th scope="col">Options</th>                               
                             </tr>
                         </thead>
                         <tbody id="usersList">
@@ -153,6 +176,7 @@
 
         <div id="toast-nosavedata" class="toast-box toast-top bg-danger">
             <div class="in">
+                <ion-icon name="warning"></ion-icon> 
                 <div class="text">
                     Upload save-data.txt!
                 </div>
@@ -161,6 +185,7 @@
 
         <div id="toast-approved" class="toast-box toast-top bg-success">
             <div class="in">
+                <ion-icon name="checkmark-done-circle"></ion-icon>
                 <div class="text">
                     All members approved.
                 </div>
@@ -169,14 +194,25 @@
 
         <div id="toast-denied" class="toast-box toast-top bg-warning">
             <div class="in">
+                <ion-icon name="checkmark-done-circle"></ion-icon>
                 <div class="text">
                     All members denied.
                 </div>
             </div>
         </div>
 
+        <div id="toast-noshare" class="toast-box toast-top bg-warning">
+            <div class="in">
+                <ion-icon name="warning"></ion-icon> 
+                <div class="text">
+                    Sharing isn't supported in your browser.
+                </div>
+            </div>
+        </div>
+
         <div id="toast-notsavedata" class="toast-box toast-top bg-danger">
             <div class="in">
+                <ion-icon name="warning"></ion-icon> 
                 <div class="text">
                     This is not a save-data.txt!
                 </div>
@@ -185,6 +221,7 @@
 
         <div id="toast-emptysavedata" class="toast-box toast-top bg-warning">
             <div class="in">
+                <ion-icon name="warning"></ion-icon> 
                 <div class="text">
                     Empty Savedata!
                 </div>
@@ -193,14 +230,34 @@
 
         <div id="toast-wtype" class="toast-box toast-top bg-danger">
             <div class="in">
+                <ion-icon name="warning"></ion-icon> 
                 <div class="text">
                     Wrong Format!
                 </div>
             </div>
         </div>
 
+        <div id="toast-delsaves" class="toast-box toast-top bg-success">
+            <div class="in">
+                <ion-icon name="trash-bin"></ion-icon>
+                <div class="text">
+                    All saves successfully deleted!
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-autosave" class="toast-box toast-top bg-success">
+            <div class="in">
+                <ion-icon name="file-tray-full"></ion-icon>
+                <div class="text">
+                    Autosave Loaded!
+                </div>
+            </div>
+        </div>
+
         <div id="toast-invedit" class="toast-box toast-top bg-success">
             <div class="in">
+                <ion-icon name="pencil-sharp"></ion-icon>
                 <div class="text">
                     Successfully Edited!
                 </div>
@@ -316,6 +373,73 @@
             </div>
         </div>
 
+        <div class="modal fade modalbox" id="recentsModal" data-bs-backdrop="static" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Save List</h5>
+                        <a id="mustClose" href="#" data-bs-dismiss="modal">Close</a>
+                    </div>
+                    <div id="recentBody" class="modal-body">
+                        <ion-icon name="information-circle"></ion-icon> Saves are stored on your phone and not sent to a third-party service.
+                        <ul id="recentListUl" class="listview image-listview"></ul>
+                    </div>
+                    <button id="deleteAllSaves" type="button" data-bs-toggle="modal" data-bs-target="#recentsModal" class="btn btn-danger btn-block"><ion-icon name="trash"></ion-icon>Delete All</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="offcanvas offcanvas-bottom action-sheet" tabindex="-1" id="actionSheetEditor">
+            <div class="offcanvas-header">
+                <h5 id="actionSheetTitle" class="offcanvas-title"></h5>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="action-button-list">
+                    <li>
+                        <a href="#" id="editButton" class="btn btn-list" data-bs-dismiss="offcanvas">
+                            <span>
+                                <ion-icon name="create"></ion-icon>
+                                Edit
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="editInv" class="btn btn-list" data-bs-dismiss="offcanvas">
+                            <span>
+                                <ion-icon name="create"></ion-icon>
+                                Edit Inventory
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="approveOrDeny" class="btn btn-list" data-bs-dismiss="offcanvas">
+                            <span>
+                                <ion-icon name="checkmark-done"></ion-icon>
+                                Approve
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="deleteUser" class="btn btn-list text-danger" data-bs-dismiss="offcanvas">
+                            <span>
+                                <ion-icon name="trash"></ion-icon>
+                                Delete
+                            </span>
+                        </a>
+                    </li>
+                    <li class="action-divider"></li>
+                    <li>
+                        <a id="clickClose" href="#" class="btn btn-list text-danger" data-bs-dismiss="offcanvas">
+                            <span>
+                                <ion-icon name="close-outline"></ion-icon>
+                                Close
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
         
 
     </div>
@@ -350,7 +474,7 @@
                     <img src="https://avatars.githubusercontent.com/u/81914120" alt="image" class="imaged rounded">
                 </div>
                 <div class="in">
-                    <strong>Made by kavascript</strong>
+                    <strong class="kavascriptProfile">Made by kavascript</strong>
                     <div class="text-muted">
                         With <ion-icon name="heart"></ion-icon>
                     </div>

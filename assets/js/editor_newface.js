@@ -21,6 +21,40 @@ function extractBetweenTags(str) {
     }
 };
 
+function getNowTime() {
+    const date = new Date();
+
+    let weekdayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let dateString = weekdayNames[date.getDay()] + " " 
+        + date.getHours() + ":" + ("00" + date.getMinutes()).slice(-2) + " " 
+        + date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear();
+    
+    return dateString;
+}
+
+function autosave() {
+    const data = JSON.stringify(cache);
+    localStorage.setItem('AUTOSAVE-EDITOR', data);
+    localStorage.setItem('AUTOSAVE-TIME', getNowTime());
+}
+
+function closeUploadSectionManually() {
+
+    $("#uploadSection").slideToggle();
+    $("#editingSection").slideToggle();
+    $(".appBottomMenu").hide();
+    $("#fabNewUser").show();
+    $("#editingTableTitle").html(`Editing Table (With ${cache.length} users.)`)
+
+    displayPage(currentPage);
+
+}
+
+function writeInLocalStorage(key) {
+    
+};
+
 const roles = [
     {
         name: "[TAXI]",
@@ -66,9 +100,59 @@ const roles = [
 
 $(document).ready(function() {
 
-    //$("#scanModal").modal('toggle');
-    
-   // $('#searchBar').prop("disabled", true);
+    if(localStorage.getItem('AUTOSAVE-EDITOR') === null) $("#recentsListButton").prop("disabled", true);
+    if(!navigator.share) $("#shareButton").html('<ion-icon name="share-social"></ion-icon> Share isn\'t supported').prop("disabled", true);
+
+    $("#recentsListButton").on("touchstart click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            document.getElementById('recentListUl').innerHTML = "";
+            if(localStorage.getItem('AUTOSAVE-EDITOR') !== null) {
+                document.getElementById('recentListUl').innerHTML += ` <li><a id="autosaveLoad" href="javascript:void(0)" class="item"><div class="icon-box bg-primary"><ion-icon name="save"></ion-icon></div><div class="in"> Autosave <span class="badge badge-secondary">${localStorage.getItem('AUTOSAVE-TIME')}</span></div></a></li>`;
+            }
+
+
+           
+        }, 10);
+    });
+
+    $(".btn-close").on("touchstart click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            $("#alertBoxer").hide();
+        }, 10);
+
+    });
+
+    $("#recentsModal").on("shown.bs.modal", function() {
+        $("#autosaveLoad").on("touchstart click", function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            setTimeout(() => {
+                const parsedItems = JSON.parse(localStorage.getItem('AUTOSAVE-EDITOR'));
+                cache = parsedItems;
+                $("#recentsModal").modal('hide');
+                closeUploadSectionManually();
+                toastbox('toast-autosave', 3000);
+                displayPage(currentPage);
+            }, 10);
+           
+        });
+
+
+        $("#deleteAllSaves").on("touchstart click", function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            setTimeout(() => {
+                localStorage.clear();
+                $("#recentsListButton").prop("disabled", true);
+                $("#recentsModal").modal('hide');
+                toastbox('toast-delsaves', 3000);
+            }, 10);
+        })
+    })
 
     $('#searchBar').on('keyup', function(e) {
 
@@ -137,11 +221,12 @@ $(document).ready(function() {
                 return;
             }  
             cache = parsedContent.members;
-           
+            autosave();
            
             $("#uploadSection").slideToggle();
             $("#editingSection").slideToggle();
-            //$("#searchBar").prop("disabled", false);
+            $(".appBottomMenu").hide();
+            $("#fabNewUser").show();
             $("#editingTableTitle").html(`Editing Table (With ${cache.length} users.)`)
     
             displayPage(currentPage);
@@ -172,6 +257,7 @@ $(document).ready(function() {
             });
             toastbox("toast-approved", 3000);
             displayPage(currentPage);
+            autosave();
         }, 10);   
     });
     
@@ -184,6 +270,7 @@ $(document).ready(function() {
             });
             toastbox("toast-denied", 3000);
             displayPage(currentPage);
+            autosave();
         }, 10);
     });
     
@@ -219,6 +306,35 @@ $(document).ready(function() {
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
+            
+        }, 10);
+        
+    
+    });
+
+    $("#shareButton").on("touchstart click", function(e) {
+
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+        if(navigator.share) {
+
+            const blob = new Blob([write(cache)], { type: 'text/plain' });
+
+            navigator.share({
+                title: 'Edited SaveData',
+                text: 'save-data.txt',
+                files: [
+                    new File([blob], 'save-data.txt', { type: "text/plain" })
+                ]
+            }).catch(() => {
+                toastbox('toast-noshare', 3000);
+                return;
+            })
+        } else {
+            toastbox('toast-noshare', 3000);
+            return;
+        }
             
         }, 10);
         
@@ -263,6 +379,7 @@ $(document).ready(function() {
                     $(this).removeClass("btn-danger");
                     $(this).addClass("btn-success");
                     displayPage(currentPage);
+                    autosave();
                 }, 10);
             });
 
@@ -276,6 +393,7 @@ $(document).ready(function() {
                     $(this).removeClass("btn-danger");
                     $(this).addClass("btn-success");
                     displayPage(currentPage);
+                    autosave();
                 }, 10);
             });
 
@@ -287,17 +405,9 @@ $(document).ready(function() {
     $("#scanModal").on("hidden.bs.modal", function(e) {
         $("#scanBody").html("");
     })
+ 
+});
 
-   
-
-    
-
-    
-})
-/**
- * 
- * @param {Number} page 
- */
 function displayPage(page) {
 
     const table = document.getElementById("usersList");
@@ -337,31 +447,15 @@ function displayPage(page) {
         } else role.innerHTML = extractBetweenTags(member.role);
         tr.appendChild(role);
 
-        const inventoryEditor = document.createElement('td');
-        //data-bs-toggle=\"modal\" data-bs-target=\"#editInventory\"
-        inventoryEditor.innerHTML = `<button id=\"${member.username}-${member.password}-editinv\" data-bs-toggle=\"modal\" data-bs-target=\"#editInventory\" class=\"btn btn-success btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>`;
+        const action = document.createElement('td');      
+        action.innerHTML = `<button id=\"${member.username}-${member.password}-opts\" data-bs-toggle=\"offcanvas\" data-bs-target=\"#actionSheetEditor\" class=\"btn btn-info btn-sm\"><ion-icon name=\"apps-sharp\"></ion-icon>Options</button>`;
+        tr.appendChild(action);
 
-        tr.appendChild(inventoryEditor);
-
-        const actions = document.createElement('td');      
-        if(member.status === 'approved') actions.innerHTML = `
-        <button id=\"${member.username}-${member.password}-edit\" data-bs-toggle=\"modal\" data-bs-target=\"#editInfo\" class=\"btn btn-light btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>
-        <button id=\"${member.username}-${member.password}-deny\" class=\"btn btn-danger btn-sm\"><ion-icon name="close-sharp"></ion-icon> Deny</button>
-        <button id=\"${member.username}-${member.password}-del\"  class=\"btn btn-secondary btn-sm\"><ion-icon name="trash"></ion-icon> Delete</button>
-        `
-        else  actions.innerHTML = `
-        <button id=\"${member.username}-${member.password}-edit\" data-bs-toggle=\"modal\" data-bs-target=\"#editInfo\" class=\"btn btn-light btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>
-        <button id=\"${member.username}-${member.password}-appr\" class=\"btn btn-success btn-sm\"><ion-icon name="checkmark-circle"></ion-icon> Approve</button>
-        <button id=\"${member.username}-${member.password}-del\" class=\"btn btn-secondary btn-sm\"><ion-icon name="trash"></ion-icon> Delete</button>
-        `;
-        tr.appendChild(actions);
 
         table.appendChild(tr);
     });
-     
-    //* Edit button handler
-    $('button[id$="-edit"]').on('touchstart click', function(e) {
-        
+
+    $('button[id$="-opts"]').on('touchstart click', function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
@@ -370,61 +464,91 @@ function displayPage(page) {
             
             const user = cache.find(member => member.username === username && member.password === password);
             const userIndex = cache.findIndex(member => member.username === username && member.password === password);
-        if(user) {        
-            $("#editUsername").html(`Editing ${username}'s Info`);
-            $("#usr1").val(user.username);
-            $("#pass1").val(user.password);           
-            $("#role1").val(user.role);
-            $(".userEditFinder").attr("id", `${userIndex}`);                                                        
-        }
-        }, 10);
-       
+            if(user) {
+
+                $("#actionSheetTitle").html(`Available options for : ${user.username}`);
+                if(user.status === 'pending') {
+                    $("#approveOrDeny").removeClass('text-warning').addClass('text-success');
+                    $("#approveOrDeny").html(`<span><ion-icon name="checkmark-done"></ion-icon>Approve</span>`);
+                } else {
+                    $("#approveOrDeny").removeClass('text-success').addClass('text-warning');
+                    $("#approveOrDeny").html(`<span><ion-icon name="close-circle-sharp"></ion-icon>Deny</span>`);
+                }
+
+                $("#editButton").on("touchstart click", function(ev) {
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    setTimeout(() => {
+                        $("#actionSheetIconed").removeClass('show');
+                        setTimeout(() => {
+                            $("#editInfo").modal('show');
+                        }, 2);
+                        $("#editUsername").html(`Editing ${username}'s Info`);
+                        $("#usr1").val(user.username);
+                        $("#pass1").val(user.password);           
+                        $("#role1").val(user.role);
+                        $(".userEditFinder").attr("id", `${userIndex}`);        
+                    }, 10);
+                    
+                });
+
+                $('#editInv').on('touchstart click', function(ev) {
         
-    });
-    $("#acceptEdits2").on('touchstart click', function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            const selectedIndex = Number($(".userEditFinder").attr("id"));
-            const username = $("#usr1").val().trim();
-            const password = $("#pass1").val().trim();
-            const role = $("#role1").val().trim();
-            if(username === '' || password === '' || role === '') {
-                alert('Don\'t leave any input empty!');
-                return;
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    setTimeout(() => {
+                        $("#actionSheetIconed").removeClass('show');
+                        setTimeout(() => {
+                            $("#editInventory").modal('show');
+                        }, 2);
+                        $("#invEditorUsername").html(`Editing ${username}'s Inventory`);
+                        $("#inv1").val(user.inventoryString);
+                        $(".inventoryFinder").attr("id", `${userIndex}`);                                       
+                    }, 10);
+                });
+
+                $('#deleteUser').on('touchstart click', function(ev) {
+        
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    setTimeout(() => {
+                        $("#actionSheetIconed").removeClass('show');                        
+                        cache.splice(userIndex, 1);
+                        displayPage(page);
+                        autosave();
+                    }, 10);
+                    
+                    
+                });
+
+                $('#approveOrDeny').on('touchstart click', function(e) {
+        
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    setTimeout(() => {
+                        $("#actionSheetIconed").removeClass('show');                        
+                        if(user.status === 'approved') cache[userIndex].status = 'pending'
+                        else cache[userIndex].status = 'approved'; 
+                        displayPage(page);
+                        autosave();
+                    }, 10);
+                   
+                    
+                    
+                });
+
             }
-            cache[selectedIndex].username = username;
-            cache[selectedIndex].password = password;
-            cache[selectedIndex].role = role;
-            toastbox("toast-invedit", 3000);
-            displayPage(currentPage);     
+            
         }, 10);
+
     });
+    
     $('#editInfo').on('hidden.bs.modal', function () {
         $('#usr1').val("");
         $('#role1').val("");
         $('#pass1').val("");
         $("#editUsername").html("");
         $('.inventoryFinder').removeAttr('id');
-    });
-    //* Edit inv button handler
-    $('button[id$="-editinv"]').on('touchstart click', function(e) {
-        
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            const username = $(this).attr("id").split("-")[0];
-            const password = $(this).attr("id").split("-")[1];
-            
-            const user = cache.find(member => member.username === username && member.password === password);
-            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
-        if(user) {        
-            $("#invEditorUsername").html(`Editing ${username}'s Inventory`);
-            $("#inv1").val(user.inventoryString);
-            $(".inventoryFinder").attr("id", `${userIndex}`);
-        }
-       
-        }, 10);
     });
     $("#acceptEdits").on('touchstart click', function(e) {
         e.preventDefault();
@@ -442,7 +566,28 @@ function displayPage(page) {
             $('#inv1').val("");
             $("#invEditorUsername").html("");
             $('.inventoryFinder').removeAttr('id');
-            displayPage(currentPage);      
+            displayPage(currentPage); 
+            autosave();     
+        }, 10);
+    });
+    $("#acceptEdits2").on('touchstart click', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const selectedIndex = Number($(".userEditFinder").attr("id"));
+            const username = $("#usr1").val().trim();
+            const password = $("#pass1").val().trim();
+            const role = $("#role1").val().trim();
+            if(username === '' || password === '' || role === '') {
+                alert('Don\'t leave any input empty!');
+                return;
+            }
+            cache[selectedIndex].username = username;
+            cache[selectedIndex].password = password;
+            cache[selectedIndex].role = role;
+            toastbox("toast-invedit", 3000);
+            displayPage(currentPage); 
+            autosave();    
         }, 10);
     });
     $('#editInventory').on('hidden.bs.modal', function () {
@@ -450,63 +595,7 @@ function displayPage(page) {
         $("#invEditorUsername").html("");
         $('.inventoryFinder').removeAttr('id');
     });
-    //! Delete button handler (OK)
-    $('button[id$="-del"]').on('touchstart click', function(e) {
-        
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            const username = $(this).attr("id").split("-")[0];
-            const password = $(this).attr("id").split("-")[1];
-            
-            const user = cache.find(member => member.username === username && member.password === password);
-            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
-       
-            if(user) {
-                cache.splice(userIndex, 1);
-                displayPage(page);
-            }
-        }, 10);
-        
-        
-    });
-    //! Deny button handler (OK)
-    $('button[id$="-deny"]').on('touchstart click', function(e) {
-        
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            const username = $(this).attr("id").split("-")[0];
-            const password = $(this).attr("id").split("-")[1];
-            
-            const user = cache.find(member => member.username === username && member.password === password);
-            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
-       
-            if(user) {
-               cache[userIndex].status = 'pending';
-               displayPage(page);
-            }
-        }, 10);
-        
-        
-    });
-    //* Approve button handler (OK)
-    $('button[id$="-appr"]').on('touchstart click', function(e) {
-        
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        const username = $(this).attr("id").split("-")[0];
-        const password = $(this).attr("id").split("-")[1];
-        
-        const user = cache.find(member => member.username === username && member.password === password);
-        const userIndex = cache.findIndex(member => member.username === username && member.password === password);
    
-        if(user) {
-           cache[userIndex].status = 'approved';
-           displayPage(page);
-        }
-        
-    });
 
     currentPage = page;
     updatePagination(page);
@@ -519,7 +608,7 @@ function displayPageSearch(page, arr) {
     const startIndex = (page - 1) * rowPerPage;
     const endIndex = startIndex + rowPerPage;
     const slicedData = arr.slice(startIndex, endIndex);
-    $("#editingTableTitle").html(`Editing Table (With ${cache.length} users.)`);
+    $("#editingTableTitle").html(`Found ${arr.length} user.`);
 
     table.innerHTML = "";
     slicedData.forEach((member) => {
@@ -552,31 +641,15 @@ function displayPageSearch(page, arr) {
         } else role.innerHTML = extractBetweenTags(member.role);
         tr.appendChild(role);
 
-        const inventoryEditor = document.createElement('td');
-        //data-bs-toggle=\"modal\" data-bs-target=\"#editInventory\"
-        inventoryEditor.innerHTML = `<button id=\"${member.username}-${member.password}-editinv\" data-bs-toggle=\"modal\" data-bs-target=\"#editInventory\" class=\"btn btn-success btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>`;
+        const action = document.createElement('td');      
+        action.innerHTML = `<button id=\"${member.username}-${member.password}-opts\" data-bs-toggle=\"offcanvas\" data-bs-target=\"#actionSheetEditor\" class=\"btn btn-info btn-sm\"><ion-icon name=\"apps-sharp\"></ion-icon>Options</button>`;
+        tr.appendChild(action);
 
-        tr.appendChild(inventoryEditor);
-
-        const actions = document.createElement('td');      
-        if(member.status === 'approved') actions.innerHTML = `
-        <button id=\"${member.username}-${member.password}-edit\" data-bs-toggle=\"modal\" data-bs-target=\"#editInfo\" class=\"btn btn-light btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>
-        <button id=\"${member.username}-${member.password}-deny\" class=\"btn btn-danger btn-sm\"><ion-icon name="close-sharp"></ion-icon> Deny</button>
-        <button id=\"${member.username}-${member.password}-del\"  class=\"btn btn-secondary btn-sm\"><ion-icon name="trash"></ion-icon> Delete</button>
-        `
-        else  actions.innerHTML = `
-        <button id=\"${member.username}-${member.password}-edit\" data-bs-toggle=\"modal\" data-bs-target=\"#editInfo\" class=\"btn btn-light btn-sm\"><ion-icon name="create"></ion-icon> Edit</button>
-        <button id=\"${member.username}-${member.password}-appr\" class=\"btn btn-success btn-sm\"><ion-icon name="checkmark-circle"></ion-icon> Approve</button>
-        <button id=\"${member.username}-${member.password}-del\" class=\"btn btn-secondary btn-sm\"><ion-icon name="trash"></ion-icon> Delete</button>
-        `;
-        tr.appendChild(actions);
 
         table.appendChild(tr);
     });
-     
-    //* Edit button handler
-    $('button[id$="-edit"]').on('touchstart click', function(e) {
-        
+
+    $('button[id$="-opts"]').on('touchstart click', function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
@@ -585,61 +658,93 @@ function displayPageSearch(page, arr) {
             
             const user = cache.find(member => member.username === username && member.password === password);
             const userIndex = cache.findIndex(member => member.username === username && member.password === password);
-        if(user) {        
-            $("#editUsername").html(`Editing ${username}'s Info`);
-            $("#usr1").val(user.username);
-            $("#pass1").val(user.password);           
-            $("#role1").val(user.role);
-            $(".userEditFinder").attr("id", `${userIndex}`);                                                        
-        }
-        }, 10);
-       
+            if(user) {
+
+                $("#actionSheetTitle").html(`Available options for : ${user.username}`);
+                if(user.status === 'pending') {
+                    $("#approveOrDeny").removeClass('text-warning').addClass('text-success');
+                    $("#approveOrDeny").html(`<span><ion-icon name="checkmark-done"></ion-icon>Approve</span>`);
+                } else {
+                    $("#approveOrDeny").removeClass('text-success').addClass('text-warning');
+                    $("#approveOrDeny").html(`<span><ion-icon name="close-circle-sharp"></ion-icon>Deny</span>`);
+                }
+
+                $("#editButton").on("touchstart click", function(ev) {
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    setTimeout(() => {
+                        $("#actionSheetIconed").removeClass('show');
+                        setTimeout(() => {
+                            $("#editInfo").modal('show');
+                        }, 2);
+                        $("#editUsername").html(`Editing ${username}'s Info`);
+                        $("#usr1").val(user.username);
+                        $("#pass1").val(user.password);           
+                        $("#role1").val(user.role);
+                        $(".userEditFinder").attr("id", `${userIndex}`);        
+                    }, 10);
+                    
+                });
+
+                $('#editInv').on('touchstart click', function(ev) {
         
-    });
-    $("#acceptEdits2").on('touchstart click', function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            const selectedIndex = Number($(".userEditFinder").attr("id"));
-            const username = $("#usr1").val().trim();
-            const password = $("#pass1").val().trim();
-            const role = $("#role1").val().trim();
-            if(username === '' || password === '' || role === '') {
-                alert('Don\'t leave any input empty!');
-                return;
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    setTimeout(() => {
+                        $("#actionSheetIconed").removeClass('show');
+                        setTimeout(() => {
+                            $("#editInventory").modal('show');
+                        }, 2);
+                        $("#invEditorUsername").html(`Editing ${username}'s Inventory`);
+                        $("#inv1").val(user.inventoryString);
+                        $(".inventoryFinder").attr("id", `${userIndex}`);                                       
+                    }, 10);
+                });
+
+                $('#deleteUser').on('touchstart click', function(ev) {
+        
+                    ev.preventDefault();
+                    ev.stopImmediatePropagation();
+                    setTimeout(() => {
+                        $("#actionSheetIconed").removeClass('show');                        
+                        cache.splice(userIndex, 1);
+                        displayPageSearch(currentPage, arr);
+                        autosave();
+                    }, 10);
+                    
+                    
+                });
+
+                $('#approveOrDeny').on('touchstart click', function(e) {
+        
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    setTimeout(() => {
+                        $("#actionSheetIconed").removeClass('show');                        
+                        if(user.status === 'approved') cache[userIndex].status = 'pending'
+                        else cache[userIndex].status = 'approved'; 
+                       
+                        displayPage(currentPage, arr);
+                        autosave();
+                    }, 10);
+                   
+                    
+                    
+                });
+
             }
-            cache[selectedIndex].username = username;
-            cache[selectedIndex].password = password;
-            cache[selectedIndex].role = role;
-            toastbox("toast-invedit", 3000);
-            displayPageSearch(currentPage, arr);     
+            
         }, 10);
+
     });
+    
+
     $('#editInfo').on('hidden.bs.modal', function () {
         $('#usr1').val("");
         $('#role1').val("");
         $('#pass1').val("");
         $("#editUsername").html("");
         $('.inventoryFinder').removeAttr('id');
-    });
-    //* Edit inv button handler
-    $('button[id$="-editinv"]').on('touchstart click', function(e) {
-        
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            const username = $(this).attr("id").split("-")[0];
-            const password = $(this).attr("id").split("-")[1];
-            
-            const user = cache.find(member => member.username === username && member.password === password);
-            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
-        if(user) {        
-            $("#invEditorUsername").html(`Editing ${username}'s Inventory`);
-            $("#inv1").val(user.inventoryString);
-            $(".inventoryFinder").attr("id", `${userIndex}`);
-        }
-       
-        }, 10);
     });
     $("#acceptEdits").on('touchstart click', function(e) {
         e.preventDefault();
@@ -657,7 +762,28 @@ function displayPageSearch(page, arr) {
             $('#inv1').val("");
             $("#invEditorUsername").html("");
             $('.inventoryFinder').removeAttr('id');
-            displayPageSearch(currentPage, arr);
+            displayPage(currentPage, arr);    
+            autosave();  
+        }, 10);
+    });
+    $("#acceptEdits2").on('touchstart click', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const selectedIndex = Number($(".userEditFinder").attr("id"));
+            const username = $("#usr1").val().trim();
+            const password = $("#pass1").val().trim();
+            const role = $("#role1").val().trim();
+            if(username === '' || password === '' || role === '') {
+                alert('Don\'t leave any input empty!');
+                return;
+            }
+            cache[selectedIndex].username = username;
+            cache[selectedIndex].password = password;
+            cache[selectedIndex].role = role;
+            toastbox("toast-invedit", 3000);
+            displayPage(currentPage, arr);     
+            autosave();
         }, 10);
     });
     $('#editInventory').on('hidden.bs.modal', function () {
@@ -665,66 +791,10 @@ function displayPageSearch(page, arr) {
         $("#invEditorUsername").html("");
         $('.inventoryFinder').removeAttr('id');
     });
-    //! Delete button handler (OK)
-    $('button[id$="-del"]').on('touchstart click', function(e) {
-        
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            const username = $(this).attr("id").split("-")[0];
-            const password = $(this).attr("id").split("-")[1];
-            
-            const user = cache.find(member => member.username === username && member.password === password);
-            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
-       
-            if(user) {
-                cache.splice(userIndex, 1);
-                displayPageSearch(currentPage, arr);
-            }
-        }, 10);
-        
-        
-    });
-    //! Deny button handler (OK)
-    $('button[id$="-deny"]').on('touchstart click', function(e) {
-        
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            const username = $(this).attr("id").split("-")[0];
-            const password = $(this).attr("id").split("-")[1];
-            
-            const user = cache.find(member => member.username === username && member.password === password);
-            const userIndex = cache.findIndex(member => member.username === username && member.password === password);
-       
-            if(user) {
-               cache[userIndex].status = 'pending';
-               displayPageSearch(currentPage, arr);
-            }
-        }, 10);
-        
-        
-    });
-    //* Approve button handler (OK)
-    $('button[id$="-appr"]').on('touchstart click', function(e) {
-        
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        const username = $(this).attr("id").split("-")[0];
-        const password = $(this).attr("id").split("-")[1];
-        
-        const user = cache.find(member => member.username === username && member.password === password);
-        const userIndex = cache.findIndex(member => member.username === username && member.password === password);
    
-        if(user) {
-           cache[userIndex].status = 'approved';
-           displayPageSearch(currentPage, arr);
-        }
-        
-    });
 
     currentPage = page;
-    updatePaginationSearch(page, arr);
+    updatePaginationSearch(page);
 
 }
 

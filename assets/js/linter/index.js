@@ -92,7 +92,7 @@ export function convertToHtml(text) {
   } else fnl += `<h3 style=\"color:red\">Wrong Syntax ${emote("assets/img/flush.png")}</h3><br>`;
   objs.errors.forEach((obj, IND) => {
 
-    fnl += `${IND+1}. ${obj.replace(/Line\s+(\d+)/gm, (match, p1) => { return `Line <a href=\"javascript:void(0)\" onclick=\"blinkLine(${p1})\">${p1}</a>`; })}<br>`
+    fnl += `${IND+1}. ${obj.replace(/Line\s+(\d+)/gm, (match, p1) => { return `Line <a href=\"javascript:void(0)\">${p1}</a>`; })}<br>`
   });
   if(objs.warnings.length === 0) {
     warns = `<h2 style=\"color:lightgreen\">No warnings ${emote("assets/img/doubt.png")}</h2>`
@@ -100,6 +100,27 @@ export function convertToHtml(text) {
   objs.warnings.forEach((obj, IND) => {
 
     warns += `${IND+1}. ${obj}<br>`
+  });
+  return { fnl, warns };
+}
+
+export function convertToShare(text) {
+  const objs = typeChecker(text);
+  let fnl = "";
+  let warns = "";
+  if(objs.errors.length === 0) {
+    fnl = `All Good! your code has no problems! 👍\n`
+  } else fnl += `Wrong Syntax ❌\n`;
+  objs.errors.forEach((obj, IND) => {
+
+    fnl += `${IND+1}. ${obj}\n`
+  });
+  if(objs.warnings.length === 0) {
+    warns = `No warnings 👍`
+  } else warns += `Warnings :\n`;
+  objs.warnings.forEach((obj, IND) => {
+
+    warns += `${IND+1}. ${obj}\n`
   });
   return { fnl, warns };
 }

@@ -4,6 +4,16 @@ let cache = { name: "", map: "" };
 
 $(document).ready(function() {
 
+
+    $(".btn-close").on("touchstart click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            $("#alertBoxer").hide();
+        }, 10);
+
+    });
+
     $("#uploadButton").on("touchstart click", function(e) {
     
         e.preventDefault();
@@ -38,7 +48,7 @@ $(document).ready(function() {
             cache.map = filteredItems.join("\n");
            
     
-            
+            if(navigator.share) $("#shareButton").show();
             $("#downloadButton").show();   
             $("#newOne").show();            
             $("#uploadButton").hide();
@@ -55,6 +65,35 @@ $(document).ready(function() {
     
         
     
+        
+    
+    });
+
+    $("#shareButton").on("touchstart click", function(e) {
+
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+        if(navigator.share) {
+
+            const blob = new Blob([cache.map], { type: 'text/plain' });
+
+            navigator.share({
+                title: 'Cleaned Map',
+                text: `${cache.name}.txt`,
+                files: [
+                    new File([blob], `${cache.name}.txt`, { type: "text/plain" })
+                ]
+            }).catch(() => {
+                toastbox('toast-noshare', 3000);
+                return;
+            })
+        } else {
+            toastbox('toast-noshare', 3000);
+            return;
+        }
+            
+        }, 10);
         
     
     });

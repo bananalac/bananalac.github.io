@@ -1,4 +1,4 @@
-import {convertToHtml, colorize, typeChecker} from './linter/index.js';
+import {convertToHtml, colorize, typeChecker, convertToShare} from './linter/index.js';
 import { AVAILABLE_OPTIONS as AO } from './linter/syntax/syntax_sheet.js';
 
 
@@ -18,6 +18,15 @@ const converterKeys = {
 };
 
 $(document).ready(function() {
+
+    $(".btn-close").on("touchstart click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            $("#alertBoxer").hide();
+        }, 10);
+
+    });
 
     const currentLink = window.location.href;
     const url = new URL(currentLink);
@@ -104,6 +113,7 @@ $(document).ready(function() {
         $("#newOne").show();
         $(".typers").prop("disabled", true);
         $("#findMistakesButton").hide();
+        if(navigator.share) $("#shareButton").show();
        
        
     
@@ -116,6 +126,19 @@ $(document).ready(function() {
        
        
     });
+
+    $("#shareButton").on("touchstart click", function(e) {
+        const code = $("#codebox").val().replace(/}(?=[^\n])/g, '}\n')
+        const errs = convertToShare(code);
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            navigator.share({
+                title: 'Lint Results',
+                text: `Code: ${code}\n${errs.fnl}\n${errs.warns}`
+            })
+        }, 10);
+    })
 
     
         

@@ -21,6 +21,17 @@ let cache = { map: [], filename: "" };
 
 $(document).ready(function() {
 
+    
+
+    $(".btn-close").on("touchstart click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            $("#alertBoxer").hide();
+        }, 10);
+
+    });
+
     $("#uploadButton").on("touchstart click", function(e) {
     
         e.preventDefault();
@@ -79,7 +90,7 @@ $(document).ready(function() {
         e.stopImmediatePropagation();
         let thisMustBeCleaned = [];
         setTimeout(() => {
-            
+
             if($("#topleftXZ").val().trim() === '' || $("#bottomrightXZ").val().trim() === '') {
                 toastbox("toast-xz", 3000);
                 return;
@@ -94,31 +105,70 @@ $(document).ready(function() {
             const y1 = Number($("#topleftXZ").val().trim().split(",")[1]);
             const x2 = Number($("#bottomrightXZ").val().trim().split(",")[0]);
             const y2 = Number($("#bottomrightXZ").val().trim().split(",")[1]);
-    
-    
+
             cache.map.forEach((line, lineIndex) => {
-                  if(lineIndex > 14 && line.trim() !== '' && !line.trim().startsWith('Spawn_Point_Editor')) {
-                    
-                    const itemX = Number(line.split(":")[1].split(",")[0]);
-                    const itemY = Number(line.split(":")[1].split(",")[2]);
-    
-                    if(isPointInRectangle(x1, y1, x2, y2, itemX, itemY) === false) {
-                        thisMustBeCleaned.push(lineIndex);
-                    }
-    
+                if(lineIndex > 14 && line.trim() !== '' && !line.trim().startsWith('Spawn_Point_Editor')) {
+                  
+                  const itemX = Number(line.split(":")[1].split(",")[0]);
+                  const itemY = Number(line.split(":")[1].split(",")[2]);
+  
+                  if(isPointInRectangle(x1, y1, x2, y2, itemX, itemY) === false) {
+                      thisMustBeCleaned.push(lineIndex);
                   }
-            });
-    
-            const cleanedOne = cache.map.filter((_, lineIndex) => !thisMustBeCleaned.includes(lineIndex));
-            cache.map = cleanedOne;
-    
+  
+                }
+          });
+
+            const isInverse = $("#toggleInverse").is(":checked");
+
+            if(isInverse === true) {
+
+                const cleanedOne = cache.map.filter((_, lineIndex) => thisMustBeCleaned.includes(lineIndex));
+                cache.map = cleanedOne;
+
+            } else {
+
+                const cleanedOne = cache.map.filter((_, lineIndex) => !thisMustBeCleaned.includes(lineIndex));
+                cache.map = cleanedOne;
+
+            }
+               
+            if(navigator.share) $("#shareButton").show();
             $("#proceed").hide();
             $("#coordinatesSection").slideToggle();
             $("#resultsSection").slideToggle();
             
     
-    
         }, 10);
+    });
+
+    $("#shareButton").on("touchstart click", function(e) {
+
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+        if(navigator.share) {
+
+            const blob = new Blob([cache.map.join("\n")], { type: 'text/plain' });
+
+            navigator.share({
+                title: 'Cleaned Map',
+                text: `cut-${cache.filename}.txt`,
+                files: [
+                    new File([blob], `cut-${cache.filename}.txt`, { type: "text/plain" })
+                ]
+            }).catch(() => {
+                toastbox('toast-noshare', 3000);
+                return;
+            })
+        } else {
+            toastbox('toast-noshare', 3000);
+            return;
+        }
+            
+        }, 10);
+        
+    
     });
 
     $("#downloadButton").on("touchstart click", function(e) {

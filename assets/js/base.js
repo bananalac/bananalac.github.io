@@ -935,7 +935,11 @@ else{
 }
 //-----------------------------------------------------------------------
 
-
+document.querySelectorAll(".kavascriptProfile").forEach(function (el) {
+    el.addEventListener("click", function () {
+        window.location.href = '/profile?name=kaveh';
+    })
+})
 
 //-----------------------------------------------------------------------
 // Test Mode

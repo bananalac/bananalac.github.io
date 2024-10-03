@@ -51,6 +51,13 @@
 
 
         <div id="cropperSection" class="section full mt-2">
+            <div id="alertBoxer" class="wide-block pt-2 pb-2">
+                <div class="alert alert-success mb-2 alert-dismissible fade show" role="alert">
+                    <h4 class="alert-title"><ion-icon name="shield-checkmark"></ion-icon> Your files are safe!</h4>
+                    The files are processed in your system and not sent anywhere. <a href="/blog?name=safety">[Learn More]</a>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
             <div class="section-title large">Map Crop</div>
             <div class="wide-block pt-2 pb-2">
                 <div class="custom-file-upload" id="fileUpload1">
@@ -94,6 +101,25 @@
                     </div>
                 </div>
             </div>
+            <ul class="listview image-listview">
+                <li>
+                    <div class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="cut"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>
+                                Delete the selected part of the map
+                                <div class="text-muted">Your selected area will be deleted from the map</div>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="toggleInverse" />
+                                <label class="form-check-label" for="toggleInverse"></label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
             <div class="wide-block pt-2 pb-2">
                 <button id="proceed" type="button" class="btn btn-success btn-block"><ion-icon name="crop"></ion-icon> Crop</button>
             </div>
@@ -108,11 +134,15 @@
             <div class="wide-block pt-2 pb-2">
                 <button id="copyToClipboard" type="button" class="btn btn-success btn-block"><ion-icon name="copy-outline"></ion-icon> Copy</button>
             </div>
+            <div id="shareButton" class="wide-block pt-2 pb-2">
+                <button type="button" class="btn btn-info"><ion-icon name="share-social"></ion-icon> Share Map</button>
+            </div>
 
         </div>
 
         <div id="toast-nomap" class="toast-box toast-top bg-danger">
             <div class="in">
+                <ion-icon name="warning"></ion-icon>
                 <div class="text">
                     Upload a map!
                 </div>
@@ -121,6 +151,7 @@
 
         <div id="toast-wtype" class="toast-box toast-top bg-danger">
             <div class="in">
+                <ion-icon name="warning"></ion-icon>
                 <div class="text">
                     Wrong Format!
                 </div>
@@ -129,6 +160,7 @@
 
         <div id="toast-copied" class="toast-box toast-top bg-success">
             <div class="in">
+                <ion-icon name="copy"></ion-icon>
                 <div class="text">
                    Copied to clipboard!
                 </div>
@@ -137,6 +169,7 @@
 
         <div id="toast-xz" class="toast-box toast-top bg-danger">
             <div class="in">
+                <ion-icon name="keypad"></ion-icon>
                 <div class="text">
                     Provide x,z!
                 </div>
@@ -152,6 +185,15 @@
                             <a href="javascript:void(0)" class="btn btn-text-secondary" data-bs-dismiss="modal">CLOSE</a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-noshare" class="toast-box toast-top bg-warning">
+            <div class="in">
+                <ion-icon name="warning"></ion-icon> 
+                <div class="text">
+                    Sharing isn't supported in your browser.
                 </div>
             </div>
         </div>
@@ -190,7 +232,7 @@
                     <img src="https://avatars.githubusercontent.com/u/81914120" alt="image" class="imaged rounded">
                 </div>
                 <div class="in">
-                    <strong>Made by kavascript</strong>
+                    <strong class="kavascriptProfile">Made by kavascript</strong>
                     <div class="text-muted">
                         With <ion-icon name="heart"></ion-icon>
                     </div>
