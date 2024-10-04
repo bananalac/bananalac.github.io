@@ -47,11 +47,6 @@ export const blogItems = {
             {
                 el: 'p',
                 vl: 'Yes, this project code is <b>open-source</b> under the <a href="https://github.com/bananalac/bananalac.github.io?tab=MPL-2.0-1-ov-file">MPL-2.0</a> license. You can use the code used in the site. <u>The website template is not open source</u> and I have purchased the license to use it, so personal use, editing, copying It is <u>forbidden</u>.Also, you do not have the right to use the logo and style of this site (BananaLAC, Los Angeles Crimes Banana) without the permission of the owner of the work.'
-            },
-           
-            {
-                el: 'h2',
-                vl: 'Is a website unable to send our files? This may be easier on the website!'
             }
         ]
     }

@@ -1,4 +1,4 @@
-import { parse, write, inventoryWrite, inventoryParse } from './user-parser/index.js';
+import { parse, write, inventoryWrite, inventoryParse } from '../user-parser/index.js';
 
 let rowPerPage = 100;
 let currentPage = 1;
@@ -22,15 +22,11 @@ function extractBetweenTags(str) {
 };
 
 function getNowTime() {
-    const date = new Date();
-
-    let weekdayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let dateString = weekdayNames[date.getDay()] + " " 
-        + date.getHours() + ":" + ("00" + date.getMinutes()).slice(-2) + " " 
-        + date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear();
+   
+    const today = new JDate;
+    today.format('dddd DD MMMM YYYY');
     
-    return dateString;
+    return today.toString();
 }
 
 function autosave() {
@@ -45,7 +41,7 @@ function closeUploadSectionManually() {
     $("#editingSection").slideToggle();
     $(".appBottomMenu").hide();
     $("#fabNewUser").show();
-    $("#editingTableTitle").html(`Editing Table (With ${cache.length} users.)`)
+    $("#editingTableTitle").html(`جدول ویرایش (با ${cache.length} نفر)`)
 
     displayPage(currentPage);
 
@@ -102,7 +98,7 @@ $(document).ready(function() {
 
 
     if(localStorage.getItem('AUTOSAVE-EDITOR') === null) $("#recentsListButton").prop("disabled", true);
-    if(!navigator.share) $("#shareButton").html('<ion-icon name="share-social"></ion-icon> Share isn\'t supported').prop("disabled", true);
+    if(!navigator.share) $("#shareButton").html('<ion-icon name="share-social"></ion-icon> اشتراک گذاری پشتیبانی نمی شود').prop("disabled", true);
 
     $("#recentsListButton").on("touchstart click", function(e) {
         e.preventDefault();
@@ -110,7 +106,7 @@ $(document).ready(function() {
         setTimeout(() => {
             document.getElementById('recentListUl').innerHTML = "";
             if(localStorage.getItem('AUTOSAVE-EDITOR') !== null) {
-                document.getElementById('recentListUl').innerHTML += ` <li><a id="autosaveLoad" href="javascript:void(0)" class="item"><div class="icon-box bg-primary"><ion-icon name="save"></ion-icon></div><div class="in"> Autosave <span class="badge badge-secondary">${localStorage.getItem('AUTOSAVE-TIME')}</span></div></a></li>`;
+                document.getElementById('recentListUl').innerHTML += ` <li><a id="autosaveLoad" href="javascript:void(0)" class="item"><div class="icon-box bg-primary"><ion-icon name="save"></ion-icon></div><div class="in"> ذخیره خودکار <span class="badge badge-secondary">${localStorage.getItem('AUTOSAVE-TIME')}</span></div></a></li>`;
             }
 
 
@@ -118,14 +114,14 @@ $(document).ready(function() {
         }, 10);
     });
 
-    $(".btn-close").on("touchstart click", function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            $("#alertBoxer").hide();
-        }, 10);
+    // $(".btn-close").on("touchstart click", function(e) {
+    //     e.preventDefault();
+    //     e.stopImmediatePropagation();
+    //     setTimeout(() => {
+    //         $("#alertBoxer").hide();
+    //     }, 10);
 
-    });
+    // });
 
     $("#recentsModal").on("shown.bs.modal", function() {
         $("#autosaveLoad").on("touchstart click", function(e) {
@@ -228,7 +224,7 @@ $(document).ready(function() {
             $("#editingSection").slideToggle();
             $(".appBottomMenu").hide();
             $("#fabNewUser").show();
-            $("#editingTableTitle").html(`Editing Table (With ${cache.length} users.)`)
+            $("#editingTableTitle").html(`جدول ویرایش (با ${cache.length} کاربر)`)
     
             displayPage(currentPage);
                 
@@ -323,7 +319,7 @@ $(document).ready(function() {
             const blob = new Blob([write(cache)], { type: 'text/plain' });
 
             navigator.share({
-                title: 'Edited SaveData',
+                title: 'سیو-دیتای ویرایش شده',
                 text: 'save-data.txt',
                 files: [
                     new File([blob], 'save-data.txt', { type: "text/plain" })
@@ -351,21 +347,21 @@ $(document).ready(function() {
 
             if(builderUsers.length > 0) {
                 const p = document.createElement('p');
-                p.innerHTML = `<span class=\"badge badge-warning\">[BUILDER]</span> Detected!<br>This role gives users access to map editing and is a very sensitive role, so it is recommended to remove this role from the ${builderUsers.length} users who have it.`;
+                p.innerHTML = `<span class=\"badge badge-warning\">[بیلدر]</span> تشخیص داده شد!<br>این رول به کاربران دسترسی ویرایش مپ میدهد،لذا میتواند برای مپ شما آسیب پذیری ایجاد کند.از همه ${builderUsers.length} نفری که آنرا دارند،رول را حذف کنید.`;
                 scanBody.appendChild(p);
-                scanBody.innerHTML += `<button id=\"removeAllBuilders\" type=\"button\" class=\"btn btn-danger btn-block\"><ion-icon name="close"></ion-icon> Remove</button>`;
+                scanBody.innerHTML += `<button id=\"removeAllBuilders\" type=\"button\" class=\"btn btn-danger btn-block\"><ion-icon name="close"></ion-icon> حذف</button>`;
             }
 
             if(adminUsers.length > 0) {
                 const p = document.createElement('p');
-                p.innerHTML = `<span class=\"badge badge-danger\">[ADMIN]</span> Detected!<br>Those who have this role have the ability to fire and ban people and generally have admin access, so it is recommended to remove this role from the ${adminUsers.length} people who have it.`;
+                p.innerHTML = `<span class=\"badge badge-danger\">[ادمین]</span> تشخیص داده شد!<br>افرادی که این رول را دارند میتوانند افراد را کیک یا بن کرده ویا از امکانات مختص ادمین که خودتان در مپ تهیه کرده اید استفاده کنند.توصیه میشود از همه ${adminUsers.length} که آنرا دارند،رول را حذف کنید.`;
                 scanBody.appendChild(p);
-                scanBody.innerHTML += `<button id=\"removeAllAdmins\" type=\"button\" class=\"btn btn-danger btn-block\"><ion-icon name="close"></ion-icon> Remove</button>`;
+                scanBody.innerHTML += `<button id=\"removeAllAdmins\" type=\"button\" class=\"btn btn-danger btn-block\"><ion-icon name="close"></ion-icon> حذف</button>`;
             }
 
             if(scanBody.innerHTML === '') {
                 const p = document.createElement('p');
-                p.innerHTML = `Excellent!<br>No sensitive items were found`;
+                p.innerHTML = `عالی!<br>هیچ مورد حساسی یافت نشد!`;
                 scanBody.appendChild(p);
             }
 
@@ -414,7 +410,7 @@ function displayPage(page) {
     const startIndex = (page - 1) * rowPerPage;
     const endIndex = startIndex + rowPerPage;
     const slicedData = cache.slice(startIndex, endIndex);
-    $("#editingTableTitle").html(`Editing Table (With ${cache.length} users.)`);
+    $("#editingTableTitle").html(`جدول ویرایش (با ${cache.length} کاربر)`);
 
     table.innerHTML = "";
     slicedData.forEach((member) => {
@@ -424,8 +420,8 @@ function displayPage(page) {
 
         const status = document.createElement('td');
         const converterItem = { 
-            approved: `<ion-icon name=\"checkmark-done-outline\"></ion-icon> Approved`, 
-            pending: `<ion-icon name=\"time-outline\"></ion-icon> Pending` 
+            approved: `<ion-icon name=\"checkmark-done-outline\"></ion-icon> تایید شده`, 
+            pending: `<ion-icon name=\"time-outline\"></ion-icon> در انتظار` 
         };
         
         status.innerHTML = converterItem[member.status];
@@ -452,26 +448,26 @@ function displayPage(page) {
         <div class="dropdown">
         <button id=\"${member.username}-${member.password}-opts\" type="button" data-bs-toggle="dropdown" class=\"btn btn-info dropdown-toggle\">
         <ion-icon name=\"apps-sharp\"></ion-icon>
-        Options
+        تنظیمات
         </button>
           <div class="dropdown-menu">
-                        <h6 class="dropdown-header">${member.username} Options :</h6> 
+                        <h6 class="dropdown-header">${member.username} تنظیمات :</h6> 
                         <a id=\"${member.username}-${member.password}-edit-optionHandler\" class="dropdown-item" href="#">
                             <ion-icon name="create"></ion-icon>
-                            EDIT
+                            ویرایش اطلاعات
                         </a>
                         <a id=\"${member.username}-${member.password}-inv-optionHandler\" class="dropdown-item" href="#">
                             <ion-icon name="create"></ion-icon>
-                            Inventory
+                            ویرایش آیونتوری
                         </a>
                         <a id=\"${member.username}-${member.password}-sts-optionHandler\" class="dropdown-item" href="#">
                             <ion-icon name="invert-mode-outline"></ion-icon>
-                            Approve/Deny
+                            قبول/رد
                         </a>
                         <div class="dropdown-divider"></div>
                         <a id=\"${member.username}-${member.password}-delete-optionHandler\" class="dropdown-item text-danger" href="#">
                             <ion-icon class="text-danger" name="trash"></ion-icon>
-                            Delete
+                            حذف
                         </a>
                     </div>
         </div>
@@ -498,7 +494,7 @@ function displayPage(page) {
 
                 if(type === 'edit') {
                     $("#editInfo").modal('show');
-                    $("#editUsername").html(`Editing ${cache[userIndex].username}'s Info`);
+                    $("#editUsername").html(`ویرایش اطلاعات ${cache[userIndex].username}`);
                     $("#usr1").val(cache[userIndex].username);
                     $("#pass1").val(cache[userIndex].password);           
                     $("#role1").val(cache[userIndex].role);
@@ -506,7 +502,7 @@ function displayPage(page) {
                 }
                 else if(type === 'inv') {
                     $("#editInventory").modal('show');
-                    $("#invEditorUsername").html(`Editing ${username}'s Inventory`);
+                    $("#invEditorUsername").html(`ویرایش آیونتوری ${cache[userIndex].username}`);
                     $("#inv1").val(user.inventoryString);
                     $(".inventoryFinder").attr("id", `${userIndex}`);    
                 }
@@ -607,8 +603,8 @@ function displayPageSearch(page, arr) {
 
         const status = document.createElement('td');
         const converterItem = { 
-            approved: `<ion-icon name=\"checkmark-done-outline\"></ion-icon> Approved`, 
-            pending: `<ion-icon name=\"time-outline\"></ion-icon> Pending` 
+            approved: `<ion-icon name=\"checkmark-done-outline\"></ion-icon> تائید شده`, 
+            pending: `<ion-icon name=\"time-outline\"></ion-icon> در انتظار` 
         };
         
         status.innerHTML = converterItem[member.status];
@@ -635,26 +631,26 @@ function displayPageSearch(page, arr) {
         <div class="dropdown">
         <button id=\"${member.username}-${member.password}-opts\" type="button" data-bs-toggle="dropdown" class=\"btn btn-info dropdown-toggle\">
         <ion-icon name=\"apps-sharp\"></ion-icon>
-        Options
+        تنظیمات
         </button>
           <div class="dropdown-menu">
                         <h6 class="dropdown-header">${member.username} Options :</h6> 
                         <a id=\"${member.username}-${member.password}-edit-optionHandler\" class="dropdown-item" href="#">
                             <ion-icon name="create"></ion-icon>
-                            EDIT
+                            ویرایش اطلاعات
                         </a>
                         <a id=\"${member.username}-${member.password}-inv-optionHandler\" class="dropdown-item" href="#">
                             <ion-icon name="create"></ion-icon>
-                            Inventory
+                            ویرایش آیونتوری
                         </a>
                         <a id=\"${member.username}-${member.password}-sts-optionHandler\" class="dropdown-item" href="#">
                             <ion-icon name="invert-mode-outline"></ion-icon>
-                            Approve/Deny
+                            قبول/رد
                         </a>
                         <div class="dropdown-divider"></div>
                         <a id=\"${member.username}-${member.password}-delete-optionHandler\" class="dropdown-item text-danger" href="#">
                             <ion-icon class="text-danger" name="trash"></ion-icon>
-                            Delete
+                            حذف
                         </a>
                     </div>
         </div>
@@ -681,7 +677,7 @@ function displayPageSearch(page, arr) {
 
                 if(type === 'edit') {
                     $("#editInfo").modal('show');
-                    $("#editUsername").html(`Editing ${cache[userIndex].username}'s Info`);
+                    $("#editUsername").html(`ویرایش اطلاعات ${cache[userIndex].username}`);
                     $("#usr1").val(cache[userIndex].username);
                     $("#pass1").val(cache[userIndex].password);           
                     $("#role1").val(cache[userIndex].role);
@@ -689,7 +685,7 @@ function displayPageSearch(page, arr) {
                 }
                 else if(type === 'inv') {
                     $("#editInventory").modal('show');
-                    $("#invEditorUsername").html(`Editing ${username}'s Inventory`);
+                    $("#invEditorUsername").html(`ویرایش آیونتوری ${cache[userIndex].username}`);
                     $("#inv1").val(user.inventoryString);
                     $(".inventoryFinder").attr("id", `${userIndex}`);    
                 }
