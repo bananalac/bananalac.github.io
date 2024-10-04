@@ -96,6 +96,13 @@ const roles = [
 
 $(document).ready(function() {
 
+    const degrees = ['0', '45', '90', '130', '180', '225', '270', '315', '360'];
+    setInterval(() => {
+        const rnd = degrees[Math.floor(Math.random() * degrees.length)];
+        $(".adHue img").css("filter", `hue-rotate(${rnd}deg)`);
+    }, 1000);
+    
+
 
     if(localStorage.getItem('AUTOSAVE-EDITOR') === null) $("#recentsListButton").prop("disabled", true);
     if(!navigator.share) $("#shareButton").html('<ion-icon name="share-social"></ion-icon> اشتراک گذاری پشتیبانی نمی شود').prop("disabled", true);
@@ -114,14 +121,14 @@ $(document).ready(function() {
         }, 10);
     });
 
-    // $(".btn-close").on("touchstart click", function(e) {
-    //     e.preventDefault();
-    //     e.stopImmediatePropagation();
-    //     setTimeout(() => {
-    //         $("#alertBoxer").hide();
-    //     }, 10);
+    $(".btn-close").on("touchstart click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            $("#alertBoxer").hide();
+        }, 10);
 
-    // });
+    });
 
     $("#recentsModal").on("shown.bs.modal", function() {
         $("#autosaveLoad").on("touchstart click", function(e) {
