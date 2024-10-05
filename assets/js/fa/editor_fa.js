@@ -90,13 +90,21 @@ $(document).ready(function() {
         const rnd = degrees[Math.floor(Math.random() * degrees.length)];
         $(".adHue img").css("filter", `hue-rotate(${rnd}deg)`);
     }, 1000);
-    
-
-
-    if(localStorage.getItem('AUTOSAVE-EDITOR') === null) $("#autosaveButton").prop("disabled", true);
-    if(!navigator.share) $("#shareButton").html('<ion-icon name="share-social"></ion-icon> اشتراک گذاری پشتیبانی نمی شود').prop("disabled", true);
 
     $(".sponsorLink").on("touchend click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            let a = document.createElement('a');
+            a.href = 'rubika://l.rubika.ir/LAC_HOST';
+            a.target = '_blank';
+            $(this).off("touchend click");
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }, 10);
+    });
+    $(".sponsorLink2").on("touchend click", function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
@@ -106,8 +114,15 @@ $(document).ready(function() {
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-        }, 10)
-    })
+        }, 10);
+    });
+    
+
+
+    if(localStorage.getItem('AUTOSAVE-EDITOR') === null) $("#autosaveButton").prop("disabled", true);
+    if(!navigator.share) $("#shareButton").html('<ion-icon name="share-social"></ion-icon> اشتراک گذاری پشتیبانی نمی شود').prop("disabled", true);
+
+    
 
     $("#autosaveButton").on("touchend click", function(e) {
         e.preventDefault();
@@ -206,7 +221,7 @@ $(document).ready(function() {
             $("#editingSection").slideToggle();
             $(".appBottomMenu").hide();
             $("#fabNewUser").show();
-            $("#editingTableTitle").html(`جدول ویرایش (با ${cache.length} کاربر)`)
+            $("#editingTableTitle").html(`جدول ویرایش (با ${cache.length} کاربر)`);
     
             displayPage(currentPage);
                 

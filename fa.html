@@ -65,13 +65,13 @@
     <!-- App Capsule -->
     <div id="appCapsule">
 
-        <div class="adbox adbox-300-50 fixed adHue">
+        <div class="adbox adbox-300-50 fixed adHue sponsorLink">
             <img src="assets/img/sample/ads/small_ad.png" alt="image">
         </div>
 
         <div class="header-large-title">
-            <h1 class="title">بـنـانـا ال ای سی 🍌</h1>
-            <h4 class="subtitle">ابزار بازی لس آنجلس کرایمز : آنلاین</h4>
+            <h1 class="title user-select-none">بـنـانـا ال ای سی 🍌</h1>
+            <h4 class="subtitle user-select-none">ابزار بازی لس آنجلس کرایمز : آنلاین</h4>
         </div>
 
         <div class="section full mt-3 mb-3">
@@ -230,7 +230,7 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <li class="sponsorLink2">
                     <a href="javascript:void(0)" class="item">
                         <div class="icon-box bg-primary">
                             <ion-icon name="accessibility"></ion-icon>
@@ -257,7 +257,57 @@
     <script src="assets/js/plugins/progressbar-js/progressbar.min.js"></script>
     <!-- Base Js File -->
     <script src="assets/js/base.js"></script>
+    <!-- JQuery -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script>
 
+$(".sponsorLink").on("touchend click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            let a = document.createElement('a');
+            a.href = 'rubika://l.rubika.ir/LAC_HOST';
+            a.target = '_blank';
+            $(this).off("touchend click");
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }, 10);
+    });
+$(".sponsorLink2").on("touchend click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            let a = document.createElement('a');
+            a.href = 'rubika://l.rubika.ir/LAC_HOST';
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }, 10);
+    });
+
+
+        let mozMikhay = 0
+        const tit1 = document.getElementsByClassName('title')[0];
+        tit1.addEventListener("click", function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            if(mozMikhay === 5) {
+                tit1.innerHTML = `موز میخای؟`;
+                mozMikhay = 0;
+                return;
+            }
+            mozMikhay++;
+        });
+        const tit = document.getElementsByClassName('subtitle')[0];
+        tit.addEventListener("click", function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            const randomTitles = ["آنلاین", "آیلاند", "آنلاید"];
+            tit.innerHTML = `ابزار بازی لس آنجلس کرایمز : ${randomTitles[Math.floor(Math.random() * randomTitles.length)]}`;
+        });
+    </script>
 
 </body>
 

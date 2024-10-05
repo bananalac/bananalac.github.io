@@ -10,6 +10,32 @@ $(document).ready(function() {
         $(".adHue img").css("filter", `hue-rotate(${rnd}deg)`);
     }, 1000);
 
+    $(".sponsorLink").on("touchend click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            let a = document.createElement('a');
+            a.href = 'rubika://l.rubika.ir/LAC_HOST';
+            a.target = '_blank';
+            $(this).off("touchend click");
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }, 10);
+    });
+    $(".sponsorLink2").on("touchend click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            let a = document.createElement('a');
+            a.href = 'rubika://l.rubika.ir/LAC_HOST';
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }, 10);
+    });
+
 
     $(".btn-close").on("touchstart click", function(e) {
         e.preventDefault();

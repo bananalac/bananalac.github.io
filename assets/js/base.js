@@ -934,18 +934,6 @@ else{
     })
 }
 //-----------------------------------------------------------------------
-//link to dev profile
-document.querySelectorAll(".kavascriptProfile").forEach(function (el) {
-    el.addEventListener("click", function () {
-        const pageHTML = document.querySelector("html");
-        if(pageHTML.dir === 'rtl') {
-            window.location.href = '/profile-fa?name=kaveh';
-        } else {
-            window.location.href = '/profile?name=kaveh';
-        }    
-    })
-});
-//-----------------------------------------------------------------------
 // Test Mode
 function testMode() {
     var colorDanger = "color: #EC4433; font-weight:bold;"

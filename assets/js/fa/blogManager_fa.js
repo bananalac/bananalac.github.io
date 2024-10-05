@@ -27,13 +27,6 @@ $(document).ready(function() {
                         نویسنده : ${postInfo.writer.name}
                     </a></div>`);
 
-        $("#writerInfo").on("touchstart click", function(e) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            setTimeout(() => {
-                window.location.href = postInfo.writer.clicker;
-            }, 10);
-        });
 
         postInfo.body.forEach((element) => {
             const el = document.createElement(element.el);

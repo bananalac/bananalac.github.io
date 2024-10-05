@@ -26,13 +26,6 @@ $(document).ready(function() {
                         Written by : ${postInfo.writer.name}
                     </a>${postInfo.date}</div>`);
 
-        $("#writerInfo").on("touchstart click", function(e) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            setTimeout(() => {
-                window.location.href = postInfo.writer.clicker;
-            }, 10);
-        });
 
         postInfo.body.forEach((element) => {
             const el = document.createElement(element.el);

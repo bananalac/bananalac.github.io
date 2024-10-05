@@ -57,7 +57,6 @@ export const blogItems = {
         image: "assets/img/posts/blogSafety.png",
         date: "13 مهر 1403" ,
         writer: {
-            clicker: '/profile-fa?name=kaveh',
             name: "Kavascript",
             image: "assets/img/kaveh.jpg"            
         },
