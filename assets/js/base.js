@@ -37,7 +37,7 @@ const Mobilekit = {
     //-------------------------------------------------------------------
     // Test Mode
     Test: {
-        enable: true, // Enable or disable test mode
+        enable: false, // Enable or disable test mode
         word: "testmode", // The word that needs to be typed to activate test mode
         alert: true, // Enable or disable alert when test mode is activated
         alertMessage: "Test mode has been activated. Look at the developer console!" // Alert message

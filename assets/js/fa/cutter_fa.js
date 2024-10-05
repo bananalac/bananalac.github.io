@@ -53,6 +53,9 @@ $(document).ready(function() {
         }, 10);
     });
 
+    if(!navigator.share) $("#shareButton").hide();
+
+
     $(".btn-close").on("touchstart click", function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
