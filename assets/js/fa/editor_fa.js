@@ -96,6 +96,19 @@ $(document).ready(function() {
     if(localStorage.getItem('AUTOSAVE-EDITOR') === null) $("#autosaveButton").prop("disabled", true);
     if(!navigator.share) $("#shareButton").html('<ion-icon name="share-social"></ion-icon> اشتراک گذاری پشتیبانی نمی شود').prop("disabled", true);
 
+    $(".sponsorLink").on("touchend click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            let a = document.createElement('a');
+            a.href = 'rubika://l.rubika.ir/LAC_HOST';
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }, 10)
+    })
+
     $("#autosaveButton").on("touchstart click", function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
