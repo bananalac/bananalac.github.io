@@ -5,18 +5,11 @@ let currentPage = 1;
 let cache;
 
 function extractBetweenTags(str) {
-    // Find the index of the '>' character
-    const startIndex = str.indexOf('>') + 1; // Adding 1 to start after '>'
-    
-    // Find the index of the '<' character
+    const startIndex = str.indexOf('>') + 1; 
     const endIndex = str.indexOf('<', startIndex); // Start searching after '>'
-    
-    // Check if both indices are valid
     if (startIndex > 0 && endIndex > startIndex) {
-        // Extract and return the substring
         return str.substring(startIndex, endIndex);
     } else {
-        // Return an empty string if no valid substring is found
         return str;
     }
 };
@@ -25,14 +18,14 @@ function getNowTime() {
    
     const today = new JDate;
     today.format('dddd DD MMMM YYYY');
-    
+    console.log(today)
     return today.toString();
 }
 
 function autosave() {
     const data = JSON.stringify(cache);
     localStorage.setItem('AUTOSAVE-EDITOR', data);
-    localStorage.setItem('AUTOSAVE-TIME', getNowTime());
+   // localStorage.setItem('AUTOSAVE-TIME', getNowTime());
 }
 
 function closeUploadSectionManually() {
@@ -46,10 +39,6 @@ function closeUploadSectionManually() {
     displayPage(currentPage);
 
 }
-
-function writeInLocalStorage(key) {
-    
-};
 
 const roles = [
     {
@@ -104,20 +93,20 @@ $(document).ready(function() {
     
 
 
-    if(localStorage.getItem('AUTOSAVE-EDITOR') === null) $("#recentsListButton").prop("disabled", true);
+    if(localStorage.getItem('AUTOSAVE-EDITOR') === null) $("#autosaveButton").prop("disabled", true);
     if(!navigator.share) $("#shareButton").html('<ion-icon name="share-social"></ion-icon> اشتراک گذاری پشتیبانی نمی شود').prop("disabled", true);
 
-    $("#recentsListButton").on("touchstart click", function(e) {
+    $("#autosaveButton").on("touchstart click", function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
-            document.getElementById('recentListUl').innerHTML = "";
             if(localStorage.getItem('AUTOSAVE-EDITOR') !== null) {
-                document.getElementById('recentListUl').innerHTML += ` <li><a id="autosaveLoad" href="javascript:void(0)" class="item"><div class="icon-box bg-primary"><ion-icon name="save"></ion-icon></div><div class="in"> ذخیره خودکار <span class="badge badge-secondary">${localStorage.getItem('AUTOSAVE-TIME')}</span></div></a></li>`;
+                const parsedItems = JSON.parse(localStorage.getItem('AUTOSAVE-EDITOR'));
+                cache = parsedItems;
+                closeUploadSectionManually();
+                toastbox('toast-autosave', 3000);
+                displayPage(currentPage);
             }
-
-
-           
         }, 10);
     });
 
@@ -130,33 +119,6 @@ $(document).ready(function() {
 
     });
 
-    $("#recentsModal").on("shown.bs.modal", function() {
-        $("#autosaveLoad").on("touchstart click", function(e) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            setTimeout(() => {
-                const parsedItems = JSON.parse(localStorage.getItem('AUTOSAVE-EDITOR'));
-                cache = parsedItems;
-                $("#recentsModal").modal('hide');
-                closeUploadSectionManually();
-                toastbox('toast-autosave', 3000);
-                displayPage(currentPage);
-            }, 10);
-           
-        });
-
-
-        $("#deleteAllSaves").on("touchstart click", function(e) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            setTimeout(() => {
-                localStorage.clear();
-                $("#recentsListButton").prop("disabled", true);
-                $("#recentsModal").modal('hide');
-                toastbox('toast-delsaves', 3000);
-            }, 10);
-        })
-    })
 
     $('#searchBar').on('keyup', function(e) {
 
@@ -278,15 +240,6 @@ $(document).ready(function() {
         }, 10);
     });
     
-    $("#deleteAllAcceptor").on("touchstart click", function(e) {
-        
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            cache = [];
-            displayPage(currentPage);
-        }, 10);
-    });
 
     $("#downloadButton").on("touchstart click", function(e) {
 
@@ -559,9 +512,7 @@ function displayPage(page) {
             cache[selectedIndex].inventory = parsedInfo;
             cache[selectedIndex].inventoryString = $("#inv1").val().trim();
             toastbox('toast-invedit', 3000);
-            $('#inv1').val("");
-            $("#invEditorUsername").html("");
-            $('.inventoryFinder').removeAttr('id');
+            $("#editInventory").modal("hide");
             displayPage(currentPage); 
             autosave();     
         }, 10);
@@ -582,6 +533,7 @@ function displayPage(page) {
             cache[selectedIndex].password = password;
             cache[selectedIndex].role = role;
             toastbox("toast-invedit", 3000);
+            $("#editInfo").modal("hide");
             displayPage(currentPage); 
             autosave();    
         }, 10);
@@ -742,9 +694,7 @@ function displayPageSearch(page, arr) {
             cache[selectedIndex].inventory = parsedInfo;
             cache[selectedIndex].inventoryString = $("#inv1").val().trim();
             toastbox('toast-invedit', 3000);
-            $('#inv1').val("");
-            $("#invEditorUsername").html("");
-            $('.inventoryFinder').removeAttr('id');
+            $("#editInventory").modal("hide");
             displayPage(currentPage, arr);    
             autosave();  
         }, 10);
@@ -765,6 +715,7 @@ function displayPageSearch(page, arr) {
             cache[selectedIndex].password = password;
             cache[selectedIndex].role = role;
             toastbox("toast-invedit", 3000);
+            $("#editInfo").modal("hide");
             displayPage(currentPage, arr);     
             autosave();
         }, 10);

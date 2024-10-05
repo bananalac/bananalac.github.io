@@ -49,7 +49,7 @@
     <!-- App Capsule -->
     <div id="appCapsule" class="full-height">
 
-        <div class="adbox adbox-300-50 fixed adHue">
+        <div class="adbox adbox-300-50 fixed adHue sponsorLink">
             <!-- <span class="closebutton">
                 <ion-icon name="close-outline"></ion-icon>
             </span> -->
@@ -82,7 +82,7 @@
             </div>
             
             <div class="wide-block pt-2 pb-2">
-                <button id="recentsListButton" type="button" data-bs-toggle="modal" data-bs-target="#recentsModal" class="btn btn-secondary btn-block"><ion-icon name="bookmark-outline"></ion-icon> لیست ذخیره ها</button>
+                <button id="autosaveButton" type="button" data-bs-toggle="modal" data-bs-target="#recentsModal" class="btn btn-secondary btn-block"><ion-icon name="bookmark-outline"></ion-icon> ذخیره خودکار</button>
             </div>
            
 
@@ -115,24 +115,21 @@
                     <button id="denyAll" type="button" class="btn btn-danger btn-block"><ion-icon name="trash-sharp"></ion-icon> رد همه</button>
                    </div>
                    <div class="col-xs-6 col-md-4">
-                    <button id="deleteAll" type="button" class="btn btn-secondary btn-block" data-bs-toggle="modal" data-bs-target="#deleteAllPrompt"><ion-icon name="trash-sharp"></ion-icon> حذف همه</button>
+                    <button id="scanUsers" type="button" class="btn btn-info btn-block"><ion-icon name="scan"></ion-icon> اسکن (جدید)</button>
                    </div>
                 </div>   
             </div>
             <div class="wide-block pt-2 pb-2">
                 <div class="row">
-                    <div class="col-xs-6 col-md-4">
-                        <button id="scanUsers" type="button" class="btn btn-info btn-block"><ion-icon name="scan"></ion-icon> اسکن (جدید)</button>
-                    </div>
-                    <div class="col-xs-6 col-md-4">
+                    <div class="col-xs-6 col-md-6">
                         <button id="downloadButton" type="button" class="btn btn-success btn-block"><ion-icon name="download"></ion-icon> دانلود مپ</button>
                     </div>
-                    <div class="col-xs-6 col-md-4">
+                    <div class="col-xs-6 col-md-6">
                         <button id="shareButton" type="button" class="btn btn-info btn-block"><ion-icon name="share-social"></ion-icon> اشتراک گذاری</button>
                     </div>
                  </div>   
             </div>
-            <div class=" wide-block pt-2 pb-2">
+            <div class="wide-block pt-2 pb-2">
                 <div class="adbox adbox-340-180 adHue">
                     <img src="assets/img/sample/ads/big_ad.png" alt="image">
                 </div>
@@ -292,31 +289,6 @@
             </div>
         </div>
 
-        <div class="modal fade dialogbox" id="deleteAllPrompt" data-bs-backdrop="static" tabindex="-1"
-            role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">آیا مطمئنید؟</h5>
-                    </div>
-                    <div class="modal-body">
-                        این عملیات قابل برگشت نیست!
-                    </div>
-                    <div class="modal-footer">
-                        <div class="btn-inline">
-                            <a id="deleteAllAcceptor" href="javascipt:void(0)" class="btn btn-text-danger" data-bs-dismiss="modal">
-                                <ion-icon name="trash-outline"></ion-icon>
-                                حذف همه
-                            </a>
-                            <a href="javascipt:void(0)" class="btn btn-text-primary" data-bs-dismiss="modal">
-                                <ion-icon name="return-up-back"></ion-icon>
-                               برگرد
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="modal fade dialogbox" id="editInventory" data-bs-backdrop="static" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -327,7 +299,7 @@
                     <form>
                         <div class="modal-body text-start mb-2">
                             <div class="form-group basic">
-                                <div class="input-wrapper">
+                                <div dir="ltr" class="input-wrapper">
                                     <a class="inventoryFinder" style="display: none;"></a>
                                     <label class="form-label" for="inv1">آیونتوری</label>
                                     <input autocomplete="off" type="text" class="form-control" id="inv1" placeholder="یک آیونتوری وارد کن...">
@@ -357,21 +329,21 @@
                         <div class="modal-body text-start mb-2">
                             <!-- USERNAME -->
                             <div class="form-group basic">
-                                <div class="input-wrapper">                                    
+                                <div dir="ltr" class="input-wrapper">                                    
                                     <label class="form-label" for="usr1">نام کاربری</label>
                                     <input autocomplete="off" type="text" class="form-control" id="usr1" placeholder="یک نام کاربری وارد کنید">
                                 </div>
                             </div>
                             <!-- PASSWORD -->
                             <div class="form-group basic">
-                                <div class="input-wrapper">                                    
+                                <div dir="ltr" class="input-wrapper">                                    
                                     <label class="form-label" for="pass1">رمز</label>
                                     <input autocomplete="off" type="text" class="form-control" id="pass1" placeholder="یک رمز وارد کنید">
                                 </div>
                             </div>
                             <!-- ROLE -->
                              <div class="form-group basic">
-                                <div class="input-wrapper">                                    
+                                <div dir="ltr" class="input-wrapper">                                    
                                     <label class="form-label" for="role1">رول</label>
                                     <input autocomplete="off" type="text" class="form-control" id="role1" placeholder="یک رول وارد کنید">
                                 </div>
@@ -401,22 +373,7 @@
             </div>
         </div>
 
-        <div class="modal fade modalbox" id="recentsModal" data-bs-backdrop="static" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">لیست ذخیره ها</h5>
-                        <a id="mustClose" href="#" data-bs-dismiss="modal">خروج</a>
-                    </div>
-                    <div id="recentBody" class="modal-body">
-                        <ion-icon name="information-circle"></ion-icon> ذخیره ها روی گوشی شما انجام می شود و به سرویس شخص ثالث ارسال نمی شود.
-                        <ul id="recentListUl" class="listview image-listview"></ul>
-                    </div>
-                    <button id="deleteAllSaves" type="button" data-bs-toggle="modal" data-bs-target="#recentsModal" class="btn btn-danger btn-block"><ion-icon name="trash"></ion-icon>حذف همه</button>
-                </div>
-            </div>
-        </div>
-
+       
        
 
     </div>

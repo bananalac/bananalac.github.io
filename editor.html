@@ -75,7 +75,7 @@
             </div>
             
             <div class="wide-block pt-2 pb-2">
-                <button id="recentsListButton" type="button" data-bs-toggle="modal" data-bs-target="#recentsModal" class="btn btn-secondary btn-block"><ion-icon name="bookmark-outline"></ion-icon> Save List</button>
+                <button id="autosaveButton" type="button" data-bs-toggle="modal" data-bs-target="#recentsModal" class="btn btn-secondary btn-block"><ion-icon name="bookmark-outline"></ion-icon> Autosave</button>
             </div>
            
 
@@ -108,20 +108,17 @@
                     <button id="denyAll" type="button" class="btn btn-danger btn-block"><ion-icon name="trash-sharp"></ion-icon> Deny All</button>
                    </div>
                    <div class="col-xs-6 col-md-4">
-                    <button id="deleteAll" type="button" class="btn btn-secondary btn-block" data-bs-toggle="modal" data-bs-target="#deleteAllPrompt"><ion-icon name="trash-sharp"></ion-icon> Delete All</button>
+                    <button id="scanUsers" type="button" class="btn btn-info btn-block"><ion-icon name="scan"></ion-icon> Scan (NEW)</button>
                    </div>
                 </div>
                        
             </div>
             <div class="wide-block pt-2 pb-2">
                 <div class="row">
-                    <div class="col-xs-6 col-md-4">
-                        <button id="scanUsers" type="button" class="btn btn-info btn-block"><ion-icon name="scan"></ion-icon> Scan (NEW)</button>
-                    </div>
-                    <div class="col-xs-6 col-md-4">
+                    <div class="col-xs-6 col-md-6">
                         <button id="downloadButton" type="button" class="btn btn-success btn-block"><ion-icon name="download"></ion-icon> Download Map</button>
                     </div>
-                    <div class="col-xs-6 col-md-4">
+                    <div class="col-xs-6 col-md-6">
                         <button id="shareButton" type="button" class="btn btn-info btn-block"><ion-icon name="share-social"></ion-icon> Share Map</button>
                     </div>
                  </div>   
@@ -281,31 +278,7 @@
             </div>
         </div>
 
-        <div class="modal fade dialogbox" id="deleteAllPrompt" data-bs-backdrop="static" tabindex="-1"
-            role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Are you sure?</h5>
-                    </div>
-                    <div class="modal-body">
-                        This process cannot be undone!
-                    </div>
-                    <div class="modal-footer">
-                        <div class="btn-inline">
-                            <a id="deleteAllAcceptor" href="javascipt:void(0)" class="btn btn-text-danger" data-bs-dismiss="modal">
-                                <ion-icon name="trash-outline"></ion-icon>
-                                Delete All
-                            </a>
-                            <a href="javascipt:void(0)" class="btn btn-text-primary" data-bs-dismiss="modal">
-                                <ion-icon name="return-up-back"></ion-icon>
-                                Go Back
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         <div class="modal fade dialogbox" id="editInventory" data-bs-backdrop="static" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -390,73 +363,9 @@
             </div>
         </div>
 
-        <div class="modal fade modalbox" id="recentsModal" data-bs-backdrop="static" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Save List</h5>
-                        <a id="mustClose" href="#" data-bs-dismiss="modal">Close</a>
-                    </div>
-                    <div id="recentBody" class="modal-body">
-                        <ion-icon name="information-circle"></ion-icon> Saves are stored on your phone and not sent to a third-party service.
-                        <ul id="recentListUl" class="listview image-listview"></ul>
-                    </div>
-                    <button id="deleteAllSaves" type="button" data-bs-toggle="modal" data-bs-target="#recentsModal" class="btn btn-danger btn-block"><ion-icon name="trash"></ion-icon>Delete All</button>
-                </div>
-            </div>
-        </div>
+        
 
-        <div class="offcanvas offcanvas-bottom action-sheet" tabindex="-1" id="actionSheetEditor">
-            <a class="actionSheetIndexSelector" style="display: none;"></a>
-            <div class="offcanvas-header">
-                <h5 id="actionSheetTitle" class="offcanvas-title"></h5>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="action-button-list">
-                    <li>
-                        <a href="#" id="editButton" class="btn btn-list" data-bs-dismiss="offcanvas">
-                            <span>
-                                <ion-icon name="create"></ion-icon>
-                                Edit
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" id="editInv" class="btn btn-list" data-bs-dismiss="offcanvas">
-                            <span>
-                                <ion-icon name="create"></ion-icon>
-                                Edit Inventory
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" id="approveOrDeny" class="btn btn-list" data-bs-dismiss="offcanvas">
-                            <span>
-                                <ion-icon name="checkmark-done"></ion-icon>
-                                Approve
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" id="deleteUser" class="btn btn-list text-danger" data-bs-dismiss="offcanvas">
-                            <span>
-                                <ion-icon name="trash"></ion-icon>
-                                Delete
-                            </span>
-                        </a>
-                    </li>
-                    <li class="action-divider"></li>
-                    <li>
-                        <a id="clickClose" href="#" class="btn btn-list text-danger" data-bs-dismiss="offcanvas">
-                            <span>
-                                <ion-icon name="close-outline"></ion-icon>
-                                Close
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+       
 
         
 

@@ -934,12 +934,24 @@ else{
     })
 }
 //-----------------------------------------------------------------------
-
+//link to dev profile
 document.querySelectorAll(".kavascriptProfile").forEach(function (el) {
     el.addEventListener("click", function () {
         window.location.href = '/profile?name=kaveh';
     })
-})
+});
+//-----------------------------------------------------------------------
+//link to dev profile
+document.querySelectorAll(".sponsorLink").forEach(function (el) {
+    el.addEventListener("click", function () {
+        const a = document.createElement('a');
+        a.href = 'rubika://l.rubika.ir/LAC_HOST';
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    })
+});
 
 //-----------------------------------------------------------------------
 // Test Mode
