@@ -109,7 +109,7 @@ $(document).ready(function() {
         }, 10)
     })
 
-    $("#autosaveButton").on("touchstart click", function(e) {
+    $("#autosaveButton").on("touchend click", function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
@@ -123,7 +123,7 @@ $(document).ready(function() {
         }, 10);
     });
 
-    $(".btn-close").on("touchstart click", function(e) {
+    $(".btn-close").on("touchend click", function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
@@ -162,7 +162,7 @@ $(document).ready(function() {
        
     });
 
-    $("#uploadButton").on("touchstart click", function(e) {
+    $("#uploadButton").on("touchend click", function(e) {
     
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -227,7 +227,7 @@ $(document).ready(function() {
     
     });
 
-    $("#approveAll").on("touchstart click", function(e) {
+    $("#approveAll").on("touchend click", function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
@@ -240,7 +240,7 @@ $(document).ready(function() {
         }, 10);   
     });
     
-    $("#denyAll").on("touchstart click", function(e) {    
+    $("#denyAll").on("touchend click", function(e) {    
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
@@ -254,7 +254,7 @@ $(document).ready(function() {
     });
     
 
-    $("#downloadButton").on("touchstart click", function(e) {
+    $("#downloadButton").on("touchend click", function(e) {
 
     
         e.preventDefault();
@@ -282,7 +282,7 @@ $(document).ready(function() {
     
     });
 
-    $("#shareButton").on("touchstart click", function(e) {
+    $("#shareButton").on("touchend click", function(e) {
 
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -310,7 +310,7 @@ $(document).ready(function() {
     
     });
 
-    $("#scanUsers").on("touchstart click", function(e) {
+    $("#scanUsers").on("touchend click", function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
@@ -338,7 +338,7 @@ $(document).ready(function() {
                 scanBody.appendChild(p);
             }
 
-            $("#removeAllBuilders").on("touchstart click", function(e) {
+            $("#removeAllBuilders").on("touchend click", function(e) {
                 e.preventDefault();
                 e.stopImmediatePropagation();
                 setTimeout(() => {
@@ -352,7 +352,7 @@ $(document).ready(function() {
                 }, 10);
             });
 
-            $("#removeAllAdmins").on("touchstart click", function(e) {
+            $("#removeAllAdmins").on("touchend click", function(e) {
                 e.preventDefault();
                 e.stopImmediatePropagation();
                 setTimeout(() => {
@@ -451,7 +451,7 @@ function displayPage(page) {
         table.appendChild(tr);
     });
 
-    $('a[id$="-optionHandler"]').on('touchstart click', function(e) {
+    $('a[id$="-optionHandler"]').on('touchend click', function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
@@ -512,7 +512,7 @@ function displayPage(page) {
         $("#invEditorUsername").html("");
         $('.inventoryFinder').removeAttr('id');
     });
-    $("#acceptEdits").on('touchstart click', function(e) {
+    $("#acceptEdits").on('touchend click', function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
@@ -530,7 +530,7 @@ function displayPage(page) {
             autosave();     
         }, 10);
     });
-    $("#acceptEdits2").on('touchstart click', function(e) {
+    $("#acceptEdits2").on('touchend click', function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
@@ -633,7 +633,7 @@ function displayPageSearch(page, arr) {
     });
 
    
-    $('a[id$="-optionHandler"]').on('touchstart click', function(e) {
+    $('a[id$="-optionHandler"]').on('touchend click', function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
@@ -694,7 +694,7 @@ function displayPageSearch(page, arr) {
         $("#invEditorUsername").html("");
         $('.inventoryFinder').removeAttr('id');
     });
-    $("#acceptEdits").on('touchstart click', function(e) {
+    $("#acceptEdits").on('touchend click', function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
@@ -712,7 +712,7 @@ function displayPageSearch(page, arr) {
             autosave();  
         }, 10);
     });
-    $("#acceptEdits2").on('touchstart click', function(e) {
+    $("#acceptEdits2").on('touchend click', function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
