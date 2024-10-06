@@ -1,4 +1,5 @@
 
+
 function isPointInRectangle(x1, y1, x2, y2, x, y) {
 
     const left = Math.min(x1, x2);
@@ -26,6 +27,18 @@ $(document).ready(function() {
         const rnd = degrees[Math.floor(Math.random() * degrees.length)];
         $(".adHue img").css("filter", `hue-rotate(${rnd}deg)`);
     }, 1000);
+
+    $.get("https://api.counterapi.dev/v1/BananaLACGithubIO/cutterViewerCount/up", function(data) {
+
+        $("#totalViewers").html(`تعداد بازدید کل : ${data.count}`)
+        
+
+    });
+    
+    // counter.up("BananaLAC", "cutterViewerCount").then((res) => {
+    //     console.log(res);
+    //     
+    // });
 
     $(".sponsorLink").on("touchend click", function(e) {
         e.preventDefault();
