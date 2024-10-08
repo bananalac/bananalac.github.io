@@ -18,6 +18,10 @@ const converterKeys = {
 
 $(document).ready(function() {
 
+    $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/linterViewerCount/up", function(data) {
+        $("#totalViewers").html(`تعداد بازدید کل : ${data.count}`)
+    });
+
     const degrees = ['0', '45', '90', '130', '180', '225', '270', '315', '360'];
     setInterval(() => {
         const rnd = degrees[Math.floor(Math.random() * degrees.length)];

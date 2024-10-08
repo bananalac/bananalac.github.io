@@ -41,8 +41,9 @@ const Mobilekit = {
         word: "testmode", // The word that needs to be typed to activate test mode
         alert: true, // Enable or disable alert when test mode is activated
         alertMessage: "Test mode has been activated. Look at the developer console!" // Alert message
-    }
+    },
     //-------------------------------------------------------------------
+    displayAds: false
 }
 //-----------------------------------------------------------------------
 
@@ -108,6 +109,16 @@ aWithHref.forEach(function (el) {
     })
 });
 //-----------------------------------------------------------------------
+
+//-----------------------------------------------------------------------
+// Display Ads
+//-----------------------------------------------------------------------
+var adboxes = document.querySelectorAll('.adbox , .sponsorLink , .sponsorLink2');
+adboxes.forEach(function (el) {
+    if(Mobilekit.displayAds === false)  el.style.display = 'none';
+});
+//-----------------------------------------------------------------------
+
 
 
 //-----------------------------------------------------------------------

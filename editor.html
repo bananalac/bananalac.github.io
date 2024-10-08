@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fa-IR" dir="rtl">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -7,21 +7,21 @@
         content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#FFFF00">
-    <title>SaveData Editor</title>
-    <meta name="description" content="Manage save-data.txt">
+    <title>ویرایشگر سیو دیتا</title>
     <meta name="keywords" content="lac, los angeles crimes, alizadev, mohammadalizade" />
-    <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="assets/img/icon/92x92.png" sizes="92x92">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style-fa.css" />
     <link rel="manifest" href="__manifest.json">
-    <!-- OG -->
-    <meta property="og:title" content="BananaLAC: Savedata Editor">
-    <meta property="og:site_name" content="BananaLAC">
-    <meta property="og:type" content="Website">
-    <meta property="og:url" content="https://bananalac.github.io/editor">
-    <meta property="og:image" content="https://bananalac.github.io/assets/img/logo.png">
-    <meta property="og:description" content="Manage save-data.txt">
+   <!-- OG -->
+   <meta name="theme-color" content="#FFFF00">
+   <meta property="og:title" content="ال ای سی فارسی">
+   <meta property="og:site_name" content="PersianLAC">
+   <meta property="og:type" content="Website">
+   <meta property="og:url" content="https://persianlac.ir/">
+   <meta property="og:image" content="https://bananalac.github.io/assets/img/logo.png">
+   <meta property="og:description" content="ابزار و محتوای ال ای سی">
+   <meta name="description" content="ابزار و محتوای ال ای سی">
 </head>
 
 <body>
@@ -33,14 +33,14 @@
     <!-- * loader -->
 
     <!-- App Header -->
-    <div class="appHeader bg-primary">
+    <div class="appHeader bg-primary scrolled">
         <div class="left">
             <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
                 <ion-icon name="menu-outline"></ion-icon>
             </a>
         </div>
         <div class="pageTitle">
-            BananaLAC
+            <img src="assets/img/logo.png" alt="logo" class="logo">             
         </div>
        
     </div>
@@ -49,16 +49,20 @@
     <!-- App Capsule -->
     <div id="appCapsule" class="full-height">
 
+        <div class="adbox adbox-300-50 fixed adHue sponsorLink">
+            <img src="assets/img/sample/ads/small_ad.png" alt="image">
+        </div>
+
 
         <div id="uploadSection" class="section full mt-2">
             <div id="alertBoxer" class="wide-block pt-2 pb-2">
                 <div class="alert alert-success mb-2 alert-dismissible fade show" role="alert">
-                    <h4 class="alert-title"><ion-icon name="shield-checkmark"></ion-icon> Your files are safe!</h4>
-                    The files are processed in your system and not sent anywhere. <a href="/privacypolicy">[Learn More]</a>
+                    <h4 class="alert-title"><ion-icon name="shield-checkmark"></ion-icon> فایل های شما ایمن است!</h4>
+                    فایل ها در دستگاه خودتان پردازش می شود و به جای دیگر فرستاده نمی شود. <a href="/privacypolicy.html">[بیشتر بدانید]</a>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
-            <div class="section-title large">SaveData Editor</div>
+            <div class="section-title large">ویرایشگر سیودیتا</div>
             <div class="wide-block pt-2 pb-2">
                 <div class="custom-file-upload" id="fileUpload1">
                     <input type="file" autocomplete="off" id="fileuploadInput" accept=".txt">
@@ -66,60 +70,65 @@
                         <span>
                             <strong>
                                 <ion-icon name="cloud-upload-outline"></ion-icon>
-                                <i>Upload Your save-data.txt</i>
+                                <i>سیو دیتا را آپلود کنید</i>
                             </strong>
                         </span>
                     </label>
                 </div>
-                <button id="uploadButton" type="button" class="btn btn-primary btn-block"><ion-icon name="create-outline"></ion-icon> Edit</button>
+                <button id="uploadButton" type="button" class="btn btn-primary btn-block"><ion-icon name="create-outline"></ion-icon> شروع</button>
             </div>
             
             <div class="wide-block pt-2 pb-2">
-                <button id="autosaveButton" type="button" data-bs-toggle="modal" data-bs-target="#recentsModal" class="btn btn-secondary btn-block"><ion-icon name="bookmark-outline"></ion-icon> Autosave</button>
+                <button id="autosaveButton" type="button" data-bs-toggle="modal" data-bs-target="#recentsModal" class="btn btn-secondary btn-block"><ion-icon name="bookmark-outline"></ion-icon> ذخیره خودکار</button>
+            </div>
+            <div class="wide-block pt-2 pb-2">
+                <div class="adbox adbox-340-180 adHue sponsorLink">
+                    <img src="assets/img/ads/big_ad.png" alt="image">
+                </div>
             </div>
            
 
         </div>
-
-        <!-- <div id="fabNewUser" style="display: none;" class="fab-button animate bottom-left dropdown">
-            <a href="#" class="fab" data-bs-toggle="dropdown">
-                <ion-icon name="add-outline"></ion-icon>
-            </a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">
-                    <ion-icon name="person-add"></ion-icon>
-                    <p id="newUserButton">New User</p>
-                </a>
-            </div>
-        </div> -->
 
         <a href="#" class="button goTop">
             <ion-icon name="arrow-up-outline"></ion-icon>
         </a>
 
         <div id="editingSection" style="display: none;" class="section full mt-2">
-            <div id="editingTableTitle" class="section-title large">Editing Table</div>
+            <div id="rating" style="display: none;" class="wide-block pt-2 pb-2">
+                <h2 id="rateTitle">آیا از این ابزار راضی هستید؟</h2>
+                <div class="btn-group" role="group">
+                 <input type="radio" class="btn-check" name="btnradioh" id="btnradior1">
+                 <label id="upVote" class="btn btn-lg btn-outline-primary" for="btnradior1">
+                     <ion-icon name="thumbs-up"></ion-icon> راضی ()
+                 </label>
+                 <input type="radio" class="btn-check" name="btnradioh" id="btnradior2">
+                 <label id="downVote" class="btn btn-lg btn-outline-primary" for="btnradior2">
+                     <ion-icon name="thumbs-down"></ion-icon> ناراضی ()
+                 </label>
+                </div>   
+           </div>
+            <div id="editingTableTitle" class="section-title large">جدول ویرایش</div>
             <div class="wide-block pt-2 pb-2">
                 <div class="row">
                    <div class="col-xs-6 col-md-4">
-                    <button id="approveAll" type="button" class="btn btn-success btn-block"><ion-icon name="checkmark-done-circle-sharp"></ion-icon> Approve All</button>
+                    <button id="approveAll" type="button" class="btn btn-success btn-block"><ion-icon name="checkmark-done-circle-sharp"></ion-icon> قبول همه</button>
                    </div>
                    <div class="col-xs-6 col-md-4">
-                    <button id="denyAll" type="button" class="btn btn-danger btn-block"><ion-icon name="trash-sharp"></ion-icon> Deny All</button>
+                    <button id="denyAll" type="button" class="btn btn-danger btn-block"><ion-icon name="trash-sharp"></ion-icon> رد همه</button>
                    </div>
                    <div class="col-xs-6 col-md-4">
-                    <button id="scanUsers" type="button" class="btn btn-info btn-block"><ion-icon name="scan"></ion-icon> Scan (NEW)</button>
+                    <button id="scanUsers" type="button" class="btn btn-info btn-block"><ion-icon name="scan"></ion-icon> اسکن (جدید)</button>
                    </div>
-                </div>
-                       
+                </div>   
             </div>
             <div class="wide-block pt-2 pb-2">
                 <div class="row">
                     <div class="col-xs-6 col-md-6">
-                        <button id="downloadButton" type="button" class="btn btn-success btn-block"><ion-icon name="download"></ion-icon> Download Map</button>
+                        <button id="downloadButton" type="button" class="btn btn-success btn-block"><ion-icon name="download"></ion-icon> دانلود مپ</button>
                     </div>
                     <div class="col-xs-6 col-md-6">
-                        <button id="shareButton" type="button" class="btn btn-info btn-block"><ion-icon name="share-social"></ion-icon> Share Map</button>
+                        <button id="shareButton" type="button" class="btn btn-info btn-block"><ion-icon name="share-social"></ion-icon> اشتراک گذاری</button>
                     </div>
                  </div>   
             </div>
@@ -131,20 +140,20 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#accordion001">
                                 <ion-icon name="help-circle-outline"></ion-icon>
-                                Search Help
+                                راهنمای جستجو
                             </button>
                         </h2>
                         <div id="accordion001" class="accordion-collapse collapse" data-bs-parent="#accordion3">
                             <div class="accordion-body">
-                                <p style="text-align:left">Use this keys at first of your search:<br>
+                                <p style="text-align:right">در اول جستجو ازین کلید ها استفاده کنید:<br>
                                 <mark>status:</mark>approved/pending<br>
                                 <mark>user:</mark> to find a username<br>
                                 <mark>pass:</mark>to find a password<br>
                                 <mark>role:</mark>to filter people with a role<br>
                                 <!-- <mark>inv:item:value</mark> (to find who has this inventory item)<br> -->
-                                Clear to show all.
+                                پاک کنید تا لیست به حالت عادی برگردد
                                 </p>
-                                <h5>Example :</h5>
+                                <h5>مثال :</h5>
                                 <p>user:alex_99<br>role:police<!-- <br>inv:vehicles:pride, king --></p>
                             </div>
                         </div>
@@ -152,14 +161,14 @@
                 </div>
 
                 <div class="form-group searchbox">
-                    <input id="searchBar" autocomplete="off" spellcheck="false" type="text" class="form-control" placeholder="Search...">
+                    <input id="searchBar" autocomplete="off" spellcheck="false" type="text" class="form-control" placeholder="جستجو...">
                     <i class="input-icon">
                         <ion-icon name="search-outline"></ion-icon>
                     </i>
                 </div>
                 <div class="divider bg-primary mt-2 mb-3"></div>
                 <nav>
-                    <ul class="pagination flex-wrap">                      
+                    <ul dir="ltr" class="pagination flex-wrap">                      
                     </ul>
                 </nav>
                 <div class="divider bg-primary mt-2 mb-3"></div>
@@ -167,11 +176,11 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Status</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">Password</th>
-                                <th scope="col">Role</th>
-                                <th scope="col">Options</th>                               
+                                <th scope="col">وضعیت</th>
+                                <th scope="col">نام کاربری</th>
+                                <th scope="col">رمز</th>
+                                <th scope="col">رول</th>
+                                <th scope="col">تنظیمات</th>                               
                             </tr>
                         </thead>
                         <tbody id="usersList">
@@ -192,7 +201,7 @@
             <div class="in">
                 <ion-icon name="warning"></ion-icon> 
                 <div class="text">
-                    Upload save-data.txt!
+                    سیو دیتا را آپلود کنید!
                 </div>
             </div>
         </div>
@@ -201,7 +210,7 @@
             <div class="in">
                 <ion-icon name="checkmark-done-circle"></ion-icon>
                 <div class="text">
-                    All members approved.
+                    تمامی اعضاء قبول شدند
                 </div>
             </div>
         </div>
@@ -210,7 +219,7 @@
             <div class="in">
                 <ion-icon name="checkmark-done-circle"></ion-icon>
                 <div class="text">
-                    All members denied.
+                     تمامی اعضاء رد شدند
                 </div>
             </div>
         </div>
@@ -219,7 +228,7 @@
             <div class="in">
                 <ion-icon name="warning"></ion-icon> 
                 <div class="text">
-                    Sharing isn't supported in your browser.
+                    اشتراک گذاری پشتیبانی نمی شود
                 </div>
             </div>
         </div>
@@ -228,7 +237,7 @@
             <div class="in">
                 <ion-icon name="warning"></ion-icon> 
                 <div class="text">
-                    This is not a save-data.txt!
+                    این یک فایل سیو-دیتا نیست!
                 </div>
             </div>
         </div>
@@ -237,7 +246,7 @@
             <div class="in">
                 <ion-icon name="warning"></ion-icon> 
                 <div class="text">
-                    Empty Savedata!
+                    سیودیتای خالی!
                 </div>
             </div>
         </div>
@@ -246,7 +255,7 @@
             <div class="in">
                 <ion-icon name="warning"></ion-icon> 
                 <div class="text">
-                    Wrong Format!
+                   فرمت اشتباه!
                 </div>
             </div>
         </div>
@@ -255,7 +264,7 @@
             <div class="in">
                 <ion-icon name="trash-bin"></ion-icon>
                 <div class="text">
-                    All saves successfully deleted!
+                    تمامی ذحیره ها با موفقیت پاک شد!
                 </div>
             </div>
         </div>
@@ -264,7 +273,7 @@
             <div class="in">
                 <ion-icon name="file-tray-full"></ion-icon>
                 <div class="text">
-                    Autosave Loaded!
+                    ذخیره خودکار بارگذاری شد!
                 </div>
             </div>
         </div>
@@ -273,11 +282,10 @@
             <div class="in">
                 <ion-icon name="pencil-sharp"></ion-icon>
                 <div class="text">
-                    Successfully Edited!
+                    با موفقیت ویرایش شد!
                 </div>
             </div>
         </div>
-
 
 
         <div class="modal fade dialogbox" id="editInventory" data-bs-backdrop="static" tabindex="-1" role="dialog">
@@ -289,18 +297,18 @@
                     <form>
                         <div class="modal-body text-start mb-2">
                             <div class="form-group basic">
-                                <div class="input-wrapper">
+                                <div dir="ltr" class="input-wrapper">
                                     <a class="inventoryFinder" style="display: none;"></a>
-                                    <label class="form-label" for="inv1">Inventory</label>
-                                    <input autocomplete="off" type="text" class="form-control" id="inv1" placeholder="Enter an inventory">
+                                    <label class="form-label" for="inv1">آیونتوری</label>
+                                    <input autocomplete="off" type="text" class="form-control" id="inv1" placeholder="یک آیونتوری وارد کن...">
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <div class="btn-inline">
                                 <button type="button" class="btn btn-text-secondary"
-                                    data-bs-dismiss="modal"><ion-icon name="return-up-back"></ion-icon> GO BACK</button>
-                                <button id="acceptEdits" type="button" class="btn btn-text-primary" data-bs-dismiss="modal"><ion-icon name="save"></ion-icon> SAVE</button>
+                                    data-bs-dismiss="modal"><ion-icon name="return-up-back"></ion-icon> برگرد</button>
+                                <button id="acceptEdits" type="button" class="btn btn-text-primary" data-bs-dismiss="modal"><ion-icon name="save"></ion-icon> ذخیره</button>
                             </div>
                         </div>
                     </form>
@@ -319,31 +327,31 @@
                         <div class="modal-body text-start mb-2">
                             <!-- USERNAME -->
                             <div class="form-group basic">
-                                <div class="input-wrapper">                                    
-                                    <label class="form-label" for="usr1">Username</label>
-                                    <input autocomplete="off" type="text" class="form-control" id="usr1" placeholder="Enter a new username">
+                                <div dir="ltr" class="input-wrapper">                                    
+                                    <label class="form-label" for="usr1">نام کاربری</label>
+                                    <input autocomplete="off" type="text" class="form-control" id="usr1" placeholder="یک نام کاربری وارد کنید">
                                 </div>
                             </div>
                             <!-- PASSWORD -->
                             <div class="form-group basic">
-                                <div class="input-wrapper">                                    
-                                    <label class="form-label" for="pass1">Password</label>
-                                    <input autocomplete="off" type="text" class="form-control" id="pass1" placeholder="Enter a new password">
+                                <div dir="ltr" class="input-wrapper">                                    
+                                    <label class="form-label" for="pass1">رمز</label>
+                                    <input autocomplete="off" type="text" class="form-control" id="pass1" placeholder="یک رمز وارد کنید">
                                 </div>
                             </div>
                             <!-- ROLE -->
                              <div class="form-group basic">
-                                <div class="input-wrapper">                                    
-                                    <label class="form-label" for="role1">Role</label>
-                                    <input autocomplete="off" type="text" class="form-control" id="role1" placeholder="Enter a role">
+                                <div dir="ltr" class="input-wrapper">                                    
+                                    <label class="form-label" for="role1">رول</label>
+                                    <input autocomplete="off" type="text" class="form-control" id="role1" placeholder="یک رول وارد کنید">
                                 </div>
                             </div>                            
                         </div>
                         <div class="modal-footer">
                             <div class="btn-inline">
                                 <button type="button" class="btn btn-text-secondary"
-                                    data-bs-dismiss="modal"><ion-icon name="return-up-back"></ion-icon> GO BACK</button>
-                                <button id="acceptEdits2" type="button" class="btn btn-text-primary" data-bs-dismiss="modal"><ion-icon name="save"></ion-icon> SAVE</button>
+                                    data-bs-dismiss="modal"><ion-icon name="return-up-back"></ion-icon> برگرد</button>
+                                <button id="acceptEdits2" type="button" class="btn btn-text-primary" data-bs-dismiss="modal"><ion-icon name="save"></ion-icon> ذخیره</button>
                             </div>
                         </div>
                     </form>
@@ -355,19 +363,21 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Scan Results</h5>
-                        <a href="#" data-bs-dismiss="modal">Close</a>
+                        <h5 class="modal-title">نتایج اسکن</h5>
+                        <a href="#" data-bs-dismiss="modal">خروج</a>
                     </div>
                     <div id="scanBody" class="modal-body"></div>
                 </div>
             </div>
         </div>
 
-        
-
        
-
-        
+        <div class="appFooter"> 
+            <div id="totalViewers" class="footer-title">
+               
+            </div> 
+        </div>
+       
 
     </div>
     <!-- * App Capsule -->
@@ -401,9 +411,9 @@
                     <img src="assets/img/kaveh.jpg" alt="image" class="imaged rounded">
                 </div>
                 <div class="in">
-                    <strong class="kavascriptProfile">Made by kavascript</strong>
+                    <strong class="kavascriptProfile">ساخته شده توسط کاوه</strong>
                     <div class="text-muted">
-                        With <ion-icon name="heart"></ion-icon>
+                        با <ion-icon class="text-danger" name="heart"></ion-icon>
                     </div>
                 </div>
                 <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
@@ -414,12 +424,12 @@
 
             <ul class="listview flush transparent no-line image-listview mt-2">
                 <li>
-                    <a href="index.html" class="item">
+                    <a href="/" class="item">
                         <div class="icon-box bg-primary">
                             <ion-icon name="home-outline"></ion-icon>
                         </div>
                         <div class="in">
-                            Homepage
+                            صفحه اصلی
                         </div>
                     </a>
                 </li>
@@ -429,7 +439,7 @@
                             <ion-icon name="layers-outline"></ion-icon>
                         </div>
                         <div class="in">
-                            <div>Tools List</div>
+                            <div>لیست ابزار</div>
                         </div>
                     </a>
                 </li>
@@ -439,13 +449,23 @@
                             <ion-icon name="moon-outline"></ion-icon>
                         </div>
                         <div class="in">
-                            <div>Dark Mode</div>
+                            <div>دارک مود</div>
                             <div class="form-check form-switch">
                                 <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodesidebar">
                                 <label class="form-check-label" for="darkmodesidebar"></label>
                             </div>
                         </div>
                     </div>
+                </li>
+                <li class="sponsorLink2">
+                    <a href="javascript:void(0)" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="accessibility"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div></div>
+                        </div>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -465,8 +485,10 @@
     <script src="assets/js/base.js"></script>
     <!--JQuery -->
     <script src="assets/js/jquery.min.js"></script>
+    <!--JDate -->
+    <script src="assets/js/jdate.min.js"></script>
     <!-- Editor Code -->
-    <script type="module" src="assets/js/editor_newface.js"></script>
+    <script type="module" src="assets/js/fa/editor_fa.js"></script>
 
 </body>
 

@@ -85,6 +85,42 @@ const roles = [
 
 $(document).ready(function() {
 
+    $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/editorViewerCount/up", function(data) {
+        $("#totalViewers").html(`تعداد بازدید کل : ${data.count}`)
+    });
+
+    $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/editorUpVotes/", function(data) {
+        $("#upVote").html(`<ion-icon name="thumbs-up"></ion-icon> راضی (${data.count})`)
+    });
+
+    $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/editorDownVotes/", function(data) {
+        $("#downVote").html(`<ion-icon name="thumbs-down"></ion-icon> ناراضی (${data.count})`)
+    });
+
+    $("#upVote").on("touchend click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/editorUpVotes/up", function(data) {
+                $("#rateTitle").html("از نظر شما متشکریم!");
+                $(".btn-group").slideUp();
+                $("#upVote").html(`<ion-icon name="thumbs-up"></ion-icon> راضی (${data.count})`).prop("disabled", true);
+            });
+        }, 10);
+    });
+
+    $("#downVote").on("touchend click", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/editorDownVotes/up", function(data) {
+                $("#rateTitle").html("از نظر شما متشکریم!");
+                $(".btn-group").slideUp();
+                $("#downVote").html(`<ion-icon name="thumbs-down"></ion-icon> ناراضی (${data.count})`).prop("disabled", true);
+            });
+        }, 10);
+    });
+
     const degrees = ['0', '45', '90', '130', '180', '225', '270', '315', '360'];
     setInterval(() => {
         const rnd = degrees[Math.floor(Math.random() * degrees.length)];
@@ -275,7 +311,7 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopImmediatePropagation();
         setTimeout(() => {
-    
+            $("#rating").show();
             const blob = new Blob([write(cache)], { type: 'text/plain' });
         
             const url = URL.createObjectURL(blob);
@@ -303,7 +339,7 @@ $(document).ready(function() {
         e.stopImmediatePropagation();
         setTimeout(() => {
         if(navigator.share) {
-
+            $("#rating").show();
             const blob = new Blob([write(cache)], { type: 'text/plain' });
 
             navigator.share({

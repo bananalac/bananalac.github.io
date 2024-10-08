@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fa-IR" dir="rtl">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -7,21 +7,21 @@
         content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#FFFF00">
-    <title>Triggerbox Cleaner</title>
-    <meta name="description" content="Clear triggerboxes from any map!">
+    <title>پاک کننده تریگرباکس</title>
     <meta name="keywords" content="lac, los angeles crimes, alizadev, mohammadalizade" />
-    <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="assets/img/icon/92x92.png" sizes="92x92">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style-fa.css">
     <link rel="manifest" href="__manifest.json">
     <!-- OG -->
-    <meta property="og:title" content="BananaLAC: Triggerbox Cleaner">
-    <meta property="og:site_name" content="BananaLAC">
+    <meta name="theme-color" content="#FFFF00">
+    <meta property="og:title" content="ال ای سی فارسی">
+    <meta property="og:site_name" content="PersianLAC">
     <meta property="og:type" content="Website">
-    <meta property="og:url" content="https://bananalac.github.io/cleaner">
+    <meta property="og:url" content="https://persianlac.ir/">
     <meta property="og:image" content="https://bananalac.github.io/assets/img/logo.png">
-    <meta property="og:description" content="Clear triggerboxes from any map!">
+    <meta property="og:description" content="ابزار و محتوای ال ای سی">
+    <meta name="description" content="ابزار و محتوای ال ای سی">
 </head>
 
 <body>
@@ -40,7 +40,7 @@
             </a>
         </div>
         <div class="pageTitle">
-            BananaLAC
+            <img src="assets/img/logo.png" alt="logo" class="logo">             
         </div>
        
     </div>
@@ -49,16 +49,32 @@
     <!-- App Capsule -->
     <div id="appCapsule" class="full-height">
 
+        <div class="adbox adbox-300-50 fixed adHue sponsorLink">
+            <img src="assets/img/sample/ads/small_ad.png" alt="image">
+        </div>
 
         <div class="section full mt-2">
             <div id="alertBoxer" class="wide-block pt-2 pb-2">
                 <div class="alert alert-success mb-2 alert-dismissible fade show" role="alert">
-                    <h4 class="alert-title"><ion-icon name="shield-checkmark"></ion-icon> Your files are safe!</h4>
-                    The files are processed in your system and not sent anywhere. <a href="/privacypolicy">[Learn More]</a>
+                    <h4 class="alert-title"><ion-icon name="shield-checkmark"></ion-icon> محیط امن</h4>
+                    فایل ها در دستگاه خودتان پردازش می شود و به جای دیگر فرستاده نمی شود. <a href="/privacypolicy">[بیشتر بدانید]</a>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
-            <div class="section-title large">Triggerbox Cleaner</div>
+            <div id="rating" style="display: none;" class="wide-block pt-2 pb-2">
+                 <h2 id="rateTitle">آیا از این ابزار راضی هستید؟</h2>
+                 <div class="btn-group" role="group">
+                  <input type="radio" class="btn-check" name="btnradioh" id="btnradior1">
+                  <label id="upVote" class="btn btn-lg btn-outline-primary" for="btnradior1">
+                      <ion-icon name="thumbs-up"></ion-icon> راضی ()
+                  </label>
+                  <input type="radio" class="btn-check" name="btnradioh" id="btnradior2">
+                  <label id="downVote" class="btn btn-lg btn-outline-primary" for="btnradior2">
+                      <ion-icon name="thumbs-down"></ion-icon> ناراضی ()
+                  </label>
+                 </div>   
+            </div>
+            <div class="section-title large">پاک کننده تریگرباکس</div>
             <div class="wide-block pt-2 pb-2">
                 <div class="custom-file-upload" id="fileUpload1">
                     <input type="file" autocomplete="off" id="fileuploadInput" accept=".txt">
@@ -66,23 +82,30 @@
                         <span>
                             <strong>
                                 <ion-icon name="cloud-upload-outline"></ion-icon>
-                                <i>Upload Your map</i>
+                                <i>مپ را آپلود کنید</i>
                             </strong>
                         </span>
                     </label>
                 </div>
-                <button id="uploadButton" type="button" class="btn btn-primary btn-block"><ion-icon name="trash-outline"></ion-icon> Clear Triggerboxes</button>
-                <button id="downloadButton" type="button" class="btn btn-success btn-block" style="display: none;"><ion-icon name="download-outline"></ion-icon> Download Map</button>
+                <button id="uploadButton" type="button" class="btn btn-primary btn-block"><ion-icon name="trash-outline"></ion-icon> تریگرباکس هارا پاک کن</button>
+                <button id="downloadButton" type="button" class="btn btn-success btn-block" style="display: none;"><ion-icon name="download-outline"></ion-icon> دانلود مپ پاک شده</button>
                 
             </div>
-
+           
             <div id="newOne" style="display: none;" class="wide-block pt-2 pb-2">
-                <button type="button" class="btn btn-success btn-block"><ion-icon name="add-outline"></ion-icon> New One</button>
+                <button type="button" class="btn btn-success btn-block"><ion-icon name="add-outline"></ion-icon> یکی جدید</button>
             </div>
             
             <div id="shareButton" style="display: none;" class="wide-block pt-2 pb-2">
-                <button type="button" class="btn btn-success btn-block"><ion-icon name="share-social"></ion-icon> Share</button>
+                <button type="button" class="btn btn-success btn-block"><ion-icon name="share-social"></ion-icon> اشتراک گذاری</button>
             </div>
+            <div id="adCont" style="display: none;" class=" wide-block pt-2 pb-2">
+                <div class="adbox adbox-340-180 adHue sponsorLink">
+                    <img src="assets/img/sample/ads/big_ad.png" alt="image">
+                </div>
+            </div>
+
+           
 
 
 
@@ -92,7 +115,7 @@
             <div class="in">
                 <ion-icon name="warning"></ion-icon> 
                 <div class="text">
-                    Sharing isn't supported in your browser.
+                    اشتراک گذاری در مرورگر شما پشتیبانی نمی شود
                 </div>
             </div>
         </div>
@@ -101,7 +124,7 @@
             <div class="in">
                 <ion-icon name="warning"></ion-icon>
                 <div class="text">
-                    Upload a map!
+                    یک مپ آپلود کنید!
                 </div>
             </div>
         </div>
@@ -117,11 +140,16 @@
             <div class="in">
                 <ion-icon name="warning"></ion-icon>
                 <div class="text">
-                    Wrong Format!
+                    فرمت اشتباه!
                 </div>
             </div>
         </div>
 
+        <div class="appFooter"> 
+            <div id="totalViewers" class="footer-title">
+               
+            </div> 
+        </div>
         
 
 
@@ -157,9 +185,9 @@
                     <img src="assets/img/kaveh.jpg" alt="image" class="imaged rounded">
                 </div>
                 <div class="in">
-                    <strong class="kavascriptProfile">Made by kavascript</strong>
+                    <strong class="kavascriptProfile">ساخته شده توسط کاوه</strong>
                     <div class="text-muted">
-                        With <ion-icon name="heart"></ion-icon>
+                        با <ion-icon class="text-danger" name="heart"></ion-icon>
                     </div>
                 </div>
                 <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
@@ -170,12 +198,12 @@
 
             <ul class="listview flush transparent no-line image-listview mt-2">
                 <li>
-                    <a href="index.html" class="item">
+                    <a href="/" class="item">
                         <div class="icon-box bg-primary">
                             <ion-icon name="home-outline"></ion-icon>
                         </div>
                         <div class="in">
-                            Homepage
+                            صفحه اصلی
                         </div>
                     </a>
                 </li>
@@ -185,7 +213,7 @@
                             <ion-icon name="layers-outline"></ion-icon>
                         </div>
                         <div class="in">
-                            <div>Tools List</div>
+                            <div>لیست ابزار</div>
                         </div>
                     </a>
                 </li>
@@ -195,13 +223,23 @@
                             <ion-icon name="moon-outline"></ion-icon>
                         </div>
                         <div class="in">
-                            <div>Dark Mode</div>
+                            <div>دارک مود</div>
                             <div class="form-check form-switch">
                                 <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodesidebar">
                                 <label class="form-check-label" for="darkmodesidebar"></label>
                             </div>
                         </div>
                     </div>
+                </li>
+                <li class="sponsorLink2">
+                    <a href="javascript:void(0)" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="accessibility"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div></div>
+                        </div>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -222,7 +260,7 @@
     <!--JQuery -->
     <script src="assets/js/jquery.min.js"></script>
     <!-- Cleaner Code -->
-    <script type="module" src="assets/js/cleaner_newface.js"></script>
+    <script type="module" src="assets/js/fa/cleaner_fa.js"></script>
 
 </body>
 
