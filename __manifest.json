@@ -1,11 +1,11 @@
 {
-    "name": "BananaLAC",
-    "short_name": "BananaLAC",
+    "name": "PersianLAC",
+    "short_name": "PLAC",
     "start_url": "index.html",
     "display": "standalone",
     "scope" : "/",
-    "background_color": "#FFFF00",
-    "theme_color": "#FFFF00",
+    "background_color": "#1e74fd",
+    "theme_color": "#1e74fd",
     "orientation": "portrait",
     "icons": [
         {
