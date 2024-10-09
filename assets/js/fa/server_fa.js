@@ -58,7 +58,7 @@ $(document).ready(function() {
                 $("#serverName").html(data.name);
                 $("#serverId").html(data.id);
                 $("#svSt").html(`وضعیت سرور : ${conv1[data.online]}`);
-                if(data.online === true) $("#svOns").html(`تعداد پلیر آنلاین : ${conv1[data.onlines]}`)
+                if(data.online === true) $("#svOns").html(`تعداد پلیر آنلاین : ${data.onlines}`)
                 else $("#svOns").html(`تعداد پلیر آنلاین : سرور آفلاین است`);
                 $("#svW").html(`آب و هوا : ${conv2[data.weather]}`);
                 $("#svLike").html(`تعداد لایک : ${data.rate.up}`);
