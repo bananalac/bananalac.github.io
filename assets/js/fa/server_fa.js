@@ -28,11 +28,48 @@ function updateInfo() {
                 $(".pageTitle").html(`مشخصات سرور`)
                 $("#serverName").html(data.name);
                 $("#serverId").html(data.id);
-                $("#svSt").html(`وضعیت سرور : ${conv1[data.online]}`);
-                if(data.online === true) $("#svOns").html(`تعداد پلیر آنلاین : ${data.onlines}`)
-                else $("#svOns").html(`تعداد پلیر آنلاین : سرور آفلاین است`);
-                $("#svW").html(`آب و هوا : ${conv2[data.weather]}`);
-                $("#svLike").html(`تعداد لایک : ${data.rate.up}`);
+                $("#svSt").html(`<ion-icon name="information-circle-outline"></ion-icon> وضعیت سرور : ${conv1[data.online]}`);
+                if(data.online === true) $("#svOns").html(`<ion-icon name="people"></ion-icon> تعداد پلیر آنلاین : ${data.onlines}`)
+                else $("#svOns").html(`<ion-icon name="people"></ion-icon> تعداد پلیر آنلاین : سرور آفلاین است`);
+                $("#svW").html(`<ion-icon name="rainy-outline"></ion-icon> آب و هوا : ${conv2[data.weather]}`);
+                $("#svLike").html(` <ion-icon name="thumbs-up"></ion-icon> تعداد لایک : ${data.rate.up}`);
+
+                if(data.imageLink !== "") $("#imageHandling").attr("src", data.imageLink);
+                if(data.description !== "") $("#svbio").html(data.description);
+
+                document.getElementById("usersList").innerHTML = "";
+
+                if(data.users.length === 0) document.getElementById("usersList").innerHTML = `
+                  <li>
+                                    <div class="item">
+                                        <div class="icon-box bg-secondary">
+                                            <ion-icon name="alert"></ion-icon>
+                                        </div>
+                                        <div class="in">
+                                            <div>اطلاعاتی در دسترس نیست!</div>
+                                        </div>
+                                    </div>
+                                </li>
+                `;
+
+                data.users.forEach(usr => {
+                    const timeJoined = new persianDate(usr.timeJoined).format(`"dddd ، Dام MMMM ماه"`);
+                    const li = document.createElement('li');
+                    li.className = `no-select`;
+                    li.innerHTML = `
+                                    <div class="item">
+                                        <div class="icon-box bg-success">
+                                            <ion-icon name="arrow-down"></ion-icon>
+                                        </div>
+                                        <div class="in">
+                                            <div> [${usr.id}] ${usr.name}</div>
+                                            <span class="text-muted">${timeJoined}</span>
+                                        </div>
+                                    </div>
+                    `;
+
+                    document.getElementById("usersList").appendChild(li);
+                })
 
                 $("#upVote").on("touchend click", function(e) {
                     e.preventDefault();
@@ -64,6 +101,14 @@ function updateInfo() {
                             url: `https://persianlac.ir/server?id=${params.get('id').trim()}`
                         });
                       }
+                    }, 10);
+                });
+
+                $("#editButt").on("touchend click", function(e) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    setTimeout(() => {
+                        location.replace(`./editsv?id=${params.get('id').trim()}`)
                     }, 10);
                 });
 
