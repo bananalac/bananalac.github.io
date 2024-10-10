@@ -7,25 +7,24 @@
         content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#000000">
-    <title>اطلاعات سرور</title>
-    <meta name="keywords" content="bootstrap 5, mobile template, cordova, phonegap, mobile, html" />
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png" sizes="32x32">
-    <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/icon/192x192.png">
-    <link rel="stylesheet" href="../assets/css/style-fa.css">
-    <link rel="manifest" href="../__manifest.json">
+    <title>تغییر پیام بوردکست</title>
+    <meta name="keywords" content="lac, los angeles crimes, alizadev, mohammadalizade" />
+    <link rel="icon" type="image/png" href="assets/img/icon/92x92.png" sizes="92x92">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
+    <link rel="stylesheet" href="assets/css/style-fa.css">
+    <link rel="manifest" href="__manifest.json">
     <!-- OG -->
-   <meta name="theme-color" content="#1e74fd">
-   <meta property="og:title" content="ال ای سی فارسی">
-   <meta property="og:site_name" content="PersianLAC">
-   <meta property="og:type" content="Website">
-   <meta property="og:url" content="https://persianlac.ir/">
-   <meta property="og:image" content="https://persianlac.ir/assets/img/logembed.png">
-   <meta property="og:description" content="ابزار و محتوای ال ای سی">
-   <meta name="description" content="ابزار و محتوای ال ای سی">
+    <meta name="theme-color" content="#1e74fd">
+    <meta property="og:title" content="ال ای سی فارسی">
+    <meta property="og:site_name" content="PersianLAC">
+    <meta property="og:type" content="Website">
+    <meta property="og:url" content="https://persianlac.ir/">
+    <meta property="og:image" content="https://persianlac.ir/assets/img/logembed.png">
+    <meta property="og:description" content="ابزار و محتوای ال ای سی">
+    <meta name="description" content="ابزار و محتوای ال ای سی">
 </head>
 
-<body class="bg-white">
+<body>
 
     <!-- loader -->
     <div id="loader">
@@ -34,77 +33,89 @@
     <!-- * loader -->
 
     <!-- App Header -->
-    <div class="appHeader bg-primary text-light">
+    <div class="appHeader bg-primary scrolled">
         <div class="left">
-            <a id="shareSv" href="#" class="headerButton">
-                <ion-icon name="share-social"></ion-icon>
+            <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
+                <ion-icon name="menu-outline"></ion-icon>
             </a>
         </div>
-        <div class="pageTitle"></div>
-        <div class="right">
-            <a id="edit" href="#" class="headerButton">
-                <ion-icon name="pencil"></ion-icon>
-            </a>
+        <div class="pageTitle">
+            <img src="assets/img/logo.png" alt="logo" class="logo">             
         </div>
+       
     </div>
     <!-- * App Header -->
 
     <!-- App Capsule -->
-    <div id="appCapsule">
+    <div id="appCapsule" class="full-height">
 
-        <div id="hideThis" class="section full">
-            <div class="wide-block pt-2 pb-2">
-                <div class="spinner-border text-primary" role="status"></div>
-            </div>
+        <div class="adbox adbox-300-50 fixed adHue sponsorLink">
+            <img src="assets/img/ads/small_ad.png" alt="image">
         </div>
+
+        <div class="section full mt-2">
+           
+            <h1 class="title">تنظیم پیام عمومی <img src="assets/img/antenna.png" style="height: 50px;"></h1>
+            <div class="wide-block pt-2 pb-2">
+              
+              
+                <div class="form-group boxed">
+                    <div class="input-wrapper">
+                        <label class="form-label" for="boardcastSecret">کد بوردکست</label>
+                        <input type="text" class="form-control" id="boardcastSecret" placeholder="این کد را مخفی نگه دارید"
+                            autocomplete="off">
+                    </div>
+                </div>
+                
+                <div class="form-group boxed">
+                    <div class="input-wrapper">
+                        <label class="form-label" for="codebox">متن موردنظر</label>
+                        <p>از متن های بلند و حاوی ایموجی پرهیز کنید.کلمات فارسی میتواند مشکل دار باشد.</p>
+                        <textarea id="codebox" autocomplete="off" rows="2" class="form-control"></textarea>
+                    </div>
+                    <button id="updateBoardcast" type="button" class="btn btn-primary btn-block"><ion-icon name="refresh"></ion-icon> بروزرسانی</button>
+                    
+                </div>
+            </div>
+
+
+            
+
         
 
-        </div>
- 
-        <div style="display: none;" class="section mt-2 hideUntilLoad">
-            <div class="profile-head">
-                <div class="avatar">
-                    <img src="../assets/img/serversdef.jpg" alt="avatar" class="imaged w86 rounded">
-                </div>
-                <div class="in">
-                    <h3 id="serverName" class="name"></h3>
-                    <h5 id="serverId" class="subtext">یک مپ ال ای سی</h5>
-                </div>
+        <div class=" wide-block pt-2 pb-2">
+            <div class="adbox adbox-340-180 adHue sponsorLink">
+                <img src="assets/img/sample/ads/big_ad.png" alt="image">
             </div>
         </div>
 
-        <div style="display: none;" class="section mt-1 mb-2 hideUntilLoad">
-            <div class="profile-info">
-                <div id="svbio" class="bio"></div>
-                <div class="link">
-                   
+
+        <div id="toast-nosecret" class="toast-box toast-top bg-danger">
+            <div class="in">
+                <ion-icon name="warning"></ion-icon>
+                <div class="text">
+                  کد یا متن خالی است!
                 </div>
             </div>
         </div>
 
-        <div style="display: none;" class="section full hideUntilLoad">
-            <div class="section-title large">اطلاعات سرور</div>
-            <div class="wide-block pt-2 pb-2">
-              <h2 id="svSt"></h2>
-              <h2 id="svOns"></h2>
-              <h2 id="svW"></h2>
-              <h3 id="svLike"></h3>
-              <!-- <h3 id="svView"></h3> -->
+        <div id="toast-success" class="toast-box toast-top bg-success">
+            <div class="in">
+                <ion-icon name="refresh"></ion-icon>
+                <div class="text">
+                 متن پیام بروز شد!
+                </div>
             </div>
-            <div id="rating" class="wide-block pt-2 pb-2">
-                <h2 id="rateTitle">آیا از این سرور راضی هستید؟</h2>
-                <button id="upVote" type="button" class="btn btn-primary"><ion-icon name="thumbs-up"></ion-icon> بله</button>
-           </div>
         </div>
 
 
-       
+
 
     </div>
     <!-- * App Capsule -->
 
-     <!-- App Bottom Menu -->
-     <div class="appBottomMenu">
+    <!-- App Bottom Menu -->
+    <div class="appBottomMenu">
         <a href="/list" class="item">
             <div class="col">
                 <ion-icon name="layers-outline"></ion-icon>
@@ -129,7 +140,7 @@
             <!-- profile box -->
             <div class="profileBox">
                 <div class="image-wrapper">
-                    <img src="../assets/img/kaveh.jpg" alt="image" class="imaged rounded">
+                    <img src="assets/img/kaveh.jpg" alt="image" class="imaged rounded">
                 </div>
                 <div class="in">
                     <strong class="kavascriptProfile">ساخته شده توسط کاوه</strong>
@@ -195,20 +206,19 @@
 
     <!-- ============== Js Files ==============  -->
     <!-- Bootstrap -->
-    <script src="../assets/js/lib/bootstrap.min.js"></script>
+    <script src="assets/js/lib/bootstrap.min.js"></script>
     <!-- Ionicons -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <!-- Splide -->
-    <script src="../assets/js/plugins/splide/splide.min.js"></script>
+    <script src="assets/js/plugins/splide/splide.min.js"></script>
     <!-- ProgressBar js -->
-    <script src="../assets/js/plugins/progressbar-js/progressbar.min.js"></script>
+    <script src="assets/js/plugins/progressbar-js/progressbar.min.js"></script>
     <!-- Base Js File -->
-    <script src="../assets/js/base.js"></script>
-    <!-- JQuery -->
-    <script src="../assets/js/jquery.min.js"></script>
-    <!-- Server file -->
-    <script src="../assets/js/fa/server_fa.js"></script>
-
+    <script src="assets/js/base.js"></script>
+    <!--JQuery -->
+    <script src="assets/js/jquery.min.js"></script>
+    <!-- Linter Code -->
+    <script type="module" src="assets/js/fa/b_fa.js"></script>
 </body>
 
 </html>

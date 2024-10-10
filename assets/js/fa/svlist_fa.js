@@ -19,7 +19,7 @@ function updateList() {
             offlinesContainer.innerHTML = "";
 
             if(onlines.length === 0) onlinesContainer.innerHTML = `
-             <li>
+             <li id="ignore">
                 <a href="#" class="item">
                     <div class="in">
                         <div>
@@ -31,7 +31,7 @@ function updateList() {
             `;
 
             if(offlines.length === 0) offlinesContainer.innerHTML = `
-             <li>
+             <li id="ignore">
                 <a href="#" class="item">
                     <div class="in">
                         <div>
@@ -139,7 +139,7 @@ $(document).ready(function() {
     setInterval(updateList, 30_000);
 
 
-    $("#offlines, #onlines").on("touchend click", 'li', function() {
+    $("#offlines, #onlines").on("touchend click", 'li:not(#ignore)', function() {
         const itsID = $(this).attr("id");
 
         location.replace('./server?id=' + itsID);
