@@ -43,7 +43,7 @@ const Mobilekit = {
         alertMessage: "Test mode has been activated. Look at the developer console!" // Alert message
     },
     //-------------------------------------------------------------------
-    displayAds: false
+    displayAds: true
 }
 //-----------------------------------------------------------------------
 
