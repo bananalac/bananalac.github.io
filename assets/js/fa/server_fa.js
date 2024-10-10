@@ -9,7 +9,7 @@ function updateInfo() {
     if(params.has('id')) {
 
         $.get(`https://api.persianlac.ir/servers/get?id=${params.get('id').trim()}`, function(data) {
-            if(data.noid) location.replace('./list?err=id')
+            if(data.noid) location.replace('./svlist?err=id')
             else {
 
                 const conv1 = {
@@ -69,11 +69,11 @@ function updateInfo() {
 
             }
         }).fail(function() {
-            location.replace('./list?err=id');
+            location.replace('./svlist?err=id');
         });
 
     } else {
-        location.replace('./list?err=id');
+        location.replace('./svlist?err=id');
     }
 }
 

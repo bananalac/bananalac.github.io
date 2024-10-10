@@ -142,7 +142,7 @@ $(document).ready(function() {
     $("#offlines, #onlines").on("touchend click", 'li:not(#ignore)', function() {
         const itsID = $(this).attr("id");
 
-        location.replace('./server?id=' + itsID);
+        location.replace('./mapinfo?id=' + itsID);
     });
 
 })
