@@ -46,21 +46,6 @@
     </div>
     <!-- * App Header -->
 
-    <!-- Search Component -->
-    <div id="search" class="appHeader">
-        <form class="search-form">
-            <div class="form-group searchbox">
-                <input type="text" class="form-control" placeholder="Search...">
-                <i class="input-icon">
-                    <ion-icon name="search-outline"></ion-icon>
-                </i>
-                <a href="#" class="ms-1 close toggle-searchbox">
-                    <ion-icon name="close-circle"></ion-icon>
-                </a>
-            </div>
-        </form>
-    </div>
-    <!-- * Search Component -->
 
     <!-- App Capsule -->
     <div id="appCapsule">
@@ -100,16 +85,6 @@
                     </div>
                 </a>
             </li>
-            <li>
-                <a href="/privacypolicy.html" class="item">
-                    <div class="icon-box bg-primary">
-                        <ion-icon name="shield-half"></ion-icon>
-                    </div>
-                    <div class="in">
-                        سیاست حفظ حریم خصوصی
-                    </div>
-                </a>
-            </li>
         </ul>
 
 
@@ -120,96 +95,120 @@
     </div>
     <!-- * App Capsule -->
 
-
-     <!-- App Bottom Menu -->
-     <div class="appBottomMenu">
-        <a href="/list" class="item">
-            <div class="col">
-                <ion-icon name="layers-outline"></ion-icon>
-            </div>
-        </a>
-        <a href="/" class="item active">
-            <div class="col">
-                <ion-icon name="home-outline"></ion-icon>
-            </div>
-        </a>
-        <a href="#sidebarPanel" class="item" data-bs-toggle="offcanvas">
-            <div class="col">
-                <ion-icon name="menu-outline"></ion-icon>
-            </div>
-        </a>
-    </div>
-    <!-- * App Bottom Menu -->
-
-    <!-- App Sidebar -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarPanel">
-        <div class="offcanvas-body">
-            <!-- profile box -->
-            <div class="profileBox">
-                <div class="image-wrapper">
-                    <img src="assets/img/kaveh.jpg" alt="image" class="imaged rounded">
-                </div>
-                <div class="in">
-                    <strong class="kavascriptProfile">ساخته شده توسط کاوه</strong>
-                    <div class="text-muted">
-                        با <ion-icon class="text-danger" name="heart"></ion-icon>
-                    </div>
-                </div>
-                <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
-                    <ion-icon name="close"></ion-icon>
-                </a>
-            </div>
-            <!-- * profile box -->
-
-            <ul class="listview flush transparent no-line image-listview mt-2">
-                <li>
-                    <a href="/" class="item">
-                        <div class="icon-box bg-primary">
-                            <ion-icon name="home-outline"></ion-icon>
-                        </div>
-                        <div class="in">
-                            صفحه اصلی
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/list" class="item">
-                        <div class="icon-box bg-primary">
-                            <ion-icon name="layers-outline"></ion-icon>
-                        </div>
-                        <div class="in">
-                            <div>لیست ابزار</div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <div class="item">
-                        <div class="icon-box bg-primary">
-                            <ion-icon name="moon-outline"></ion-icon>
-                        </div>
-                        <div class="in">
-                            <div>دارک مود</div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodesidebar">
-                                <label class="form-check-label" for="darkmodesidebar"></label>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="sponsorLink2">
-                    <a href="javascript:void(0)" class="item">
-                        <div class="icon-box bg-primary">
-                            <ion-icon name="accessibility"></ion-icon>
-                        </div>
-                        <div class="in">
-                            <div></div>
-                        </div>
-                    </a>
-                </li>
-            </ul>
+ <!-- App Bottom Menu -->
+ <div class="appBottomMenu">
+    <a href="/list" class="item">
+        <div class="col">
+            <ion-icon name="hammer-outline"></ion-icon>
+            <strong>لیست ابزار</strong>
         </div>
+    </a>
+    <a href="/apihelp" class="item">
+        <div class="col">
+            <ion-icon name="help"></ion-icon>
+            <strong>راهنما</strong>
+        </div>
+    </a>
+    <a href="/" class="item active">
+        <div class="col">
+            <ion-icon name="home-outline"></ion-icon>
+            <strong>خانه</strong>
+        </div>
+    </a>
+    <a href="/svlist" class="item">
+        <div class="col">
+            <ion-icon name="server-outline"></ion-icon>
+            <strong>لیست سرور</strong>
+        </div>
+    </a>
+    <a href="#sidebarPanel" class="item" data-bs-toggle="offcanvas">
+        <div class="col">
+            <ion-icon name="menu-outline"></ion-icon>
+            <strong>منو</strong>
+        </div>
+    </a>
+</div>
+<!-- * App Bottom Menu -->
+
+<!-- App Sidebar -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarPanel">
+    <div class="offcanvas-body">
+        <!-- profile box -->
+        <div class="profileBox">
+            <!-- <div class="image-wrapper">
+                <img src="assets/img/iran.png" alt="image" class="imaged rounded">
+            </div> -->
+            <div class="in">
+                <strong class="kavascriptProfile">منو دسترسی</strong>
+                <div class="text-muted">
+                   
+                </div>
+            </div>
+            <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
+                <ion-icon name="close"></ion-icon>
+            </a>
+        </div>
+        <!-- * profile box -->
+
+        <ul class="listview flush transparent no-line image-listview mt-2">
+            <li>
+                <a href="/" class="item">
+                    <div class="icon-box bg-primary">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </div>
+                    <div class="in">
+                        صفحه اصلی
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/list" class="item">
+                    <div class="icon-box bg-primary">
+                        <ion-icon name="hammer-outline"></ion-icon>
+                    </div>
+                    <div class="in">
+                        <div>لیست ابزار</div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/svlist" class="item">
+                    <div class="icon-box bg-primary">
+                        <ion-icon name="server-outline"></ion-icon>
+                    </div>
+                    <div class="in">
+                        <div>لیست سرور</div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/apihelp" class="item">
+                    <div class="icon-box bg-primary">
+                        <ion-icon name="help-outline"></ion-icon>
+                    </div>
+                    <div class="in">
+                        <div>راهنمای API</div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <div class="item">
+                    <div class="icon-box bg-primary">
+                        <ion-icon name="moon-outline"></ion-icon>
+                    </div>
+                    <div class="in">
+                        <div>دارک مود</div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodesidebar">
+                            <label class="form-check-label" for="darkmodesidebar"></label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
-    <!-- * App Sidebar -->
+</div>
+<!-- * App Sidebar -->
 
 
     <!-- ============== Js Files ==============  -->

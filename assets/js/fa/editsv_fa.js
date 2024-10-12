@@ -23,9 +23,10 @@ $(document).ready(function() {
 
             $("#descriptionEdit").val(data.description);
             $("#imagelinkEdit").val(data.imageLink);
+            $("#rulesEdit").val(data.rules);
+            $("#linkEdit").val(data.link);
             $("#ipaddressEdit").val(data.ipaddress);
-           // $("#resetTimerEdit").val(data.usersResetTimer);
-           
+          
 
 
           }
@@ -77,14 +78,15 @@ $(document).ready(function() {
             const d = $("#descriptionEdit").val().trim();
             const img = $("#imagelinkEdit").val().trim();
             const ip = $("#ipaddressEdit").val().trim();
-            //const res = $("#resetTimerEdit").val().trim();
-
+            const link = $("#linkEdit").val().trim();
+            const rulz = $("#rulesEdit").val()
+           
             
            
-            $.post(`https://api.persianlac.ir/servers/edit`, { secret: givenSecret, description: d, imageLink: img, ipaddress: ip, usersResetTimer: 60, links: ["test"] }, function(data) {
+            $.post(`https://api.persianlac.ir/servers/edit`, { secret: givenSecret, link: link, rules: rulz, description: d, imageLink: img, ipaddress: ip, usersResetTimer: 60, links: ["test"] }, function(data) {
                 if(data.success) {
                     toastbox('toast-proceed', 3000);
-                    location.reload();
+                    location.replace('./mapinfo?id=' + givenId);
                 }
             })
         }, 10);

@@ -5,40 +5,9 @@ let cache = { name: "", map: "" };
 $(document).ready(function() {
 
     $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/cleanerViewerCount/up", function(data) {
-        $("#totalViewers").html(`تعداد بازدید کل : ${data.count}`)
+        $("#totalViewers").html(`تعداد بازدید : ${data.count}`)
     });
 
-    $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/cleanerUpVotes/", function(data) {
-        $("#upVote").html(`<ion-icon name="thumbs-up"></ion-icon> راضی (${data.count})`)
-    });
-
-    $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/cleanerDownVotes/", function(data) {
-        $("#downVote").html(`<ion-icon name="thumbs-down"></ion-icon> ناراضی (${data.count})`)
-    });
-
-    $("#upVote").on("touchend click", function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/cleanerUpVotes/up", function(data) {
-                $("#rateTitle").html("از نظر شما متشکریم!");
-                $(".btn-group").slideUp();
-                $("#upVote").html(`<ion-icon name="thumbs-up"></ion-icon> راضی (${data.count})`).prop("disabled", true);
-            });
-        }, 10);
-    });
-
-    $("#downVote").on("touchend click", function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/cleanerDownVotes/up", function(data) {
-                $("#rateTitle").html("از نظر شما متشکریم!");
-                $(".btn-group").slideUp();
-                $("#downVote").html(`<ion-icon name="thumbs-down"></ion-icon> ناراضی (${data.count})`).prop("disabled", true);
-            });
-        }, 10);
-    });
 
     const degrees = ['0', '45', '90', '130', '180', '225', '270', '315', '360'];
     setInterval(() => {
@@ -59,20 +28,7 @@ $(document).ready(function() {
             document.body.removeChild(a);
         }, 10);
     });
-    $(".sponsorLink2").on("touchend click", function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            let a = document.createElement('a');
-            a.href = 'rubika://l.rubika.ir/LAC_HOST';
-            a.target = '_blank';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }, 10);
-    });
-
-
+ 
     $(".btn-close").on("touchstart click", function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -119,8 +75,7 @@ $(document).ready(function() {
             if(navigator.share) $("#shareButton").show();
             $("#downloadButton").show(); 
             $("#adCont").show();  
-            $("#newOne").show();     
-            $("#rating").show();       
+            $("#newOne").show();           
             $("#uploadButton").hide();
             $("#fileuploadInput").prop("disabled", true);
             $("#foundX").html(`${triggerboxesLength} تا تریگرباکس پیدا شد!`);
@@ -201,12 +156,11 @@ $(document).ready(function() {
 
            location.reload();
 
-
         }, 10);
        
-    })
+    });
     
-})
+});
 
 
 

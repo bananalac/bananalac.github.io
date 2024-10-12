@@ -14,19 +14,11 @@ function extractBetweenTags(str) {
     }
 };
 
-function getNowTime() {
-   
-    const today = new JDate;
-    today.format('dddd DD MMMM YYYY');
-    console.log(today)
-    return today.toString();
-}
 
 function autosave() {
     const data = JSON.stringify(cache);
     localStorage.setItem('AUTOSAVE-EDITOR', data);
-   // localStorage.setItem('AUTOSAVE-TIME', getNowTime());
-}
+};
 
 function closeUploadSectionManually() {
 
@@ -86,39 +78,7 @@ const roles = [
 $(document).ready(function() {
 
     $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/editorViewerCount/up", function(data) {
-        $("#totalViewers").html(`تعداد بازدید کل : ${data.count}`)
-    });
-
-    $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/editorUpVotes/", function(data) {
-        $("#upVote").html(`<ion-icon name="thumbs-up"></ion-icon> راضی (${data.count})`)
-    });
-
-    $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/editorDownVotes/", function(data) {
-        $("#downVote").html(`<ion-icon name="thumbs-down"></ion-icon> ناراضی (${data.count})`)
-    });
-
-    $("#upVote").on("touchend click", function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/editorUpVotes/up", function(data) {
-                $("#rateTitle").html("از نظر شما متشکریم!");
-                $(".btn-group").slideUp();
-                $("#upVote").html(`<ion-icon name="thumbs-up"></ion-icon> راضی (${data.count})`).prop("disabled", true);
-            });
-        }, 10);
-    });
-
-    $("#downVote").on("touchend click", function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/editorDownVotes/up", function(data) {
-                $("#rateTitle").html("از نظر شما متشکریم!");
-                $(".btn-group").slideUp();
-                $("#downVote").html(`<ion-icon name="thumbs-down"></ion-icon> ناراضی (${data.count})`).prop("disabled", true);
-            });
-        }, 10);
+        $("#totalViewers").html(`تعداد بازدید : ${data.count}`)
     });
 
     const degrees = ['0', '45', '90', '130', '180', '225', '270', '315', '360'];
@@ -140,25 +100,10 @@ $(document).ready(function() {
             document.body.removeChild(a);
         }, 10);
     });
-    $(".sponsorLink2").on("touchend click", function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            let a = document.createElement('a');
-            a.href = 'rubika://l.rubika.ir/LAC_HOST';
-            a.target = '_blank';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }, 10);
-    });
     
-
-
     if(localStorage.getItem('AUTOSAVE-EDITOR') === null) $("#autosaveButton").prop("disabled", true);
     if(!navigator.share) $("#shareButton").html('<ion-icon name="share-social"></ion-icon> اشتراک گذاری پشتیبانی نمی شود').prop("disabled", true);
 
-    
 
     $("#autosaveButton").on("touchend click", function(e) {
         e.preventDefault();

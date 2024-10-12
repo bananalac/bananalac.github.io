@@ -19,21 +19,7 @@ $(document).ready(function() {
             document.body.removeChild(a);
         }, 10);
     });
-    $(".sponsorLink2").on("touchend click", function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            let a = document.createElement('a');
-            a.href = 'rubika://l.rubika.ir/LAC_HOST';
-            a.target = '_blank';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }, 10);
-    });
-
-
-
+   
     $("#updateBoardcast").on("touchend click", function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -57,4 +43,4 @@ $(document).ready(function() {
     })
 
 
-})
+});

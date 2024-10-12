@@ -71,7 +71,7 @@
             <div class="in">
                 <ion-icon name="warning"></ion-icon>
                 <div class="text">
-                 آیدی اشتباه است یا قابل دسترسی نیست!
+                 خطا در دریافت اطلاعات
                 </div>
             </div>
         </div>
@@ -82,21 +82,36 @@
     </div>
     <!-- * App Capsule -->
 
-     <!-- App Bottom Menu -->
-     <div class="appBottomMenu">
+    <!-- App Bottom Menu -->
+    <div class="appBottomMenu">
         <a href="/list" class="item">
             <div class="col">
-                <ion-icon name="layers-outline"></ion-icon>
+                <ion-icon name="hammer-outline"></ion-icon>
+                <strong>لیست ابزار</strong>
+            </div>
+        </a>
+        <a href="/apihelp" class="item">
+            <div class="col">
+                <ion-icon name="help"></ion-icon>
+                <strong>راهنما</strong>
             </div>
         </a>
         <a href="/" class="item active">
             <div class="col">
                 <ion-icon name="home-outline"></ion-icon>
+                <strong>خانه</strong>
+            </div>
+        </a>
+        <a href="/svlist" class="item">
+            <div class="col">
+                <ion-icon name="server-outline"></ion-icon>
+                <strong>لیست سرور</strong>
             </div>
         </a>
         <a href="#sidebarPanel" class="item" data-bs-toggle="offcanvas">
             <div class="col">
                 <ion-icon name="menu-outline"></ion-icon>
+                <strong>منو</strong>
             </div>
         </a>
     </div>
@@ -107,13 +122,13 @@
         <div class="offcanvas-body">
             <!-- profile box -->
             <div class="profileBox">
-                <div class="image-wrapper">
-                    <img src="assets/img/kaveh.jpg" alt="image" class="imaged rounded">
-                </div>
+                <!-- <div class="image-wrapper">
+                    <img src="assets/img/iran.png" alt="image" class="imaged rounded">
+                </div> -->
                 <div class="in">
-                    <strong class="kavascriptProfile">ساخته شده توسط کاوه</strong>
+                    <strong class="kavascriptProfile">منو دسترسی</strong>
                     <div class="text-muted">
-                        با <ion-icon class="text-danger" name="heart"></ion-icon>
+                       
                     </div>
                 </div>
                 <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
@@ -136,10 +151,30 @@
                 <li>
                     <a href="/list" class="item">
                         <div class="icon-box bg-primary">
-                            <ion-icon name="layers-outline"></ion-icon>
+                            <ion-icon name="hammer-outline"></ion-icon>
                         </div>
                         <div class="in">
                             <div>لیست ابزار</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/svlist" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="server-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>لیست سرور</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/apihelp" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>راهنمای API</div>
                         </div>
                     </a>
                 </li>
@@ -156,16 +191,6 @@
                             </div>
                         </div>
                     </div>
-                </li>
-                <li class="sponsorLink2">
-                    <a href="javascript:void(0)" class="item">
-                        <div class="icon-box bg-primary">
-                            <ion-icon name="accessibility"></ion-icon>
-                        </div>
-                        <div class="in">
-                            <div></div>
-                        </div>
-                    </a>
                 </li>
             </ul>
         </div>

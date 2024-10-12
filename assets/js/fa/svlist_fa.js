@@ -48,7 +48,7 @@ function updateList() {
                 li.id = sv.id;
                 li.innerHTML = `
                 <a href="javascript:void(0)" class="item">
-                    <img src="../assets/img/serversdef.jpg" alt="image" class="image">
+                    <img src="${sv.imageLink}" alt="image" class="image">
                     <div class="in">
                         <div>
                             <header>${sv.id}</header>
@@ -70,7 +70,7 @@ function updateList() {
                 li.id = sv.id;
                 li.innerHTML = `
                 <a href="javascript:void(0)" class="item">
-                    <img src="../assets/img/serversdef.jpg" alt="image" class="image">
+                    <img src="${sv.imageLink}" alt="image" class="image">
                     <div class="in">
                         <div>
                             <header>${sv.id}</header>
@@ -120,29 +120,20 @@ $(document).ready(function() {
             document.body.removeChild(a);
         }, 10);
     });
-    $(".sponsorLink2").on("touchend click", function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            let a = document.createElement('a');
-            a.href = 'rubika://l.rubika.ir/LAC_HOST';
-            a.target = '_blank';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }, 10);
-    });
-
+   
 
     updateList();
 
     setInterval(updateList, 30_000);
 
 
-    $("#offlines, #onlines").on("touchend click", 'li:not(#ignore)', function() {
-        const itsID = $(this).attr("id");
-
-        location.replace('./mapinfo?id=' + itsID);
+    $("#offlines, #onlines").on("touchend click", 'li:not(#ignore)', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const itsID = $(this).attr("id");
+            location.replace('./mapinfo?id=' + itsID);
+        }, 10);
     });
 
 })

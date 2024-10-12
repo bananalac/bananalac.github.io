@@ -26,31 +26,20 @@ function updateInfo() {
                 $(".hideUntilLoad").show();
                 $("#hideThis").hide();
                 $(".pageTitle").html(`مشخصات سرور`)
-                $("#serverName").html(data.name);
+                $("#serverName").html(data.name.trim());
                 $("#serverId").html(data.id);
                 $("#svSt").html(`<ion-icon name="information-circle-outline"></ion-icon> وضعیت سرور : ${conv1[data.online]}`);
-                if(data.online === true) $("#svOns").html(`<ion-icon name="people"></ion-icon> تعداد پلیر آنلاین : ${data.onlines}`)
-                else $("#svOns").html(`<ion-icon name="people"></ion-icon> تعداد پلیر آنلاین : سرور آفلاین است`);
-                $("#svW").html(`<ion-icon name="rainy-outline"></ion-icon> آب و هوا : ${conv2[data.weather]}`);
-                $("#svLike").html(` <ion-icon name="thumbs-up"></ion-icon> تعداد لایک : ${data.rate.up}`);
-
-                if(data.imageLink !== "") $("#imageHandling").attr("src", data.imageLink);
+                if(data.ipaddress.trim() !== "") $("#svIP").show().html(`<ion-icon name="hardware-chip-outline"></ion-icon> آدرس سرور : ${data.ipaddress.trim()}`);
+                if(data.online === true) {
+                    $("#svOns").show().html(`<ion-icon name="people-outline"></ion-icon> تعداد پلیر در حال بازی : ${data.onlines}`);
+                    $("#svW").show().html(`<ion-icon name="rainy-outline"></ion-icon> آب و هوا : ${conv2[data.weather]}`);
+                } 
+                
                 if(data.description !== "") $("#svbio").html(data.description);
 
                 document.getElementById("usersList").innerHTML = "";
 
-                if(data.users.length === 0) document.getElementById("usersList").innerHTML = `
-                  <li>
-                                    <div class="item">
-                                        <div class="icon-box bg-secondary">
-                                            <ion-icon name="alert"></ion-icon>
-                                        </div>
-                                        <div class="in">
-                                            <div>اطلاعاتی در دسترس نیست!</div>
-                                        </div>
-                                    </div>
-                                </li>
-                `;
+                if(data.users.length !== 0) $("#usersAcco").show();
 
                 data.users.forEach(usr => {
                     const timeJoined = new persianDate(usr.timeJoined).format(`"dddd ، Dام MMMM ماه"`);
@@ -69,27 +58,28 @@ function updateInfo() {
                     `;
 
                     document.getElementById("usersList").appendChild(li);
-                })
-
-                $("#upVote").on("touchend click", function(e) {
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                    setTimeout(() => {
-                        $.post(`https://api.persianlac.ir/servers/upvote`, { id: params.get('id').trim() }, function(data2) {
-
-                            if(data2.success === true) {
-                                $("#upVote").hide();
-                                $("#rateTitle").html(`از نظر شما متشکریم!`);
-                                setTimeout(() => {
-                                    rateOnSession = true;
-                                    $("#rating").sildeUp();
-                                }, 3000);
-                            } else {
-
-                            }
-                        });
-                    }, 10);
                 });
+
+                if(data.rules !== "") {
+                    const rulesList = document.getElementById("rulesList");
+                    data.rules.split("\n").forEach((rule) => {
+                        const li = document.createElement('li');
+                        li.innerHTML = rule;
+                        rulesList.appendChild(li);
+                    });
+                }
+
+                if(data.link !== "") {
+                    const rulesList = document.getElementById("linkList");
+                    data.link.split(" ").forEach((lin) => {
+                        const a = document.createElement('a');
+                        a.href = lin;
+                        a.innerHTML = lin;
+                        rulesList.appendChild(a);
+                    });
+                }
+
+                
 
                 $("#shareSv").on("touchend click", function(e) {
                     e.preventDefault();

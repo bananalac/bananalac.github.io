@@ -61,11 +61,11 @@
         <div style="display: none;" class="section mt-2 hideUntilLoad">
             <div class="profile-head">
                 <div class="avatar">
-                    <img id="imageHandling" src="assets/img/serversdef.jpg" alt="avatar" class="imaged w86 rounded">
+                    <img id="imageHandling" src="assets/img/default-prof.jpg" alt="avatar" class="imaged w86 rounded">
                 </div>
                 <div class="in">
                     <h3 id="serverName" class="name"></h3>
-                    <h5 id="serverId" class="subtext">یک مپ ال ای سی</h5>
+                    <h5 id="serverId" class="subtext"></h5>
                 </div>
             </div>
         </div>
@@ -73,27 +73,26 @@
         <div style="display: none;" class="section mt-1 mb-2 hideUntilLoad">
             <div class="profile-info">
                 <div id="svbio" class="bio"></div>
-                <div class="link">
+                <div id="linkList" class="link">
                    
                 </div>
             </div>
         </div>
 
         <div style="display: none;" class="section full hideUntilLoad">
-            <div class="section-title large">اطلاعات سرور</div>
+            <div class="section-title large">اطلاعات کلی سرور</div>
             <div class="wide-block pt-2 pb-2">
               <h2 id="svSt"></h2>
-              <h2 id="svOns"></h2>
-              <h2 id="svW"></h2>
-              <h3 id="svLike"></h3>
-              <!-- <h3 id="svView"></h3> -->
+              <h2 style="display: none;" id="svIP"></h2>
+              <h2 style="display: none;" id="svOns"></h2>
+              <h2 style="display: none;" id="svW"></h2>
             </div>
-            <div class="accordion" id="usersAcco">
+            <div style="display: none;" class="accordion" id="usersAcco">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#accordionusr">
-                            <ion-icon name="options"></ion-icon>
+                            <ion-icon name="people"></ion-icon>
                             اعضای درون مپ
                         </button>
                     </h2>
@@ -107,10 +106,26 @@
                     </div>
                 </div>
             </div> 
-            <div id="rating" class="wide-block pt-2 pb-2">
-                <h2 id="rateTitle">آیا از این سرور راضی هستید؟</h2>
-                <button id="upVote" type="button" class="btn btn-primary"><ion-icon name="thumbs-up"></ion-icon> بله</button>
-           </div>
+
+            <div style="display: none;" class="accordion" id="rulesAcco">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#accordionrules">
+                            <ion-icon name="ban"></ion-icon>
+                            قوانین سرور
+                        </button>
+                    </h2>
+                    <div id="accordionrules" class="accordion-collapse collapse" data-bs-parent="#rulesAcco">
+                        <div class="accordion-body">
+                            
+                            <ol id="rulesList">
+                              
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div> 
         </div>
         
 
@@ -124,21 +139,36 @@
     </div>
     <!-- * App Capsule -->
 
-     <!-- App Bottom Menu -->
-     <div class="appBottomMenu">
+    <!-- App Bottom Menu -->
+    <div class="appBottomMenu">
         <a href="/list" class="item">
             <div class="col">
-                <ion-icon name="layers-outline"></ion-icon>
+                <ion-icon name="hammer-outline"></ion-icon>
+                <strong>لیست ابزار</strong>
+            </div>
+        </a>
+        <a href="/apihelp" class="item">
+            <div class="col">
+                <ion-icon name="help"></ion-icon>
+                <strong>راهنما</strong>
             </div>
         </a>
         <a href="/" class="item active">
             <div class="col">
                 <ion-icon name="home-outline"></ion-icon>
+                <strong>خانه</strong>
+            </div>
+        </a>
+        <a href="/svlist" class="item">
+            <div class="col">
+                <ion-icon name="server-outline"></ion-icon>
+                <strong>لیست سرور</strong>
             </div>
         </a>
         <a href="#sidebarPanel" class="item" data-bs-toggle="offcanvas">
             <div class="col">
                 <ion-icon name="menu-outline"></ion-icon>
+                <strong>منو</strong>
             </div>
         </a>
     </div>
@@ -149,13 +179,13 @@
         <div class="offcanvas-body">
             <!-- profile box -->
             <div class="profileBox">
-                <div class="image-wrapper">
-                    <img src="assets/img/kaveh.jpg" alt="image" class="imaged rounded">
-                </div>
+                <!-- <div class="image-wrapper">
+                    <img src="assets/img/iran.png" alt="image" class="imaged rounded">
+                </div> -->
                 <div class="in">
-                    <strong class="kavascriptProfile">ساخته شده توسط کاوه</strong>
+                    <strong class="kavascriptProfile">منو دسترسی</strong>
                     <div class="text-muted">
-                        با <ion-icon class="text-danger" name="heart"></ion-icon>
+                       
                     </div>
                 </div>
                 <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
@@ -178,10 +208,30 @@
                 <li>
                     <a href="/list" class="item">
                         <div class="icon-box bg-primary">
-                            <ion-icon name="layers-outline"></ion-icon>
+                            <ion-icon name="hammer-outline"></ion-icon>
                         </div>
                         <div class="in">
                             <div>لیست ابزار</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/svlist" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="server-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>لیست سرور</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/apihelp" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>راهنمای API</div>
                         </div>
                     </a>
                 </li>
@@ -198,16 +248,6 @@
                             </div>
                         </div>
                     </div>
-                </li>
-                <li class="sponsorLink2">
-                    <a href="javascript:void(0)" class="item">
-                        <div class="icon-box bg-primary">
-                            <ion-icon name="accessibility"></ion-icon>
-                        </div>
-                        <div class="in">
-                            <div></div>
-                        </div>
-                    </a>
                 </li>
             </ul>
         </div>
@@ -230,7 +270,7 @@
     <!-- PersianDate -->
     <script src="assets/js/persian-date.min.js"></script>
     <!-- Server file -->
-    <script src="assets/js/fa/server_fa.js"></script>
+    <script src="assets/js/fa/mapinfo_fa.js"></script>
 
 </body>
 

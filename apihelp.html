@@ -7,24 +7,22 @@
         content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>تغییر پیام بوردکست</title>
+    <title>API Help</title>
     <meta name="keywords" content="lac, los angeles crimes, alizadev, mohammadalizade" />
-    <link rel="icon" type="image/png" href="assets/img/icon/92x92.png" sizes="92x92">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
     <link rel="stylesheet" href="assets/css/style-fa.css">
     <link rel="manifest" href="__manifest.json">
-    <!-- OG -->
-    <meta name="theme-color" content="#1e74fd">
-    <meta property="og:title" content="ال ای سی فارسی">
-    <meta property="og:site_name" content="PersianLAC">
-    <meta property="og:type" content="Website">
-    <meta property="og:url" content="https://persianlac.ir/">
-    <meta property="og:image" content="https://persianlac.ir/assets/img/logembed.png">
-    <meta property="og:description" content="ابزار و محتوای ال ای سی">
-    <meta name="description" content="ابزار و محتوای ال ای سی">
+     <!-- OG -->
+     <meta property="og:title" content="راهنمای وب سرویس">
+     <meta property="og:site_name" content="PersianLAC">
+     <meta property="og:type" content="Website">
+     <meta property="og:url" content="https://persianlac.ir/privacypolicy">
+     <meta property="og:image" content="https://persianlac.ir/assets/img/logembed.png">
+     <meta property="og:description" content="راهنمای وب سرویس">
 </head>
 
-<body>
+<body class="bg-white text-light">
 
     <!-- loader -->
     <div id="loader">
@@ -34,88 +32,97 @@
 
     <!-- App Header -->
     <div class="appHeader bg-primary">
-        <div class="left">
-            <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
-                <ion-icon name="menu-outline"></ion-icon>
-            </a>
-        </div>
-        <div class="pageTitle">
-            <img src="assets/img/logo.png" alt="logo" class="logo">             
-        </div>
+        
+        <div class="pageTitle">راهنمای API</div>
        
     </div>
     <!-- * App Header -->
 
     <!-- App Capsule -->
-    <div id="appCapsule" class="full-height">
+    <div id="appCapsule">
 
-        <div class="adbox adbox-300-50 fixed adHue sponsorLink">
-            <img src="assets/img/ads/small_ad.png" alt="image">
-        </div>
+        <div class="blog-post">
+            <div class="mb-2">
+              
+            </div>
+            <h1 id="blogTitleText" class="title">راهنمای استفاده از API</h1>
 
-        <div class="section full mt-2">
-           
-            <div class="section-title large">تنظیم پیام عمومی <img src="assets/img/antenna.png" style="height: 50px;"></div>
-            <div class="wide-block pt-2 pb-2">
-              
-              
-                <div class="form-group boxed">
-                    <div class="input-wrapper">
-                        <label class="form-label" for="boardcastSecret">کد بوردکست</label>
-                        <input type="text" class="form-control" id="boardcastSecret" placeholder="این کد را مخفی نگه دارید"
-                            autocomplete="off">
-                    </div>
+            <div id="writerInfo" class="post-header">
+                <a id="blogWriterName" href="#">
+                    <img src="assets/img/default-prof.jpg" alt="avatar" class="imaged w24 me-05">
+                    ال ای سی فارسی
+                </a></div>
+            </div>
+            <div class="post-body">
+               
+                <h1>وب سرویس جیست؟</h1>
+                <p>وب سرویس یا همان API مجموعه ای از ابزار برای تعامل با وب است که ما لیستی از وب سرویس های خودمون رو براتون معرفی می کنیم.</p>
+                <div class="divider bg-primary mt-2 mb-3"></div>
+                <h2>1. ارسال اطلاعات به لیست سرور</h2>
+                <div dir="ltr">
+                    <code style="text-align: left;">mode{loop}<br>ifcondition{ishost=true}<br>webrequest{https://api.persianlac.ir/servers/on*POST*secret=yoursecret*name=yourRP*onlines=[curplayers]*weather=[weather]}<br>cooldown{60}</code>
                 </div>
                 
-                <div class="form-group boxed">
-                    <div class="input-wrapper">
-                        <label class="form-label" for="codebox">متن موردنظر</label>
-                        <p>از متن های بلند و حاوی ایموجی پرهیز کنید.کلمات فارسی میتواند مشکل دار باشد.</p>
-                        <textarea id="codebox" autocomplete="off" rows="2" class="form-control"></textarea>
-                    </div>
-                    <button id="updateBoardcast" type="button" class="btn btn-primary btn-block"><ion-icon name="refresh"></ion-icon> بروزرسانی</button>
-                    
+                <h3>⚠ نکات مهم : </h3>
+                <ol>
+                    <li>به جای  yoursecret رمزی دلخواه و پیچیده قرار دهید. </li>
+                    <li>به جای yourRP اسم سرورتان را بنویسید.</li>
+                    <li>رمز را هربار تغییر ندهید.</li>
+                    <li>اسم را می توانید تغییر دهید.</li>
+                    <li>با مراجعه به  <a href="/svlist">اینجا</a> ، سرور خود را بیابید و آنرا ویرایش کنید.</li>
+                </ol>
+
+                <h3>⛔ محدودیت : 5 درخواست در هر 90 ثانیه</h3>
+
+                <a class="btn btn-primary btn-block" id="copySendAPI" href="javascript:void(0)"><ion-icon name="copy"></ion-icon>کپی کد</a>
+                <div class="divider bg-primary mt-2 mb-3"></div>
+                <h2>2. دریافت متن اخبار</h2>
+                <div dir="ltr">
+                    <code style="text-align: left;">mode{loop}<br>ifcondition{ishost=true}<br>webrequest{https://api.persianlac.ir/boardcast/get?secret=yoursecret*GET}<br>cooldown{60}</code>
                 </div>
-            </div>
+                
+                <h3>⚠ نکات مهم : </h3>
+                <ol>
+                    <li>به <a href="/boardcast">اینجا</a> مراجعه کنید و با یک رمز،اخبار را تنظیم کنید.</li>
+                    <li>به جای yoursecret رمز تنظیمی در مرحله قبل را وارد کنید.</li>
+                    <li>رمز را هربار تغییر ندهید.</li>
+                    <li>اگر رمزی نباشد،هیچ چیزی در چت ارسال نمی شود.</li>
+                    <li>می توانید کادر متن را خالی بگذارید تا اخبار خاموش شود.</li>
+                </ol>
 
+                <h3>⛔ محدودیت : 5 درخواست در هر یک دقیقه یعنی حداکثر پنج خبر در یک مپ</h3>
 
-            
+                <a class="btn btn-primary btn-block" id="bAPI" href="javascript:void(0)"><ion-icon name="copy"></ion-icon>کپی کد</a>
+                <div class="divider bg-primary mt-2 mb-3"></div>
+                <h2>3. تقویم خورشیدی</h2>
+                <div dir="ltr">
+                    <code style="text-align: left;">mode{loop}<br>ifcondition{ishost=true}<br>webrequest{https://api.persianlac.ir/util/date*GET}<br>cooldown{60}</code>
+                </div>
+                
 
-        
+                <h3>⛔ محدودیت : 5 درخواست در هر یک دقیقه</h3>
 
-        <div class=" wide-block pt-2 pb-2">
-            <div class="adbox adbox-340-180 adHue sponsorLink">
-                <img src="assets/img/ads/big_ad.png" alt="image">
+                <a class="btn btn-primary btn-block" id="copyDateAPI" href="javascript:void(0)"><ion-icon name="copy"></ion-icon>کپی کد</a>
             </div>
         </div>
 
-
-        <div id="toast-nosecret" class="toast-box toast-top bg-danger">
+        <div id="toast-copied" class="toast-box toast-top bg-success">
             <div class="in">
-                <ion-icon name="warning"></ion-icon>
+                <ion-icon name="copy"></ion-icon>
                 <div class="text">
-                  کد یا متن خالی است!
+                  کد کپی شد!
                 </div>
             </div>
         </div>
-
-        <div id="toast-success" class="toast-box toast-top bg-success">
-            <div class="in">
-                <ion-icon name="refresh"></ion-icon>
-                <div class="text">
-                 متن پیام بروز شد!
-                </div>
-            </div>
-        </div>
-
 
 
 
     </div>
     <!-- * App Capsule -->
 
-     <!-- App Bottom Menu -->
-     <div class="appBottomMenu">
+
+      <!-- App Bottom Menu -->
+      <div class="appBottomMenu">
         <a href="/list" class="item">
             <div class="col">
                 <ion-icon name="hammer-outline"></ion-icon>
@@ -240,10 +247,34 @@
     <script src="assets/js/plugins/progressbar-js/progressbar.min.js"></script>
     <!-- Base Js File -->
     <script src="assets/js/base.js"></script>
-    <!--JQuery -->
+    <!-- JQuery -->
     <script src="assets/js/jquery.min.js"></script>
-    <!-- Linter Code -->
-    <script type="module" src="assets/js/fa/b_fa.js"></script>
+
+    <script>
+        $("#copySendAPI").on("touchend click", function(e) {
+             e.preventDefault();
+             e.stopImmediatePropagation();
+             setTimeout(() => {
+                navigator.clipboard.writeText(`mode{loop}\nifcondition{ishost=true}\nwebrequest{https://api.persianlac.ir/boardcast/get?secret=yoursecret*GET}\ncooldown{60}`).then(() => { toastbox('toast-copied', 3000) }).catch(() => {});
+             }, 10);
+        });
+
+        $("#bAPI").on("touchend click", function(e) {
+             e.preventDefault();
+             e.stopImmediatePropagation();
+             setTimeout(() => {
+                navigator.clipboard.writeText(`mode{loop}\nifcondition{ishost=true}\nwebrequest{https://api.persianlac.ir/boardcast/get?secret=yoursecret*GET}\ncooldown{60}`).then(() => { toastbox('toast-copied', 3000) }).catch(() => {});
+             }, 10);
+        });
+        $("#copyDateAPI").on("touchend click", function(e) {
+             e.preventDefault();
+             e.stopImmediatePropagation();
+             setTimeout(() => {
+                navigator.clipboard.writeText(`mode{loop}\nifcondition{ishost=true}\nwebrequest{https://api.persianlac.ir/util/date*GET}\ncooldown{60}`).then(() => { toastbox('toast-copied', 3000) }).catch(() => {});
+             }, 10);
+        });
+    </script>
+    
 </body>
 
 </html>

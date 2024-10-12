@@ -20,8 +20,19 @@
     <meta property="og:type" content="Website">
     <meta property="og:url" content="https://persianlac.ir/">
     <meta property="og:image" content="https://persianlac.ir/assets/img/logembed.png">
-    <meta property="og:description" content="ابزار و محتوای ال ای سی">
-    <meta name="description" content="ابزار و محتوای ال ای سی">
+    <meta property="og:description" content="مرجع سرور ها،ابزار و محتوا">
+    <meta name="description" content="مرجع سرور ها،ابزار و محتوا">
+    <style>
+        .blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+    </style>
 </head>
 
 <body>
@@ -46,49 +57,68 @@
     </div>
     <!-- * App Header -->
 
-    <!-- Search Component -->
-    <div id="search" class="appHeader">
-        <form class="search-form">
-            <div class="form-group searchbox">
-                <input type="text" class="form-control" placeholder="Search...">
-                <i class="input-icon">
-                    <ion-icon name="search-outline"></ion-icon>
-                </i>
-                <a href="#" class="ms-1 close toggle-searchbox">
-                    <ion-icon name="close-circle"></ion-icon>
-                </a>
-            </div>
-        </form>
-    </div>
-    <!-- * Search Component -->
+
 
     <!-- App Capsule -->
     <div id="appCapsule">
 
-        <div class="adbox adbox-300-50 fixed adHue sponsorLink">
+        <!-- <div class="adbox adbox-300-50 fixed adHue sponsorLink">
             <img src="assets/img/ads/small_ad.png" alt="image">
-        </div>
+        </div> -->
 
         <div class="header-large-title">
             <h1 class="title user-select-none">ال ای سی فارسی <img src="assets/img/iran.png" style="height: 50px;"></h1>
-            <h4 class="subtitle user-select-none">محتوا و ابزار فارسی ال ای سی</h4>
+            <h4 class="subtitle user-select-none">مرجع سرور ها،ابزار و محتوای ال ای سی</h4>
+        </div>
+
+        <div style="display: none;" class="section full mt-3 mb-3 showOnExists">
+            <div class="section-title large">لیست سرور های فعال</div>
+            <!-- carousel multiple -->
+            <div class="carousel-multiple splide" data-splide="{&quot;direction&quot;:&quot;rtl&quot;}">
+                <div class="splide__track">
+                    <ul id="allSvList" class="splide__list">
+                        <li class="splide__slide">
+                            
+                        </li>
+                       
+                    </ul>
+                </div>
+            </div>
+            <!-- * carousel multiple -->
+
+            
+
+        </div>
+
+
+        <div class="section mt-3 mb-3">
+            <a href="/svlist" style="display: none;" class="btn btn-primary btn-block showOnExists">
+                <ion-icon name="list"></ion-icon>
+                لیست کامل سرور ها
+            </a>
+            <div class="card">
+               
+                <div class="card-body">
+                    <h6 class="card-subtitle">می خواهید سرور شما نیز نشان داده شود؟</h6>
+                    <h5 class="card-title">برای ثبت سرور کلیک کن!</h5>
+                    <p class="card-text">
+                        کاملا رایگان!
+                    </p>
+                    <a href="/apihelp" class="btn btn-success">
+                        <ion-icon name="log-in"></ion-icon>
+                        ثبت سرور
+                    </a>
+                </div>
+            </div>
         </div>
 
         <div class="section full mt-3 mb-3">
-
+            <div class="section-title large">ابزار های قابل استفاده</div>
             <!-- carousel multiple -->
             <div class="carousel-multiple splide" data-splide="{&quot;direction&quot;:&quot;rtl&quot;}">
                 <div class="splide__track">
                     <ul class="splide__list">
-                        <!-- <li class="splide__slide">
-                            <div class="card">
-                                <img src="assets/img/slide/linter-slide.jpg" class="card-img-top" alt="linter-image">
-                                <div class="card-body pt-2">
-                                    <h4 class="mb-0">خطایاب تریگرباکس</h4>
-                                </div>
-                            </div>
-                        </li> -->
-                        <li class="splide__slide">
+                        <li relink="/cleaner" class="splide__slide toolsRedirector">
                             <div class="card">
                                 <img src="assets/img/slide/cleaner-slide.jpg" class="card-img-top" alt="cleaner-image">
                                 <div class="card-body pt-2">
@@ -96,7 +126,23 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="splide__slide">
+                        <li relink="/apihelp" class="splide__slide toolsRedirector">
+                            <div class="card">
+                                <img src="assets/img/slide/api-slide.jpg" class="card-img-top" alt="cleaner-image">
+                                <div class="card-body pt-2">
+                                    <h4 class="mb-0">ابزار تریگرباکسی</h4>
+                                </div>
+                            </div>
+                        </li>
+                        <li relink="/apihelp" class="splide__slide toolsRedirector">
+                            <div class="card">
+                                <img src="assets/img/slide/cleaner-slide.jpg" class="card-img-top" alt="api-image">
+                                <div class="card-body pt-2">
+                                    <h4 class="mb-0">ابزار تریگرباکسی</h4>
+                                </div>
+                            </div>
+                        </li>
+                        <li relink="/cutter" class="splide__slide toolsRedirector">
                             <div class="card">
                                 <img src="assets/img/slide/cut-slide.jpg" class="card-img-top" alt="cutter-image">
                                 <div class="card-body pt-2">
@@ -104,7 +150,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="splide__slide">
+                        <li relink="/editor" class="splide__slide toolsRedirector">
                             <div class="card">
                                 <img src="assets/img/slide/editor-slide.jpg" class="card-img-top" alt="editor-image">
                                 <div class="card-body pt-2">
@@ -146,7 +192,7 @@
                 کپی برداری از ابزار و محتوای خاص این وبسایت با اجازه صاحب سایت بلامانع است.
             </div>
            
-            <div>وبسایت محتوای ال ای سی</div>
+            <div>مرجع تخصصی سرور،ابزار و محتوای ال ای سی</div>
            
 
         </div>
@@ -160,17 +206,32 @@
     <div class="appBottomMenu">
         <a href="/list" class="item">
             <div class="col">
-                <ion-icon name="layers-outline"></ion-icon>
+                <ion-icon name="hammer-outline"></ion-icon>
+                <strong>لیست ابزار</strong>
+            </div>
+        </a>
+        <a href="/apihelp" class="item">
+            <div class="col">
+                <ion-icon name="help"></ion-icon>
+                <strong>راهنما</strong>
             </div>
         </a>
         <a href="/" class="item active">
             <div class="col">
                 <ion-icon name="home-outline"></ion-icon>
+                <strong>خانه</strong>
+            </div>
+        </a>
+        <a href="/svlist" class="item">
+            <div class="col">
+                <ion-icon name="server-outline"></ion-icon>
+                <strong>لیست سرور</strong>
             </div>
         </a>
         <a href="#sidebarPanel" class="item" data-bs-toggle="offcanvas">
             <div class="col">
                 <ion-icon name="menu-outline"></ion-icon>
+                <strong>منو</strong>
             </div>
         </a>
     </div>
@@ -181,13 +242,13 @@
         <div class="offcanvas-body">
             <!-- profile box -->
             <div class="profileBox">
-                <div class="image-wrapper">
-                    <img src="assets/img/kaveh.jpg" alt="image" class="imaged rounded">
-                </div>
+                <!-- <div class="image-wrapper">
+                    <img src="assets/img/iran.png" alt="image" class="imaged rounded">
+                </div> -->
                 <div class="in">
-                    <strong class="kavascriptProfile">ساخته شده توسط کاوه</strong>
+                    <strong class="kavascriptProfile">منو دسترسی</strong>
                     <div class="text-muted">
-                        با <ion-icon class="text-danger" name="heart"></ion-icon>
+                       
                     </div>
                 </div>
                 <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
@@ -210,10 +271,30 @@
                 <li>
                     <a href="/list" class="item">
                         <div class="icon-box bg-primary">
-                            <ion-icon name="layers-outline"></ion-icon>
+                            <ion-icon name="hammer-outline"></ion-icon>
                         </div>
                         <div class="in">
                             <div>لیست ابزار</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/svlist" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="server-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>لیست سرور</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/apihelp" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>راهنمای API</div>
                         </div>
                     </a>
                 </li>
@@ -231,20 +312,10 @@
                         </div>
                     </div>
                 </li>
-                <li class="sponsorLink2">
-                    <a href="javascript:void(0)" class="item">
-                        <div class="icon-box bg-primary">
-                            <ion-icon name="accessibility"></ion-icon>
-                        </div>
-                        <div class="in">
-                            <div></div>
-                        </div>
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
-    <!-- * App Sidebar -->
+    <!-- * App Sidebar --> 
 
 
     <!-- ============== Js Files ==============  -->
@@ -260,56 +331,9 @@
     <script src="assets/js/base.js"></script>
     <!-- JQuery -->
     <script src="assets/js/jquery.min.js"></script>
-    <script>
-
-$(".sponsorLink").on("touchend click", function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            let a = document.createElement('a');
-            a.href = 'rubika://l.rubika.ir/LAC_HOST';
-            a.target = '_blank';
-            $(this).off("touchend click");
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }, 10);
-    });
-$(".sponsorLink2").on("touchend click", function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            let a = document.createElement('a');
-            a.href = 'rubika://l.rubika.ir/LAC_HOST';
-            a.target = '_blank';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }, 10);
-    });
-
-
-        let mozMikhay = 0
-        const tit1 = document.getElementsByClassName('title')[0];
-        tit1.addEventListener("click", function(e) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            if(mozMikhay === 5) {
-                tit1.innerHTML = `موز میخای؟`;
-                mozMikhay = 0;
-                return;
-            }
-            mozMikhay++;
-        });
-        const tit = document.getElementsByClassName('subtitle')[0];
-        tit.addEventListener("click", function(e) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            const randomTitles = ["آنلاین", "آیلاند", "آنلاید"];
-            tit.innerHTML = `ابزار بازی لس آنجلس کرایمز : ${randomTitles[Math.floor(Math.random() * randomTitles.length)]}`;
-        });
-    </script>
-
+    <!-- Main code -->
+    <script src="assets/js/fa/main_fa.js"></script>
+   
 </body>
 
 </html>
