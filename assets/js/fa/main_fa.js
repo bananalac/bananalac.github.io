@@ -1,5 +1,4 @@
 function updateList() {
-    console.log("did i do this?")
     $.get(`https://api.persianlac.ir/servers/all`, function(data) {
 
         if(data) {     
@@ -16,10 +15,9 @@ function updateList() {
                 li.id = sv.id;
                 li.innerHTML = `
                  <div class="card">
-                                <img src="${sv.imageLink}" class="card-img-top" alt="server-image">
                                 <div class="card-body pt-2">
-                                    ${sv.name} | <span class="text-success blink_me">آنلاین</span> | ${sv.onlines} پلیر آنلاین
-                                    <footer>${sv.id}</footer>
+                                    ${sv.name}
+                                    <footer><span class="text-success blink_me">آنلاین</span> | ${sv.onlines} پلیر آنلاین</footer>
                                 </div>
                     </div>
                 `;
@@ -54,15 +52,15 @@ $(document).ready(function() {
         }, 10);
     });
 
-    $(".toolsRedirector").on("touchend click", function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            const relink = $(this).attr("relink");
-            location.replace(relink);
-        }, 10);
+    // $(".toolsRedirector").on("touchend click", function(e) {
+    //     e.preventDefault();
+    //     e.stopImmediatePropagation();
+    //     setTimeout(() => {
+    //         const relink = $(this).attr("relink");
+    //         location.replace(relink);
+    //     }, 10);
         
-    });
+    // });
 
     updateList();
 

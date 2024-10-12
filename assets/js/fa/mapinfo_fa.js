@@ -61,6 +61,7 @@ function updateInfo() {
                 });
 
                 if(data.rules !== "") {
+                    $("#rulesAcco").show();
                     const rulesList = document.getElementById("rulesList");
                     data.rules.split("\n").forEach((rule) => {
                         const li = document.createElement('li');
