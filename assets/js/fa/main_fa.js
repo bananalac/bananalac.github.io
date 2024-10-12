@@ -62,18 +62,18 @@ $(document).ready(function() {
         
     // });
 
-    updateList();
+  //  updateList();
 
-    setInterval(updateList, 30_000);
+ //   setInterval(updateList, 30_000);
 
-    $("#allSvList").on("touchend click", 'li:not(#ignore)', function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            const itsID = $(this).attr("id");
-            location.replace('./mapinfo?id=' + itsID);
-        }, 10);
-    });
+    // $("#allSvList").on("touchend click", 'li:not(#ignore)', function(e) {
+    //     e.preventDefault();
+    //     e.stopImmediatePropagation();
+    //     setTimeout(() => {
+    //         const itsID = $(this).attr("id");
+    //         location.replace('./mapinfo?id=' + itsID);
+    //     }, 10);
+    // });
 
 
 

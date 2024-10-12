@@ -63,6 +63,7 @@ function updateInfo() {
                 if(data.rules !== "") {
                     $("#rulesAcco").show();
                     const rulesList = document.getElementById("rulesList");
+                    rulesList.innerHTML = "";
                     data.rules.split("\n").forEach((rule) => {
                         const li = document.createElement('li');
                         li.innerHTML = rule;
@@ -71,12 +72,13 @@ function updateInfo() {
                 }
 
                 if(data.link !== "") {
-                    const rulesList = document.getElementById("linkList");
+                    const linkList = document.getElementById("linkList");
+                    linkList.innerHTML = "";
                     data.link.split(" ").forEach((lin) => {
                         const a = document.createElement('a');
                         a.href = lin;
                         a.innerHTML = lin;
-                        rulesList.appendChild(a);
+                        linkList.appendChild(a);
                     });
                 }
 
