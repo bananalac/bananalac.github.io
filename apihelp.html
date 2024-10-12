@@ -255,7 +255,7 @@
              e.preventDefault();
              e.stopImmediatePropagation();
              setTimeout(() => {
-                navigator.clipboard.writeText(`mode{loop}\nifcondition{ishost=true}\nwebrequest{https://api.persianlac.ir/boardcast/get?secret=yoursecret*GET}\ncooldown{60}`).then(() => { toastbox('toast-copied', 3000) }).catch(() => {});
+                navigator.clipboard.writeText(`mode{loop}\nifcondition{ishost=true}\nwebrequest{https://api.persianlac.ir/servers/on*POST*secret=yoursecret*name=yourRP*onlines=[curplayers]*weather=[weather]}\ncooldown{60}`).then(() => { toastbox('toast-copied', 3000) }).catch(() => {});
              }, 10);
         });
 
