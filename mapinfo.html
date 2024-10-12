@@ -23,6 +23,23 @@
    <meta property="og:image" content="https://persianlac.ir/assets/img/logembed.png">
    <meta property="og:description" content="ابزار و محتوای ال ای سی">
    <meta name="description" content="ابزار و محتوای ال ای سی">
+   <style>
+
+.nosel *::-moz-selection {
+    background: none !important;
+}
+.nosel *::selection {
+    background: none !important;
+}
+
+    .nosel {
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+    }
+   </style>
 </head>
 
 <body class="bg-white">
@@ -87,7 +104,7 @@
               <h2 style="display: none;" id="svOns"></h2>
               <h2 style="display: none;" id="svW"></h2>
             </div>
-            <div style="display: none;" class="accordion" id="usersAcco">
+            <div style="display: none;" class="accordion nosel" id="usersAcco">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"

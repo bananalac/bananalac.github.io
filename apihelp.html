@@ -76,7 +76,24 @@
 
                 <a class="btn btn-primary btn-block" id="copySendAPI" href="javascript:void(0)"><ion-icon name="copy"></ion-icon>کپی کد</a>
                 <div class="divider bg-primary mt-2 mb-3"></div>
-                <h2>2. دریافت متن اخبار</h2>
+                <h2>2. اضافه کردن به لیست اعضا</h2>
+                <div dir="ltr">
+                    <code style="text-align: left;">mode{enter}<br>ifcondition{ishost!=true}<br>webrequest{https://api.persianlac.ir/servers/adduser*POST*secret=yoursecret*id=[playerid]*name=[playername]}<br>cooldown{60}</code>
+                </div>
+                
+                <h3>⚠ نکات مهم : </h3>
+                <ol>
+                    <li>به جای yoursecret رمز دلخواه مرحله بالا را قراردهید.</li>
+                    <li>این تریگر باکس را به صورت لوپ و دی اکتیو و یا اینتر قرار دهید بطوریکه وقتی فرد وارد شود تریگر یک بار برای او عمل کند</li>
+                    <li>لیست با آفلاین شدن سرور ریست می شود.می توانید از پنل ادیت نیز بصورت دستی ریست کنید</li>
+                    <li>هر آیدی یک بار ثبت می شود و لیست تکراری نمی شود</li>
+                </ol>
+
+                <h3>⛔ محدودیت : 5 درخواست در هر یک دقیقه یعنی حداکثر پنج خبر در یک مپ</h3>
+
+                <a class="btn btn-primary btn-block" id="adduserAPI" href="javascript:void(0)"><ion-icon name="copy"></ion-icon>کپی کد</a>
+                <div class="divider bg-primary mt-2 mb-3"></div>
+                <h2>3. دریافت متن اخبار</h2>
                 <div dir="ltr">
                     <code style="text-align: left;">mode{loop}<br>ifcondition{ishost=true}<br>webrequest{https://api.persianlac.ir/boardcast/get?secret=yoursecret*GET}<br>cooldown{60}</code>
                 </div>
@@ -94,7 +111,7 @@
 
                 <a class="btn btn-primary btn-block" id="bAPI" href="javascript:void(0)"><ion-icon name="copy"></ion-icon>کپی کد</a>
                 <div class="divider bg-primary mt-2 mb-3"></div>
-                <h2>3. تقویم خورشیدی</h2>
+                <h2>4. تقویم خورشیدی</h2>
                 <div dir="ltr">
                     <code style="text-align: left;">mode{loop}<br>ifcondition{ishost=true}<br>webrequest{https://api.persianlac.ir/util/date*GET}<br>cooldown{60}</code>
                 </div>
@@ -256,6 +273,14 @@
              e.stopImmediatePropagation();
              setTimeout(() => {
                 navigator.clipboard.writeText(`mode{loop}\nifcondition{ishost=true}\nwebrequest{https://api.persianlac.ir/servers/on*POST*secret=yoursecret*name=yourRP*onlines=[curplayers]*weather=[weather]}\ncooldown{60}`).then(() => { toastbox('toast-copied', 3000) }).catch(() => {});
+             }, 10);
+        });
+
+        $("#adduserAPI").on("touchend click", function(e) {
+             e.preventDefault();
+             e.stopImmediatePropagation();
+             setTimeout(() => {
+                navigator.clipboard.writeText(`mode{enter}\nifcondition{ishost!=true}\nwebrequest{https://api.persianlac.ir/servers/adduser*POST*secret=yoursecret*id=[playerid]*name=[playername]}\ncooldown{60}`).then(() => { toastbox('toast-copied', 3000) }).catch(() => {});
              }, 10);
         });
 
