@@ -51,7 +51,6 @@ function updateList() {
                     <img src="${sv.imageLink}" alt="image" class="image">
                     <div class="in">
                         <div>
-                            <header>${sv.id}</header>
                             ${sv.name}
                             <footer class="text-success">آنلاین</footer>
                         </div>
@@ -73,7 +72,7 @@ function updateList() {
                     <img src="${sv.imageLink}" alt="image" class="image">
                     <div class="in">
                         <div>
-                            <header>${sv.id}</header>
+                           
                             ${sv.name}
                             <footer class="text-danger">آفلاین</footer>
                         </div>

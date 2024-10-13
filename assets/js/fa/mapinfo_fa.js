@@ -28,6 +28,7 @@ function updateInfo() {
                 $(".pageTitle").html(`مشخصات سرور`)
                 $("#serverName").html(data.name.trim());
                 $("#serverId").html(data.id);
+                $("#imageHandling").attr("src", data.imageLink);
                 $("#svSt").html(`<ion-icon name="information-circle-outline"></ion-icon> وضعیت سرور : ${conv1[data.online]}`);
                 if(data.ipaddress.trim() !== "") $("#svIP").show().html(`<ion-icon name="hardware-chip-outline"></ion-icon> آدرس سرور : ${data.ipaddress.trim()}`);
                 if(data.online === true) {
