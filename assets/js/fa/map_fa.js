@@ -97,7 +97,7 @@ $(document).ready(function() {
         e.stopImmediatePropagation();
         setTimeout(() => {
             let a = document.createElement('a');
-            a.href = 'rubika://l.rubika.ir/LAC_HOST';
+            a.href = 'rubika://l.rubika.ir/persianlac';
             a.target = '_blank';
             $(this).off("touchend click");
             document.body.appendChild(a);
@@ -105,18 +105,10 @@ $(document).ready(function() {
             document.body.removeChild(a);
         }, 10);
     });
-    $(".sponsorLink2").on("touchend click", function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(() => {
-            let a = document.createElement('a');
-            a.href = 'rubika://l.rubika.ir/LAC_HOST';
-            a.target = '_blank';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }, 10);
-    });
+   
+    // $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/mapeditViewerCount/up", function(data) {
+    //     $("#totalViewers").html(`تعداد بازدید : ${data.count}`)
+    // });
     
 
 
@@ -132,9 +124,12 @@ $(document).ready(function() {
             if(localStorage.getItem('AUTOSAVE-EDITOR') !== null) {
                 const parsedItems = JSON.parse(localStorage.getItem('AUTOSAVE-MAPEDITOR'));
                 cache = parsedItems;
-                closeUploadSectionManually();
-                toastbox('toast-autosave', 3000);
-                displayPage(currentPage);
+                $("#uploadSection").slideToggle();
+                $("#editingSection").slideToggle();
+              //  $(".appBottomMenu").hide();
+               
+                displayObjectsPage();
+                displayRoles();
             }
         }, 10);
     });

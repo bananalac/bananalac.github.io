@@ -111,7 +111,7 @@ $(document).ready(function() {
         e.stopImmediatePropagation();
         setTimeout(() => {
             let a = document.createElement('a');
-            a.href = 'rubika://l.rubika.ir/LAC_HOST';
+            a.href = 'rubika://l.rubika.ir/persianlac';
             a.target = '_blank';
             $(this).off("touchend click");
             document.body.appendChild(a);

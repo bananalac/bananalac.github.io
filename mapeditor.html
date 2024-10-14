@@ -10,21 +10,21 @@
         content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>ویرایشگر سیو دیتا</title>
+    <title>ویرایشگر نقشه</title>
     <meta name="keywords" content="lac, los angeles crimes, alizadev, mohammadalizade" />
-    <link rel="icon" type="image/png" href="assets/img/icon/92x92.png" sizes="92x92">
+    <link rel="icon" type="image/png" href="assets/img/icon/92x92.png" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
     <link rel="stylesheet" href="assets/css/style-fa.css" />
     <link rel="manifest" href="__manifest.json">
-   <!-- OG -->
-   <meta name="theme-color" content="#1e74fd">
-   <meta property="og:title" content="ال ای سی فارسی">
-   <meta property="og:site_name" content="PersianLAC">
-   <meta property="og:type" content="Website">
-   <meta property="og:url" content="https://persianlac.ir/">
-   <meta property="og:image" content="https://persianlac.ir/assets/img/logembed.png">
-   <meta property="og:description" content="ابزار و محتوای ال ای سی">
-   <meta name="description" content="ابزار و محتوای ال ای سی">
+    <!-- OG -->
+    <meta name="theme-color" content="#1e74fd">
+    <meta property="og:title" content="ال ای سی فارسی">
+    <meta property="og:site_name" content="PersianLAC">
+    <meta property="og:type" content="Website">
+    <meta property="og:url" content="https://persianlac.ir/mapeditor">
+    <meta property="og:image" content="https://persianlac.ir/assets/img/logembed.png">
+    <meta property="og:description" content="ویرایشگر حرفه ای مپ">
+    <meta name="description" content="ویرایشگر حرفه ای مپ">
 </head>
 
 <body>
@@ -60,12 +60,12 @@
         <div id="uploadSection" class="section full mt-2">
             <div id="alertBoxer" class="wide-block pt-2 pb-2">
                 <div class="alert alert-success mb-2 alert-dismissible fade show" role="alert">
-                    <h4 class="alert-title"><ion-icon name="shield-checkmark"></ion-icon> محیط امن</h4>
+                    <h4 class="alert-title"><ion-icon name="shield-checkmark"></ion-icon> فایل های شما ایمن است!</h4>
                     فایل ها در دستگاه خودتان پردازش می شود و به جای دیگر فرستاده نمی شود. <a href="/privacypolicy.html">[بیشتر بدانید]</a>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
-            <div class="section-title large">ویرایشگر سیودیتا</div>
+            <div class="section-title large">ویرایشگر حرفه ای نقشه</div>
             <div class="wide-block pt-2 pb-2">
                 <div class="custom-file-upload" id="fileUpload1">
                     <input type="file" autocomplete="off" id="fileuploadInput" accept=".txt">
@@ -73,7 +73,7 @@
                         <span>
                             <strong>
                                 <ion-icon name="cloud-upload-outline"></ion-icon>
-                                <i>سیو دیتا را آپلود کنید</i>
+                                <i>مپ را آپلود کنید</i>
                             </strong>
                         </span>
                     </label>
@@ -84,110 +84,200 @@
             <div class="wide-block pt-2 pb-2">
                 <button id="autosaveButton" type="button" data-bs-toggle="modal" data-bs-target="#recentsModal" class="btn btn-secondary btn-block"><ion-icon name="bookmark-outline"></ion-icon> ذخیره خودکار</button>
             </div>
-           
-           
-
-        </div>
-
-        <a href="#" class="button goTop">
-            <ion-icon name="arrow-up-outline"></ion-icon>
-        </a>
-
-        <div id="editingSection" style="display: none;" class="section full mt-2">
-            <div id="editingTableTitle" class="section-title large">جدول ویرایش</div>
-            <div class="wide-block pt-2 pb-2">
-                <div class="row">
-                   <div class="col-xs-6 col-md-4">
-                    <button id="approveAll" type="button" class="btn btn-success btn-block"><ion-icon name="checkmark-done-circle-sharp"></ion-icon> قبول همه</button>
-                   </div>
-                   <div class="col-xs-6 col-md-4">
-                    <button id="denyAll" type="button" class="btn btn-danger btn-block"><ion-icon name="trash-sharp"></ion-icon> رد همه</button>
-                   </div>
-                   <div class="col-xs-6 col-md-4">
-                    <button id="scanUsers" type="button" class="btn btn-info btn-block"><ion-icon name="scan"></ion-icon> اسکن (جدید)</button>
-                   </div>
-                </div>   
-            </div>
-            <div class="wide-block pt-2 pb-2">
-                <div class="row">
-                    <div class="col-xs-6 col-md-6">
-                        <button id="downloadButton" type="button" class="btn btn-success btn-block"><ion-icon name="download"></ion-icon> دانلود مپ</button>
-                    </div>
-                    <div class="col-xs-6 col-md-6">
-                        <button id="shareButton" type="button" class="btn btn-info btn-block"><ion-icon name="share-social"></ion-icon> اشتراک گذاری</button>
-                    </div>
-                 </div>   
-            </div>
-            <div class="wide-block pt-2 pb-2">
-
-                <div class="accordion" id="accordion3">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#accordion001">
-                                <ion-icon name="help-circle-outline"></ion-icon>
-                                راهنمای جستجو
-                            </button>
-                        </h2>
-                        <div id="accordion001" class="accordion-collapse collapse" data-bs-parent="#accordion3">
-                            <div class="accordion-body">
-                                <p style="text-align:right">در اول جستجو ازین کلید ها استفاده کنید:<br>
-                                <mark>status:</mark>approved/pending<br>
-                                <mark>user:</mark> to find a username<br>
-                                <mark>pass:</mark>to find a password<br>
-                                <mark>role:</mark>to filter people with a role<br>
-                                <!-- <mark>inv:item:value</mark> (to find who has this inventory item)<br> -->
-                                پاک کنید تا لیست به حالت عادی برگردد
-                                </p>
-                                <h5>مثال :</h5>
-                                <p>user:alex_99<br>role:police<!-- <br>inv:vehicles:pride, king --></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group searchbox">
-                    <input id="searchBar" autocomplete="off" spellcheck="false" type="text" class="form-control" placeholder="جستجو...">
-                    <i class="input-icon">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </i>
-                </div>
-                <div class="divider bg-primary mt-2 mb-3"></div>
-                <nav>
-                    <ul dir="ltr" class="pagination flex-wrap">                      
-                    </ul>
-                </nav>
-                <div class="divider bg-primary mt-2 mb-3"></div>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">وضعیت</th>
-                                <th scope="col">نام کاربری</th>
-                                <th scope="col">رمز</th>
-                                <th scope="col">رول</th>
-                                <th scope="col">تنظیمات</th>                               
-                            </tr>
-                        </thead>
-                        <tbody id="usersList">
-                            
-                           
-                        </tbody>
-                    </table>
-                </div>
-               
-               
-            </div>
             
            
 
         </div>
 
-        <div id="toast-nosavedata" class="toast-box toast-top bg-danger">
+
+        <div id="editingSection" style="display: none;" class="section full mt-2">
+            <div id="editingTableTitle" class="section-title large">دسترسی سریع</div>
+            <div class="wide-block pt-2 pb-2">
+                <div class="row">
+                   <div class="col-xs-3 col-md-3">
+                    <button id="deleteAllVeh" type="button" class="btn btn-block btn-link">حذف خودرو ها</button>
+                   </div>
+                   <div class="col-xs-3 col-md-3">
+                    <button id="deletePhysical" type="button" class="btn btn-block btn-link">حذف اشیاء فیزیکی</button>
+                   </div>
+                   <div class="col-xs-3 col-md-3">
+                    <button id="mapMove" type="button" class="btn btn-link btn-block">جابجایی مپ</button>
+                   </div>
+                   <div class="col-xs-3 col-md-3">
+                    <button id="installObject" type="button" class="btn btn-link btn-block">نصب وسیله</button>
+                   </div>
+                </div>   
+            </div>
+            <div class="wide-block pt-2 pb-2">
+                <div class="row">
+                   <div class="col-xs-3 col-md-3">
+                    <button id="deleteTriggerboxes" type="button" class="btn btn-link btn-block">حذف تریگرباکس ها</button>
+                   </div>
+                   <div class="col-xs-3 col-md-3">
+                    <button id="roleEdit" type="button" class="btn btn-link btn-block">ویرایش رول ها</button>
+                   </div>
+                   <div class="col-xs-3 col-md-3">
+                    <button id="mapLock" type="button" class="btn btn-link btn-block">قفل مپ</button>
+                   </div>
+                   <div class="col-xs-3 col-md-3">
+                    <button id="installTB" type="button" class="btn btn-link btn-block">نصب تریگرباکس</button>
+                   </div>
+                </div>   
+            </div>
+            <!-- <div class="wide-block pt-2 pb-2">
+                <button id="shortcutUsage" type="button" class="btn btn-secondary btn-block">نحوه استفاده سریع</button>
+            </div> -->
+            <!-- <div id="editingTableTitle" class="section-title large">دسترسی سریع</div>
+            <div class="wide-block pt-2 pb-2">
+                <div class="row">
+                   <div class="col-xs-3 col-md-3">
+                    <button id="deleteTriggerboxes" type="button" class="btn btn-secondary btn-block">حذف تریگرباکس ها</button>
+                   </div>
+                   <div class="col-xs-3 col-md-3">
+                    <button id="roleEdit" type="button" class="btn btn-secondary btn-block">ویرایش رول ها</button>
+                   </div>
+                   <div class="col-xs-3 col-md-3">
+                    <button id="mapLock" type="button" class="btn btn-secondary btn-block">قفل مپ</button>
+                   </div>
+                   <div class="col-xs-3 col-md-3">
+                    <button id="installTB" type="button" class="btn btn-secondary btn-block">نصب تریگرباکس</button>
+                   </div>
+                </div>   
+            </div> -->
+            
+            <div class="wide-block pt-2 pb-2">
+                <!-- * Options * -->
+                <div class="accordion" id="optAcco">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#accordionOpt">
+                                <ion-icon name="options"></ion-icon>
+                                تنظیمات مپ
+                            </button>
+                        </h2>
+                        <div id="accordionOpt" class="accordion-collapse collapse" data-bs-parent="#optAcco">
+                            <div class="accordion-body">
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="divider bg-primary mt-2 mb-3"></div> 
+                <!-- ? Objects ?  -->
+                <div class="accordion" id="tableAcco">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#accordion001">
+                                <ion-icon name="trash"></ion-icon>
+                                حذف انبوه اشیاء
+                            </button>
+                        </h2>
+                        <div id="accordion001" class="accordion-collapse collapse" data-bs-parent="#tableAcco">
+                            <div class="accordion-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">اسم شیء</th>
+                                                <th scope="col">تعداد</th>
+                                                <th scope="col">حذف</th>                          
+                                            </tr>
+                                        </thead>
+                                        <tbody id="objList">
+                                            
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="divider bg-primary mt-2 mb-3"></div> 
+                <!-- ! Vehicles ! -->
+                <div class="accordion" id="vehAcco">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#accordionVeh">
+                                <ion-icon name="list"></ion-icon>
+                                مدیریت وسایل نقلیه
+                            </button>
+                        </h2>
+                        <div id="accordionVeh" class="accordion-collapse collapse" data-bs-parent="#vehAcco">
+                            <div class="accordion-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">اسم وسیله نقلیه</th>
+                                                <th scope="col">تعداد</th>
+                                                <th scope="col">حذف</th>                          
+                                            </tr>
+                                        </thead>
+                                        <tbody id="vehList">
+                                            
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider bg-primary mt-2 mb-3"></div>  
+                <!-- Roles -->
+                <div class="accordion" id="roleAcco">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#accordion002">
+                                <ion-icon name="list"></ion-icon>
+                                مدیریت رول ها
+                            </button>
+                        </h2>
+                        <div id="accordion002" class="accordion-collapse collapse" data-bs-parent="#roleAcco">
+                            <div class="accordion-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">اسم رول</th>
+                                                <th scope="col">اسم خام</th>
+                                                <th scope="col">حذف</th>                          
+                                            </tr>
+                                        </thead>
+                                        <tbody id="roleList">
+                                            
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            
+
+        </div>
+
+        <div class="appFooter"> 
+            <div id="totalViewers" class="footer-title">
+               
+            </div> 
+        </div>
+
+        <div id="toast-nomap" class="toast-box toast-top bg-danger">
             <div class="in">
                 <ion-icon name="warning"></ion-icon> 
                 <div class="text">
-                    سیو دیتا را آپلود کنید!
+                    یک مپ آپلود کنید!
                 </div>
             </div>
         </div>
@@ -219,23 +309,15 @@
             </div>
         </div>
 
-        <div id="toast-notsavedata" class="toast-box toast-top bg-danger">
+        <div id="toast-notmap" class="toast-box toast-top bg-danger">
             <div class="in">
                 <ion-icon name="warning"></ion-icon> 
                 <div class="text">
-                    این یک فایل سیو-دیتا نیست!
+                    این یک فایل مپ نیست!
                 </div>
             </div>
         </div>
 
-        <div id="toast-emptysavedata" class="toast-box toast-top bg-warning">
-            <div class="in">
-                <ion-icon name="warning"></ion-icon> 
-                <div class="text">
-                    سیودیتای خالی!
-                </div>
-            </div>
-        </div>
 
         <div id="toast-wtype" class="toast-box toast-top bg-danger">
             <div class="in">
@@ -358,18 +440,13 @@
         </div>
 
        
-        <div class="appFooter"> 
-            <div id="totalViewers" class="footer-title">
-               
-            </div> 
-        </div>
        
 
     </div>
     <!-- * App Capsule -->
 
-    <!-- App Bottom Menu -->
-    <div class="appBottomMenu">
+     <!-- App Bottom Menu -->
+     <div class="appBottomMenu">
         <a href="/list" class="item">
             <div class="col">
                 <ion-icon name="hammer-outline"></ion-icon>
@@ -481,7 +558,7 @@
             </ul>
         </div>
     </div>
-    <!-- * App Sidebar -->
+    <!-- * App Sidebar --> 
 
     <!-- ============== Js Files ==============  -->
     <!-- Bootstrap -->
@@ -499,7 +576,7 @@
     <!--JDate -->
     <script src="assets/js/jdate.min.js"></script>
     <!-- Editor Code -->
-    <script type="module" src="assets/js/fa/editor_fa.js"></script>
+    <script type="module" src="assets/js/fa/map_fa.js"></script>
 
 </body>
 
