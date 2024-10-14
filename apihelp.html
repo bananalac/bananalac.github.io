@@ -81,7 +81,7 @@
                 <div class="divider bg-primary mt-2 mb-3"></div>
                 <h2>2. اضافه کردن به لیست اعضا</h2>
                 <div dir="ltr">
-                    <code style="text-align: left;">mode{enter}<br>ifcondition{ishost!=true}<br>webrequest{https://api.persianlac.ir/servers/adduser*POST*secret=yoursecret*id=[playerid]*name=[playername]}<br>cooldown{60}</code>
+                    <code style="text-align: left;">mode{enter}<br>ifcondition{ishost!=true}<br>webrequest{https://api.persianlac.ir/servers/adduser*POST*secret=yoursecret*id=[playerid]*name=[playername]}<br>deactivate{}</code>
                 </div>
                 
                 <h3>⚠ نکات مهم : </h3>
@@ -283,7 +283,7 @@
              e.preventDefault();
              e.stopImmediatePropagation();
              setTimeout(() => {
-                navigator.clipboard.writeText(`mode{enter}\nifcondition{ishost!=true}\nwebrequest{https://api.persianlac.ir/servers/adduser*POST*secret=yoursecret*id=[playerid]*name=[playername]}\ncooldown{60}`).then(() => { toastbox('toast-copied', 3000) }).catch(() => {});
+                navigator.clipboard.writeText(`mode{enter}\nifcondition{ishost!=true}\nwebrequest{https://api.persianlac.ir/servers/adduser*POST*secret=yoursecret*id=[playerid]*name=[playername]}\ndeactivate{}`).then(() => { toastbox('toast-copied', 3000) }).catch(() => {});
              }, 10);
         });
 
