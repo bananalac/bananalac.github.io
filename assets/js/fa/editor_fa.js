@@ -1,4 +1,4 @@
-import { parse, write, inventoryWrite, inventoryParse } from '../user-parser/index.js';
+import { parse, write, inventoryWrite, inventoryParse } from '../user-parser/index.mjs';
 
 let rowPerPage = 100;
 let currentPage = 1;

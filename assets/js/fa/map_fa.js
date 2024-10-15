@@ -1,4 +1,4 @@
-import { parse, write, objCount, vehCount } from '../map-parser/index.js';
+import { parse, write, objCount, vehCount } from '../map-parser/index.mjs';
 //import { parse, write, inventoryWrite, inventoryParse } from '../user-parser/index.js';
 
 let rowPerPage = 100;
@@ -15,13 +15,7 @@ function extractBetweenTags(str) {
     }
 };
 
-function getNowTime() {
-   
-    const today = new JDate;
-    today.format('dddd DD MMMM YYYY');
-    console.log(today)
-    return today.toString();
-}
+
 
 function autosave() {
     const data = JSON.stringify(cache);
