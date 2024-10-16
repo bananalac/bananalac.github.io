@@ -3,28 +3,23 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!-- <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0"> -->
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>تغییر پیام بوردکست</title>
-    <meta name="keywords" content="lac, los angeles crimes, alizadev, mohammadalizade" />
-    <link rel="icon" type="image/png" href="assets/img/icon/92x92.png" sizes="92x92">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
-    <link rel="stylesheet" href="assets/css/style-fa.css">
-    <link rel="manifest" href="__manifest.json">
-    <!-- OG -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <!-- * Info * -->
+    <meta name="description" content="پیام تنظیم کن و در مپ بفرست!">
+    <meta name="keywords" content="lac, polyfield, los angeles crimes, alizadev, mohammadalizade, LAC, LACrimes, Rubika, persianlac, bananalac, rain city studio" />
+    <meta name="author" content="PersianLAC">
     <meta name="theme-color" content="#1e74fd">
-    <meta property="og:title" content="ال ای سی فارسی">
+    <!-- Open Graph -->
+    <meta property="og:title" content="ارسال پیام دلخواه">
     <meta property="og:site_name" content="PersianLAC">
     <meta property="og:type" content="Website">
-    <meta property="og:url" content="https://persianlac.ir/">
+    <meta property="og:url" content="https://persianlac.ir/boardcast">
     <meta property="og:image" content="https://persianlac.ir/assets/img/logembed.png">
-    <meta property="og:description" content="ابزار و محتوای ال ای سی">
-    <meta name="description" content="ابزار و محتوای ال ای سی">
+    <meta property="og:description" content="پیام تنظیم کن و در مپ بفرست!">
+    <title>ارسال پیام دلخواه</title>
+    <link rel="icon" type="image/png" href="assets/img/icon/92x92.png" sizes="92x92">
+    <link rel="stylesheet" href="assets/css/style-fa.css">
+    <link rel="canonical" href="https://persianlac.ir/boardcast">
 </head>
 
 <body>
@@ -53,12 +48,12 @@
     <div id="appCapsule" class="full-height">
 
         <div class="adbox adbox-300-50 fixed adHue sponsorLink">
-            <img src="assets/img/ads/small_ad.png" alt="image">
+            <img src="assets/img/ads/small_ad.png" alt="small rubika ad">
         </div>
 
         <div class="section full mt-2">
            
-            <div class="section-title large">تنظیم پیام عمومی <img src="assets/img/antenna.png" style="height: 50px;"></div>
+            <div class="section-title large">تنظیم پیام عمومی <img src="assets/img/antenna.png" alt="boardcast antenna" style="height: 50px;"></div>
             <div class="wide-block pt-2 pb-2">
               
               
@@ -89,7 +84,16 @@
             <div class="in">
                 <ion-icon name="warning"></ion-icon>
                 <div class="text">
-                  کد یا متن خالی است!
+                  کد خالی است!
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-clear" class="toast-box toast-top bg-warning">
+            <div class="in">
+                <ion-icon name="warning"></ion-icon>
+                <div class="text">
+                  ارسال پیام غیرفعال شد
                 </div>
             </div>
         </div>
@@ -123,7 +127,7 @@
                 <strong>راهنما</strong>
             </div>
         </a>
-        <a href="/" class="item active">
+        <a href="/" class="item">
             <div class="col">
                 <ion-icon name="home-outline"></ion-icon>
                 <strong>خانه</strong>
@@ -234,11 +238,11 @@
     <!-- ProgressBar js -->
     <script src="assets/js/plugins/progressbar-js/progressbar.min.js"></script>
     <!-- Base Js File -->
-    <script src="assets/js/base.js"></script>
+    <script src="assets/js/base.min.js"></script>
     <!--JQuery -->
     <script src="assets/js/jquery.min.js"></script>
-    <!-- Linter Code -->
-    <script type="module" src="assets/js/fa/b_fa.js"></script>
+    <!-- Boardcast Code -->
+    <script src="assets/js/fa/b_fa.js"></script>
 </body>
 
 </html>

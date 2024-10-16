@@ -94,6 +94,7 @@ $(document).ready(function() {
             let a = document.createElement('a');
             a.href = 'rubika://l.rubika.ir/persianlac';
             a.target = '_blank';
+            a.rel = 'nofollow';
             $(this).off("touchend click");
             document.body.appendChild(a);
             a.click();
@@ -102,7 +103,7 @@ $(document).ready(function() {
     });
     
     if(localStorage.getItem('AUTOSAVE-EDITOR') === null) $("#autosaveButton").prop("disabled", true);
-    if(!navigator.share) $("#shareButton").html('<ion-icon name="share-social"></ion-icon> اشتراک گذاری پشتیبانی نمی شود').prop("disabled", true);
+    if(!navigator.share) $("#shareButton").hide();
 
 
     $("#autosaveButton").on("touchend click", function(e) {

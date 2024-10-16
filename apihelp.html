@@ -3,26 +3,23 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!-- <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0"> -->
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>API Help</title>
-    <meta name="keywords" content="lac, los angeles crimes, alizadev, mohammadalizade" />
-    <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <!-- * Info * -->
+    <meta name="description" content="راهنمای API ال ای سی فارسی">
+    <meta name="keywords" content="lac, polyfield, los angeles crimes, alizadev, mohammadalizade, LAC, LACrimes, Rubika, persianlac, bananalac, rain city studio" />
+    <meta name="author" content="PersianLAC">
+    <meta name="theme-color" content="#1e74fd">
+    <!-- Open Graph -->
+    <meta property="og:title" content="صفحه اصلی">
+    <meta property="og:site_name" content="PersianLAC">
+    <meta property="og:type" content="Website">
+    <meta property="og:url" content="https://persianlac.ir/">
+    <meta property="og:image" content="https://persianlac.ir/assets/img/logembed.png">
+    <meta property="og:description" content="راهنمای API ال ای سی فارسی">
+    <title>راهنمای API</title>
+    <link rel="icon" type="image/png" href="assets/img/icon/92x92.png" sizes="92x92">
     <link rel="stylesheet" href="assets/css/style-fa.css">
-    <link rel="manifest" href="__manifest.json">
-     <!-- OG -->
-     <meta property="og:title" content="راهنمای وب سرویس">
-     <meta property="og:site_name" content="PersianLAC">
-     <meta property="og:type" content="Website">
-     <meta property="og:url" content="https://persianlac.ir/apihelp">
-     <meta property="og:image" content="https://persianlac.ir/assets/img/logembed.png">
-     <meta property="og:description" content="راهنمای وب سرویس">
+    <link rel="canonical" href="https://persianlac.ir/apihelp">
 </head>
 
 <body class="bg-white text-light">
@@ -52,7 +49,7 @@
 
             <div id="writerInfo" class="post-header">
                 <a id="blogWriterName" href="#">
-                    <img src="assets/img/default-prof.jpg" alt="avatar" class="imaged w24 me-05">
+                    <img src="assets/img/default-prof.jpg" alt="persianlac writer photo" class="imaged w24 me-05">
                     ال ای سی فارسی
                 </a></div>
             </div>
@@ -92,25 +89,24 @@
                     <li>هر آیدی یک بار ثبت می شود و لیست تکراری نمی شود</li>
                 </ol>
 
-                <h3>⛔ محدودیت : 5 درخواست در هر یک دقیقه یعنی حداکثر پنج خبر در یک مپ</h3>
 
                 <a class="btn btn-primary btn-block" id="adduserAPI" href="javascript:void(0)"><ion-icon name="copy"></ion-icon>کپی کد</a>
                 <div class="divider bg-primary mt-2 mb-3"></div>
-                <h2>3. دریافت متن اخبار</h2>
+                <h2>3. دریافت متن دلخواه در مپ</h2>
                 <div dir="ltr">
                     <code style="text-align: left;">mode{loop}<br>ifcondition{ishost=true}<br>webrequest{https://api.persianlac.ir/boardcast/get?secret=yoursecret*GET}<br>cooldown{60}</code>
                 </div>
                 
                 <h3>⚠ نکات مهم : </h3>
                 <ol>
-                    <li>به <a href="/boardcast">اینجا</a> مراجعه کنید و با یک رمز،اخبار را تنظیم کنید.</li>
+                    <li>به <a href="/boardcast">اینجا</a> مراجعه کنید و با یک رمز، پیام خود را تنظیم کنید.</li>
                     <li>به جای yoursecret رمز تنظیمی در مرحله قبل را وارد کنید.</li>
                     <li>رمز را هربار تغییر ندهید.</li>
                     <li>اگر رمزی نباشد،هیچ چیزی در چت ارسال نمی شود.</li>
-                    <li>می توانید کادر متن را خالی بگذارید تا اخبار خاموش شود.</li>
+                    <li>می توانید کادر متن را خالی بگذارید تا فرستادن پیام خاموش شود.</li>
                 </ol>
 
-                <h3>⛔ محدودیت : 5 درخواست در هر یک دقیقه یعنی حداکثر پنج خبر در یک مپ</h3>
+                <h3>⛔ محدودیت : 5 درخواست در هر یک دقیقه یعنی حداکثر پنج پیام مختلف در یک مپ</h3>
 
                 <a class="btn btn-primary btn-block" id="bAPI" href="javascript:void(0)"><ion-icon name="copy"></ion-icon>کپی کد</a>
                 <div class="divider bg-primary mt-2 mb-3"></div>
@@ -118,7 +114,6 @@
                 <div dir="ltr">
                     <code style="text-align: left;">mode{loop}<br>ifcondition{ishost=true}<br>webrequest{https://api.persianlac.ir/util/date*GET}<br>cooldown{60}</code>
                 </div>
-                
 
                 <h3>⛔ محدودیت : 5 درخواست در هر یک دقیقه</h3>
 
@@ -149,13 +144,13 @@
                 <strong>لیست ابزار</strong>
             </div>
         </a>
-        <a href="/apihelp" class="item">
+        <a href="/apihelp" class="item active">
             <div class="col">
                 <ion-icon name="help"></ion-icon>
                 <strong>راهنما</strong>
             </div>
         </a>
-        <a href="/" class="item active">
+        <a href="/" class="item">
             <div class="col">
                 <ion-icon name="home-outline"></ion-icon>
                 <strong>خانه</strong>
@@ -266,7 +261,7 @@
     <!-- ProgressBar js -->
     <script src="assets/js/plugins/progressbar-js/progressbar.min.js"></script>
     <!-- Base Js File -->
-    <script src="assets/js/base.js"></script>
+    <script src="assets/js/base.min.js"></script>
     <!-- JQuery -->
     <script src="assets/js/jquery.min.js"></script>
 

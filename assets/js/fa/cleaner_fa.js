@@ -5,7 +5,7 @@ let cache = { name: "", map: "" };
 $(document).ready(function() {
 
     $.get("https://api.counterapi.dev/v1/PersianLACGithubIO/cleanerViewerCount/up", function(data) {
-        $("#totalViewers").html(`تعداد بازدید : ${data.count}`)
+        $("#totalViewers").html(`تعداد بازدید : ${data.count}`);
     });
 
 
@@ -15,6 +15,8 @@ $(document).ready(function() {
         $(".adHue img").css("filter", `hue-rotate(${rnd}deg)`);
     }, 1000);
 
+
+
     $(".sponsorLink").on("touchend click", function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -22,6 +24,7 @@ $(document).ready(function() {
             let a = document.createElement('a');
             a.href = 'rubika://l.rubika.ir/persianlac';
             a.target = '_blank';
+            a.rel = 'nofollow';
             $(this).off("touchend click");
             document.body.appendChild(a);
             a.click();
@@ -36,6 +39,15 @@ $(document).ready(function() {
             $("#alertBoxer").hide();
         }, 10);
 
+    });
+
+
+    $("#fileuploadInput").on("change", function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            $("#filteringItems").attr("disabled", false);
+        }, 10);
     });
 
     $("#uploadButton").on("touchstart click", function(e) {
@@ -67,19 +79,36 @@ $(document).ready(function() {
             const content = event.target.result;
             
             const lines = content.split("\n");
-            const triggerboxesLength = lines.filter(line => line.startsWith('Trigger_Box_Editor')).length;
-            const filteredItems = lines.filter(line => !line.startsWith('Trigger_Box_Editor'));
-            cache.map = filteredItems.join("\n");
-           
-    
+            const additionalFilter = $("#filteringItems").val().trim()
+            if(additionalFilter === '') {
+                const triggerboxesLength = lines.filter(line => line.startsWith('Trigger_Box_Editor')).length;
+                const filteredItems = lines.filter(line => !line.startsWith('Trigger_Box_Editor'));
+                cache.map = filteredItems.join("\n");
+               
+        
+               
+                $("#foundX").html(`${triggerboxesLength} تریگرباکس پیدا شد!`);
+                toastbox("toast-found", 5000);
+      
+            } else {
+                const triggerboxesLength = lines.filter(line => line.startsWith('Trigger_Box_Editor') && line.includes(additionalFilter)).length;
+                const filteredItems = lines.filter(line => !line.startsWith('Trigger_Box_Editor') && line.includes(additionalFilter));
+                cache.map = filteredItems.join("\n");
+               
+        
+               
+                $("#foundX").html(`${triggerboxesLength} تریگرباکس با فیلتر خواسته شده پیدا شد!`);
+                toastbox("toast-found", 5000);
+         
+            }
+
             if(navigator.share) $("#shareButton").show();
             $("#downloadButton").show(); 
-            $("#adCont").show();  
+            $("#hideDivFilter").slideUp();
             $("#newOne").show();           
             $("#uploadButton").hide();
             $("#fileuploadInput").prop("disabled", true);
-            $("#foundX").html(`${triggerboxesLength} تا تریگرباکس پیدا شد!`);
-            toastbox("toast-found", 5000);
+           
 
             
         };

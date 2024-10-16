@@ -40,6 +40,7 @@ $(document).ready(function() {
             let a = document.createElement('a');
             a.href = 'rubika://l.rubika.ir/persianlac';
             a.target = '_blank';
+            a.rel = 'nofollow';
             $(this).off("touchend click");
             document.body.appendChild(a);
             a.click();
