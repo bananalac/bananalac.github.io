@@ -1,8 +1,7 @@
 import { parse, write, objCount, vehCount } from '../map-parser/index.mjs';
-//import { parse, write, inventoryWrite, inventoryParse } from '../user-parser/index.js';
 
-let rowPerPage = 100;
-let currentPage = 1;
+
+
 let cache;
 
 function extractBetweenTags(str) {
@@ -15,68 +14,10 @@ function extractBetweenTags(str) {
     }
 };
 
-
-
 function autosave() {
     const data = JSON.stringify(cache);
     localStorage.setItem('AUTOSAVE-MAPEDITOR', data);
-   // localStorage.setItem('AUTOSAVE-TIME', getNowTime());
 }
-
-function closeUploadSectionManually() {
-
-    $("#uploadSection").slideToggle();
-    $("#editingSection").slideToggle();
-    $(".appBottomMenu").hide();
-    $("#fabNewUser").show();
-    $("#editingTableTitle").html(`جدول ویرایش (با ${cache.length} نفر)`)
-
-    displayPage(currentPage);
-
-}
-
-const roles = [
-    {
-        name: "[TAXI]",
-        color: "yellow",
-        icon: `<ion-icon name=\"car\"></ion-icon>`
-    },
-    {
-        name: "[POLICE]",
-        color: "blue",
-        icon: `<ion-icon name=\"shield-half\"></ion-icon>`
-    },
-    {
-        name: "[DOCTOR]",
-        color: "green",
-        icon: `<ion-icon name=\"medkit\"></ion-icon>`
-    },
-    {
-        name: "[MECHANIC]",
-        color: "orange",
-        icon: `<ion-icon name=\"build\"></ion-icon>`
-    },
-    {
-        name: "[ADMIN]",
-        color: "red",
-        icon: `<ion-icon name=\"lock-closed\"></ion-icon>`
-    },
-    {
-        name: "[WORKER]",
-        color: "#c7c",
-        icon: `<ion-icon name=\"body\"></ion-icon>`
-    },
-    {
-        name: "[BUILDER]",
-        color: "white",
-        icon: `<ion-icon name=\"business\"></ion-icon>`
-    },
-    {
-        name: "none",
-        color: "white",
-        icon: `<ion-icon name=\"man\"></ion-icon>`
-    }
-];
 
 $(document).ready(function() {
 
@@ -324,7 +265,20 @@ function displayObjectsPage() {
 
         objList.appendChild(tr);
 
-    }
+    };
+
+    $('#objList').on("touchend click", 'button[id$="-del"]', function(e) {
+        console.log("bruh?");
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(() => {
+            const objName = $(this).attr("id").split("-")[0];
+            const filteredItems = cache.objects.filter(o => o.objName !== objName);
+            cache.objects = filteredItems;
+            displayObjectsPage();
+        }, 10);
+
+    });
 
 };
 
