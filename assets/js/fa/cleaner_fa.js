@@ -79,7 +79,7 @@ $(document).ready(function() {
             const content = event.target.result;
             
             const lines = content.split("\n");
-            const additionalFilter = $("#filteringItems").val().trim()
+            const additionalFilter = $("#filteringItems").val().trim();
             if(additionalFilter === '') {
                 const triggerboxesLength = lines.filter(line => line.startsWith('Trigger_Box_Editor')).length;
                 const filteredItems = lines.filter(line => !line.startsWith('Trigger_Box_Editor'));
@@ -92,7 +92,7 @@ $(document).ready(function() {
       
             } else {
                 const triggerboxesLength = lines.filter(line => line.startsWith('Trigger_Box_Editor') && line.includes(additionalFilter)).length;
-                const filteredItems = lines.filter(line => !line.startsWith('Trigger_Box_Editor') && !line.includes(additionalFilter));
+                const filteredItems = lines.filter(line => line.startsWith('Trigger_Box_Editor') && !line.includes(additionalFilter));
                 cache.map = filteredItems.join("\n");
                
         
