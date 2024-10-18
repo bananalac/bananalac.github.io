@@ -92,7 +92,7 @@ $(document).ready(function() {
       
             } else {
                 const triggerboxesLength = lines.filter(line => line.startsWith('Trigger_Box_Editor') && line.includes(additionalFilter)).length;
-                const filteredItems = lines.filter(line => line.startsWith('Trigger_Box_Editor') && !line.includes(additionalFilter));
+                const filteredItems = lines.filter(line => !line.includes(additionalFilter));
                 cache.map = filteredItems.join("\n");
                
         
